@@ -1,45 +1,21 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import HeroScene from '@/components/HeroScene';
 
 export default function Hero() {
-  const reduce = useReducedMotion();
-
   return (
     <section
       id="top"
-      className="relative h-[100svh] min-h-[680px] w-full overflow-hidden"
+      className="relative h-[100svh] min-h-[680px] w-full overflow-hidden bg-earth"
     >
-      <div className="absolute inset-0 -z-10">
-        <div
-          className={`absolute inset-0 ${
-            reduce ? '' : 'animate-ken-burns'
-          } will-change-transform`}
-        >
-          <video
-            className="h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/hero-lake.jpg"
-            aria-hidden="true"
-          >
-            <source src="/videos/lake-2.mp4" type="video/mp4" />
-          </video>
-          {/* Fallback gradient — visible until media drops in */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_70%,#3a4a3a_0%,#1c1a17_70%)] -z-10" />
-        </div>
-
-        <div className="absolute inset-0 bg-gradient-to-t from-earth/85 via-earth/45 to-earth/20" />
-        <div className="absolute inset-0 hero-vignette" />
-      </div>
+      <HeroScene />
 
       <div className="container-edit relative z-10 h-full flex flex-col justify-end pb-32 md:pb-40">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
           className="max-w-3xl"
         >
           <h1 className="font-display font-light text-cream leading-[0.95] text-[clamp(2.75rem,7vw,6.5rem)] tracking-tight">

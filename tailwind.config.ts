@@ -17,7 +17,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ['var(--font-cormorant)', 'Cormorant Garamond', 'serif'],
-        body: ['var(--font-dm-sans)', 'DM Sans', 'sans-serif'],
+        body: ['var(--font-jost)', 'Jost', 'sans-serif'],
         sc: ['var(--font-cormorant-sc)', 'Cormorant SC', 'serif'],
       },
       letterSpacing: {

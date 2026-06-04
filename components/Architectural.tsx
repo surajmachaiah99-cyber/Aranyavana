@@ -1,11 +1,50 @@
 import SectionReveal from '@/components/SectionReveal';
 
-const MATERIALS: Array<[string, string]> = [
-  ['Compressed Stabilised Earth Blocks', 'CSEB · Structural Core'],
-  ['Natural Stone Cladding', 'Site-Sourced · Tactile'],
-  ['Lime Plaster', 'Breathable · Ageless'],
-  ['Timber', 'Responsibly Harvested'],
-  ['Clay Roof Tiles', 'Thermal Mass · Vernacular'],
+type Material = {
+  name: string;
+  quality: string;
+  /** CSS gradient that visually represents the material. */
+  swatch: string;
+  /** Single-word edge tone for the ring around the swatch. */
+  ring: string;
+};
+
+const MATERIALS: Material[] = [
+  {
+    name: 'Compressed Stabilised Earth Blocks',
+    quality: 'CSEB · Structural Core',
+    swatch:
+      'linear-gradient(135deg,#7a5a3e 0%,#a07c54 35%,#8a6442 60%,#6b4e36 100%)',
+    ring: 'rgba(160,124,84,0.55)',
+  },
+  {
+    name: 'Natural Stone Cladding',
+    quality: 'Site-Sourced · Tactile',
+    swatch:
+      'linear-gradient(135deg,#3f3a35 0%,#615850 30%,#8c8278 55%,#4a443e 100%)',
+    ring: 'rgba(140,130,120,0.5)',
+  },
+  {
+    name: 'Lime Plaster',
+    quality: 'Breathable · Ageless',
+    swatch:
+      'linear-gradient(135deg,#ebe4d2 0%,#d8cdb3 40%,#c2b699 70%,#b5a98a 100%)',
+    ring: 'rgba(216,205,179,0.55)',
+  },
+  {
+    name: 'Timber',
+    quality: 'Responsibly Harvested',
+    swatch:
+      'linear-gradient(120deg,#5a3a22 0%,#7d5230 30%,#a4703f 55%,#6b4222 80%,#4a2c16 100%)',
+    ring: 'rgba(164,112,63,0.55)',
+  },
+  {
+    name: 'Clay Roof Tiles',
+    quality: 'Thermal Mass · Vernacular',
+    swatch:
+      'linear-gradient(135deg,#7e2f1e 0%,#a64327 30%,#cb5a32 55%,#822f1c 90%)',
+    ring: 'rgba(166,67,39,0.55)',
+  },
 ];
 
 const PRINCIPLES = [
@@ -19,7 +58,7 @@ const PRINCIPLES = [
 
 export default function Architectural() {
   return (
-    <section id="architecture" className="bg-earth py-32 md:py-40">
+    <section id="architecture" className="bg-earth py-32 md:py-44">
       <div className="container-edit grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-32">
@@ -62,28 +101,42 @@ export default function Architectural() {
               materials that age gracefully alongside the forest.
             </p>
 
-            <div className="mt-14">
+            <div className="mt-16">
               <p className="font-sc text-sand text-[0.7rem] tracking-widest2 mb-6">
                 · The Material Palette
               </p>
-              <ul className="divide-y divide-bark/50 border-y border-bark/50">
-                {MATERIALS.map(([material, quality]) => (
+
+              <ul className="border-t border-bark/45">
+                {MATERIALS.map((m) => (
                   <li
-                    key={material}
-                    className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2 sm:gap-8 py-5"
+                    key={m.name}
+                    className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 sm:gap-8 py-6 border-b border-bark/45"
                   >
-                    <span className="font-display font-light text-cream text-[1.2rem]">
-                      {material}
+                    {/* Swatch */}
+                    <span
+                      aria-hidden="true"
+                      className="block h-12 w-12 sm:h-14 sm:w-14 rounded-sm shadow-[0_2px_18px_-6px_rgba(0,0,0,0.6)] ring-1"
+                      style={{
+                        backgroundImage: m.swatch,
+                        // Tailwind can't do dynamic ring colors, so inline.
+                        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+                        ...({ '--tw-ring-color': m.ring } as React.CSSProperties),
+                      }}
+                    />
+
+                    <span className="font-display font-light text-cream text-[1.15rem] sm:text-[1.25rem] leading-snug">
+                      {m.name}
                     </span>
-                    <span className="font-body font-light text-mist/60 text-[0.78rem] tracking-wider uppercase self-end sm:self-center">
-                      {quality}
+
+                    <span className="font-sc text-mist/55 text-[0.7rem] tracking-widest2 text-right whitespace-nowrap hidden sm:inline">
+                      {m.quality}
                     </span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <p className="mt-14 font-body font-light text-sky text-[1.02rem] leading-[1.9] max-w-[560px]">
+            <p className="mt-16 font-body font-light text-sky text-[1.02rem] leading-[1.9] max-w-[560px]">
               Every estate blueprint prioritises deep verandas, central open
               courtyards, and dedicated lakeside firepit zones — turning the
               daily ritual of watching the sun set over the water into the

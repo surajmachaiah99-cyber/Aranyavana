@@ -41,7 +41,7 @@ const CARDS: Card[] = [
 
 export default function CoreAssets() {
   return (
-    <section id="assets" className="bg-stone py-32 md:py-40 relative">
+    <section id="assets" className="bg-[#0e0d0b] py-32 md:py-44 relative">
       <div className="container-edit">
         <SectionReveal className="max-w-3xl">
           <p className="eyebrow mb-5">· The Offering</p>
@@ -51,29 +51,47 @@ export default function CoreAssets() {
           </h2>
         </SectionReveal>
 
-        <StaggerGroup className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-7">
+        <StaggerGroup className="mt-24 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
           {CARDS.map((c) => (
             <StaggerItem
               key={c.number}
-              className="group relative flex flex-col p-12 border border-bark/70 bg-earth/40 transition-all duration-700 ease-editorial hover:border-sand/50 hover:shadow-[0_30px_80px_-30px_rgba(196,168,130,0.18)] hover:-translate-y-1"
+              className="group relative flex flex-col overflow-hidden p-12 lg:p-14 border border-bark/50 bg-earth/40 transition-all duration-700 ease-editorial hover:border-sand/55 hover:bg-earth/70"
             >
-              <p className="font-sc text-sand/80 text-[0.7rem] tracking-widest2 mb-10">
+              {/* Ghost number watermark */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-6 -right-2 font-display font-light text-cream/[0.045] text-[12rem] leading-none select-none transition-opacity duration-700 group-hover:text-sand/[0.08]"
+              >
                 {c.number}
+              </span>
+
+              {/* Hover gold underline */}
+              <span
+                aria-hidden="true"
+                className="absolute left-12 lg:left-14 top-0 h-px w-12 bg-sand/0 transition-all duration-700 group-hover:bg-sand/80 group-hover:w-24"
+              />
+
+              <p className="relative font-sc text-sand/85 text-[0.7rem] tracking-widest2 mb-10">
+                · {c.number}
               </p>
 
-              <div className={`mb-8 ${c.iconColor}`}>
+              <div
+                className={`relative mb-10 transition-transform duration-700 ease-editorial group-hover:-translate-y-1 ${c.iconColor}`}
+              >
                 <c.Icon />
               </div>
 
-              <h3 className="font-display font-light text-cream text-[1.6rem] leading-tight mb-5">
+              <h3 className="relative font-display font-light text-cream text-[1.65rem] leading-tight mb-6">
                 {c.title}
               </h3>
 
-              <p className="font-body font-light text-sky/85 text-[0.95rem] leading-[1.85] mb-10">
+              <p className="relative font-body font-light text-sky/80 text-[0.95rem] leading-[1.9] mb-10">
                 {c.body}
               </p>
 
-              <span className="mt-auto pill self-start">{c.pill}</span>
+              <span className="relative mt-auto pill self-start">
+                {c.pill}
+              </span>
             </StaggerItem>
           ))}
         </StaggerGroup>

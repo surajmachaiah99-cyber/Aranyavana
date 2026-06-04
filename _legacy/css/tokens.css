@@ -1,0 +1,45 @@
+/* Udyana by Aranyavana — Design Tokens */
+
+:root {
+  /* Earth & wood */
+  --earth: #2C2417;
+  --bark: #4A3728;
+  --clay: #8B6B4E;
+  --sand: #C4A882;
+
+  /* Light neutrals */
+  --mist: #E8DDD0;
+  --fog: #F4EFE8;
+  --sky: #FAFAF7;
+
+  /* Water */
+  --water: #4A6B6E;
+  --water-light: #7BA3A8;
+
+  /* Flora */
+  --moss: #5A6B42;
+
+  /* Accents */
+  --gold: #B8935A;
+  --gold-light: #D4AE7A;
+
+  /* Spacing */
+  --section-pad-y: 7rem;
+  --section-pad-x: 2rem;
+  --container: 1100px;
+  --container-narrow: 720px;
+  --container-wide: 1280px;
+
+  /* Typography families */
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --reveal-duration: 0.8s;
+
+  /* Layering */
+  --z-nav: 100;
+  --z-overlay: 200;
+}

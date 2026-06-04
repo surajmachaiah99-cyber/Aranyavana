@@ -1,0 +1,135 @@
+/* Fixed navigation */
+
+.site-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  padding: 1.4rem 3rem;
+  background: rgba(250, 250, 247, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(196, 168, 130, 0.18);
+  transition: padding 0.45s var(--ease-out),
+              background 0.45s var(--ease-out);
+}
+
+.site-nav.is-scrolled {
+  padding: 0.8rem 3rem;
+  background: rgba(250, 250, 247, 0.95);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--earth);
+  white-space: nowrap;
+}
+
+.nav-brand em {
+  color: var(--clay);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bark);
+  position: relative;
+  transition: color 0.3s var(--ease-out);
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links a[aria-current="page"] {
+  color: var(--earth);
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after,
+.nav-links a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* Hamburger — hidden on desktop */
+.nav-toggle {
+  display: none;
+  width: 36px;
+  height: 36px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(74, 55, 40, 0.2);
+  border-radius: 2px;
+  background: transparent;
+}
+
+.nav-toggle span,
+.nav-toggle span::before,
+.nav-toggle span::after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--earth);
+  position: absolute;
+  transition: transform 0.35s var(--ease-out),
+              opacity 0.2s var(--ease-out),
+              top 0.35s var(--ease-out);
+}
+
+.nav-toggle span {
+  position: relative;
+  background: transparent;
+}
+
+.nav-toggle span::before {
+  top: -5px;
+}
+
+.nav-toggle span::after {
+  top: 5px;
+}
+
+.nav-toggle[aria-expanded="true"] span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}

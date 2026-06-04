@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enquire — Udyana by Aranyavana</title>
+  <meta name="description" content="Request a private briefing at Udyana. By appointment only — write to us and we will reply within two working days." />
+  <meta name="theme-color" content="#2C2417" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/nav.css" />
+  <link rel="stylesheet" href="../css/sections.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/form.js" defer></script>
+</head>
+<body>
+
+  <header class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">Aranyavana <em>·</em> Udyana</a>
+
+      <button class="nav-toggle" id="navToggle" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation">
+        <span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="../index.html#lake">The Lake</a>
+        <a href="homes.html">Homes</a>
+        <a href="../index.html#landscape">Landscape</a>
+        <a href="../index.html#location">Location</a>
+        <a href="../index.html#invest">Invest</a>
+        <a href="contact.html" aria-current="page">Enquire</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="manifesto" style="padding-top: 9rem;">
+    <div class="container-narrow">
+      <p class="eyebrow section-eyebrow reveal">By Appointment Only</p>
+      <h1 class="manifesto-quote reveal" style="font-size: clamp(2rem, 4vw, 3rem);">
+        <em>Your nature legacy begins with a conversation.</em>
+      </h1>
+      <hr class="divider-ornament reveal" />
+      <p class="manifesto-body reveal">
+        Udyana is shown by private appointment only. Share a few words about what calls you here — a home, a plot, an enquiry of any kind — and we will reply within two working days.
+      </p>
+
+      <form class="form-wrap reveal" id="enquiryForm" novalidate>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone (optional)</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+        </div>
+
+        <div class="field">
+          <label for="message">What brings you to Udyana?</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="cta cta-solid" id="submitBtn">Send Enquiry</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <p style="text-align: center; font-size: 0.78rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--clay); margin-top: 3rem;">
+        Or write directly to <a href="mailto:hello@aranyavana.com" style="color: var(--gold); border-bottom: 1px solid var(--gold);">hello@aranyavana.com</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container-narrow">
+      <p class="eyebrow" style="color: var(--gold-light);">Call</p>
+      <h2 class="cta-title"><em>Sometimes a voice says it best.</em></h2>
+      <div class="cta-buttons">
+        <a href="tel:+919999999999" class="cta cta-solid">+91 99999 99999</a>
+        <a href="../index.html" class="cta">Return Home</a>
+      </div>
+      <p class="cta-tagline">aranyavana.in · Own Nature. Build Legacy.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p class="site-footer-brand">Aranyavana</p>
+    <p class="site-footer-tagline"><em>Forest + Living · Where Nature Leads Life</em></p>
+    <p class="site-footer-contact">
+      <a href="tel:+919999999999">+91 99999 99999</a>
+      <span>·</span>
+      <a href="mailto:hello@aranyavana.com">hello@aranyavana.com</a>
+      <span>·</span>
+      <a href="https://aranyavana.in" rel="noopener">aranyavana.in</a>
+    </p>
+  </footer>
+
+</body>
+</html>

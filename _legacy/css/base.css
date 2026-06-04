@@ -1,0 +1,189 @@
+/* Reset & global base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--earth);
+  background: var(--sky);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+}
+
+p {
+  font-weight: 300;
+}
+
+/* Layout helpers */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.container-narrow {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.container-wide {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  width: 100%;
+}
+
+section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+  position: relative;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+
+.italic {
+  font-style: italic;
+}
+
+.divider-ornament {
+  display: block;
+  width: 60px;
+  height: 1px;
+  margin: 2rem auto;
+  background: linear-gradient(90deg, transparent, var(--sand), transparent);
+  border: 0;
+}
+
+.cta {
+  display: inline-block;
+  padding: 1rem 2.6rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  background: transparent;
+  transition: background 0.5s var(--ease-out),
+              color 0.5s var(--ease-out),
+              transform 0.5s var(--ease-out);
+}
+
+.cta:hover,
+.cta:focus-visible {
+  background: var(--gold);
+  color: var(--earth);
+}
+
+.cta-solid {
+  background: var(--gold);
+  color: var(--earth);
+  border-color: var(--gold);
+}
+
+.cta-solid:hover,
+.cta-solid:focus-visible {
+  background: var(--gold-light);
+  color: var(--earth);
+}
+
+.cta-dark {
+  border-color: var(--earth);
+  color: var(--earth);
+}
+
+.cta-dark:hover,
+.cta-dark:focus-visible {
+  background: var(--earth);
+  color: var(--gold-light);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* Section eyebrow + heading pattern */
+.section-eyebrow {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.section-title em {
+  color: var(--clay);
+  font-weight: 300;
+}
+
+.section-lede {
+  font-size: 1.1rem;
+  line-height: 1.85;
+  color: var(--bark);
+  max-width: 60ch;
+}

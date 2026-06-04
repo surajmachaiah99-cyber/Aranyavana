@@ -1,0 +1,83 @@
+import SectionReveal from '@/components/SectionReveal';
+import { StaggerGroup, StaggerItem } from '@/components/Stagger';
+import { GroveIcon, HorizonIcon, WaveIcon } from '@/components/icons';
+import type { ReactNode } from 'react';
+
+type Card = {
+  number: string;
+  title: string;
+  body: string;
+  pill: string;
+  iconColor: string;
+  Icon: () => ReactNode;
+};
+
+const CARDS: Card[] = [
+  {
+    number: '01',
+    title: 'The 15-Acre Living Lake',
+    body: 'Not a peripheral amenity, but the organizing intelligence of the community. A secure, natural water resource that guarantees environmental permanence for your family.',
+    pill: '· Water Security',
+    iconColor: 'text-water',
+    Icon: () => <WaveIcon />,
+  },
+  {
+    number: '02',
+    title: 'The 1km Transition',
+    body: 'Situated exactly 1 kilometer from the Bangalore–Mangalore Highway. A brief, scenic drive acts as a decompression chamber — the city gives you success; nature gives you peace.',
+    pill: '· Highway Proximity',
+    iconColor: 'text-sand',
+    Icon: () => <HorizonIcon />,
+  },
+  {
+    number: '03',
+    title: 'The 6,000 Sq.Ft. Sanctum',
+    body: 'Expansive, low-density estate plots engineered to protect your privacy and optimize wind, light, and open skies.',
+    pill: '· Estate Scale',
+    iconColor: 'text-leaf',
+    Icon: () => <GroveIcon />,
+  },
+];
+
+export default function CoreAssets() {
+  return (
+    <section id="assets" className="bg-stone py-32 md:py-40 relative">
+      <div className="container-edit">
+        <SectionReveal className="max-w-3xl">
+          <p className="eyebrow mb-5">· The Offering</p>
+          <span className="rule mb-10" />
+          <h2 className="font-display font-light text-cream text-[clamp(2rem,4vw,3.25rem)] leading-[1.05]">
+            Three Reasons This Land Is Finite
+          </h2>
+        </SectionReveal>
+
+        <StaggerGroup className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-7">
+          {CARDS.map((c) => (
+            <StaggerItem
+              key={c.number}
+              className="group relative flex flex-col p-12 border border-bark/70 bg-earth/40 transition-all duration-700 ease-editorial hover:border-sand/50 hover:shadow-[0_30px_80px_-30px_rgba(196,168,130,0.18)] hover:-translate-y-1"
+            >
+              <p className="font-sc text-sand/80 text-[0.7rem] tracking-widest2 mb-10">
+                {c.number}
+              </p>
+
+              <div className={`mb-8 ${c.iconColor}`}>
+                <c.Icon />
+              </div>
+
+              <h3 className="font-display font-light text-cream text-[1.6rem] leading-tight mb-5">
+                {c.title}
+              </h3>
+
+              <p className="font-body font-light text-sky/85 text-[0.95rem] leading-[1.85] mb-10">
+                {c.body}
+              </p>
+
+              <span className="mt-auto pill self-start">{c.pill}</span>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
+      </div>
+    </section>
+  );
+}

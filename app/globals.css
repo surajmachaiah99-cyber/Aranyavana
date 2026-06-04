@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-earth: #1c1a17;
+  --color-stone: #2e2b27;
+  --color-bark: #4a4035;
+  --color-sand: #c4a882;
+  --color-mist: #e8e0d4;
+  --color-water: #7b9e9b;
+  --color-leaf: #4d5c3a;
+  --color-sky: #d6ddd8;
+  --color-cream: #f5f0e8;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-earth);
+    color: var(--color-sky);
+    font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-sand);
+    color: var(--color-earth);
+  }
+
+  @media (min-width: 1024px) {
+    html,
+    body {
+      cursor: none;
+    }
+    html a,
+    html button,
+    html input,
+    html textarea,
+    html select,
+    html [data-cursor='pointer'] {
+      cursor: none;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-cormorant-sc), 'Cormorant SC', serif;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-sand);
+    font-size: 0.75rem;
+  }
+
+  .rule {
+    display: block;
+    height: 1px;
+    width: 56px;
+    background-color: rgba(196, 168, 130, 0.4);
+  }
+
+  .container-edit {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-edit {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-edit {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+  .btn-ghost-sand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2.25rem;
+    border: 1px solid var(--color-sand);
+    color: var(--color-sand);
+    font-family: var(--font-cormorant-sc), 'Cormorant SC', serif;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    background: transparent;
+    transition: background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .btn-ghost-sand:hover {
+    background-color: var(--color-sand);
+    color: var(--color-earth);
+  }
+
+  .btn-fill-sand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1.1rem 2rem;
+    background-color: var(--color-sand);
+    color: var(--color-earth);
+    font-family: var(--font-cormorant-sc), 'Cormorant SC', serif;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .btn-fill-sand:hover {
+    background-color: var(--color-mist);
+  }
+
+  .btn-fill-sand:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.95rem;
+    border-radius: 9999px;
+    background-color: rgba(77, 92, 58, 0.25);
+    color: var(--color-sky);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid rgba(77, 92, 58, 0.5);
+  }
+
+  .input-edit {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(196, 168, 130, 0.25);
+    padding: 0.95rem 0 0.7rem;
+    color: var(--color-cream);
+    font-family: var(--font-dm-sans), sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    transition: border-color 0.4s ease;
+  }
+
+  .input-edit:focus {
+    outline: none;
+    border-bottom-color: var(--color-sand);
+  }
+
+  .input-edit::placeholder {
+    color: rgba(214, 221, 216, 0.35);
+  }
+
+  .label-edit {
+    display: block;
+    font-family: var(--font-cormorant-sc), serif;
+    color: var(--color-sand);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+}
+
+/* Grain overlay — applied via the <Grain /> component */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Vignette utility for hero */
+.hero-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(28, 26, 23, 0) 40%,
+    rgba(28, 26, 23, 0.55) 100%
+  );
+}
+
+/* Custom cursor */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--color-sand);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease,
+    opacity 0.25s ease;
+  mix-blend-mode: difference;
+  opacity: 0;
+}
+
+.cursor-dot.is-visible {
+  opacity: 1;
+}
+
+.cursor-dot.is-hover {
+  width: 36px;
+  height: 36px;
+  background: rgba(196, 168, 130, 0.35);
+}
+
+@media (max-width: 1023px) {
+  .cursor-dot {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

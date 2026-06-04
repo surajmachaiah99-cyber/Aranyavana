@@ -1,0 +1,142 @@
+/* Responsive breakpoints */
+
+@media (max-width: 1100px) {
+  .site-nav,
+  .site-nav.is-scrolled {
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+  }
+
+  .nav-links {
+    gap: 1.6rem;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --section-pad-y: 6rem;
+  }
+
+  /* Hamburger nav */
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    inset: 64px 0 auto 0;
+    flex-direction: column;
+    background: rgba(250, 250, 247, 0.98);
+    backdrop-filter: blur(16px);
+    padding: 2.4rem 2rem 3rem;
+    gap: 1.6rem;
+    border-bottom: 1px solid rgba(196, 168, 130, 0.25);
+    transform: translateY(-110%);
+    transition: transform 0.45s var(--ease-out);
+  }
+
+  .nav-links.is-open {
+    transform: translateY(0);
+  }
+
+  /* Stack all 2-col grids */
+  .lake-grid,
+  .home-grid,
+  .location-grid,
+  .invest-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .plots-grid,
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landscape-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lake-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .form-wrap {
+    padding: 2.4rem 1.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --section-pad-y: 5rem;
+    --section-pad-x: 1.5rem;
+  }
+
+  .hero {
+    padding: 7rem 1.5rem 5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 10vw, 4rem);
+  }
+
+  .landscape-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-spec-list,
+  .price-bands {
+    grid-template-columns: 1fr;
+  }
+
+  .lake-stats {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .lake-numeral {
+    font-size: clamp(5rem, 22vw, 8rem);
+  }
+
+  .location-distances li {
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+  }
+
+  .location-distances strong {
+    font-size: 1.2rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .cta-buttons .cta {
+    text-align: center;
+  }
+
+  .site-footer-contact {
+    font-size: 0.7rem;
+  }
+
+  .site-footer-contact span {
+    display: block;
+    padding: 0.4rem 0;
+  }
+
+  .tab-button {
+    padding: 0.8rem 1.4rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+  }
+}
+
+@media (max-width: 375px) {
+  .nav-brand {
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+  }
+}

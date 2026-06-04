@@ -1,0 +1,597 @@
+/* Shared section styles */
+
+/* ============ Manifesto ============ */
+.manifesto {
+  background: var(--sky);
+  text-align: center;
+}
+
+.manifesto .container-narrow {
+  max-width: 860px;
+}
+
+.manifesto-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.45;
+  color: var(--earth);
+}
+
+.manifesto-quote em {
+  color: var(--clay);
+}
+
+.manifesto-body {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--bark);
+  max-width: 62ch;
+  margin: 0 auto;
+}
+
+/* ============ Lake ============ */
+.lake {
+  background: var(--earth);
+  color: var(--mist);
+  position: relative;
+  overflow: hidden;
+}
+
+.lake::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -40%;
+  transform: translateX(-50%);
+  width: 120%;
+  height: 70%;
+  background: radial-gradient(ellipse at center, rgba(74, 107, 110, 0.32), transparent 65%);
+  pointer-events: none;
+}
+
+.lake-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 5rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.lake-eyebrow {
+  color: var(--water-light);
+}
+
+.lake-numeral {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(7rem, 11vw, 11rem);
+  line-height: 1;
+  color: var(--water-light);
+  letter-spacing: -0.02em;
+  margin: 0.5rem 0 0.4rem;
+}
+
+.lake-sublabel {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 2rem;
+}
+
+.lake-descriptor {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.55;
+  color: var(--mist);
+  margin-bottom: 1.8rem;
+}
+
+.lake-body {
+  color: rgba(232, 221, 208, 0.78);
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+}
+
+.lake-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(196, 168, 130, 0.18);
+}
+
+.lake-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.lake-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--gold-light);
+}
+
+.lake-stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(232, 221, 208, 0.6);
+}
+
+.lake-visual {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 2px;
+  background:
+    linear-gradient(135deg, rgba(74, 107, 110, 0.55), rgba(26, 18, 9, 0.65)),
+    radial-gradient(ellipse at 70% 30%, rgba(123, 163, 168, 0.35), transparent 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  border: 1px solid rgba(196, 168, 130, 0.15);
+  overflow: hidden;
+}
+
+.lake-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 70%, rgba(123, 163, 168, 0.25), transparent 50%),
+    radial-gradient(circle at 70% 30%, rgba(184, 147, 90, 0.10), transparent 60%);
+  pointer-events: none;
+}
+
+.lake-visual-quote {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: var(--mist);
+  text-align: center;
+  max-width: 22ch;
+}
+
+/* ============ Plots ============ */
+.plots {
+  background: var(--fog);
+}
+
+.plots-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+
+.plots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.plot-card {
+  position: relative;
+  background: var(--sky);
+  padding: 3rem 2.2rem 2.6rem;
+  border: 1px solid rgba(196, 168, 130, 0.3);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+  overflow: hidden;
+}
+
+.plot-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 0;
+  background: var(--gold);
+  transition: height 0.6s var(--ease-out);
+}
+
+.plot-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px -30px rgba(44, 36, 23, 0.15);
+}
+
+.plot-card:hover::before {
+  height: 100%;
+}
+
+.plot-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 4.5rem;
+  font-weight: 300;
+  color: rgba(184, 147, 90, 0.25);
+  line-height: 1;
+  margin-bottom: 1.4rem;
+}
+
+.plot-title {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--earth);
+  margin-bottom: 0.4rem;
+}
+
+.plot-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-bottom: 1.4rem;
+}
+
+.plot-body {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--bark);
+  margin-bottom: 1.6rem;
+}
+
+.plot-price {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold);
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(196, 168, 130, 0.3);
+}
+
+/* ============ Location ============ */
+.location {
+  background: var(--fog);
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.location-distances {
+  list-style: none;
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.location-distances li {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(196, 168, 130, 0.3);
+}
+
+.location-distances strong {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+.location-distances span {
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bark);
+}
+
+.location-map {
+  position: relative;
+  aspect-ratio: 4/5;
+  background:
+    radial-gradient(circle, rgba(196, 168, 130, 0.18) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    linear-gradient(160deg, var(--mist), var(--fog));
+  border: 1px solid rgba(196, 168, 130, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  gap: 0.6rem;
+}
+
+.location-map-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--earth);
+}
+
+.location-map-corridor {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+
+.location-map-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--bark);
+  margin-top: 1.6rem;
+  max-width: 26ch;
+}
+
+/* ============ Philosophy ============ */
+.philosophy {
+  background: var(--earth);
+  color: var(--mist);
+}
+
+.philosophy-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+
+.philosophy-title {
+  color: var(--mist);
+}
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.philosophy-card {
+  border: 1px solid rgba(196, 168, 130, 0.25);
+  padding: 2.6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.philosophy-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--water-light);
+}
+
+.philosophy-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--mist);
+}
+
+.philosophy-card p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(232, 221, 208, 0.7);
+}
+
+/* ============ Investment ============ */
+.invest {
+  background: var(--fog);
+}
+
+.invest-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+
+.invest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.invest-card {
+  background: var(--sky);
+  padding: 3rem 2.4rem;
+  border: 1px solid rgba(196, 168, 130, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.invest-card.is-feature {
+  background: var(--earth);
+  color: var(--mist);
+  border-color: rgba(196, 168, 130, 0.25);
+}
+
+.invest-card.is-feature h3,
+.invest-card.is-feature .invest-num {
+  color: var(--gold-light);
+}
+
+.invest-card.is-feature p {
+  color: rgba(232, 221, 208, 0.75);
+}
+
+.invest-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--gold);
+}
+
+.invest-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--earth);
+}
+
+.invest-card p {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: var(--bark);
+}
+
+/* ============ CTA ============ */
+.cta-section {
+  background: linear-gradient(180deg, #1a1209, var(--earth));
+  color: var(--mist);
+  text-align: center;
+}
+
+.cta-section .container-narrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.cta-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  line-height: 1.25;
+  color: var(--gold-light);
+  max-width: 22ch;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+
+.cta-tagline {
+  margin-top: 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(228, 218, 200, 0.6);
+}
+
+/* ============ Footer ============ */
+.site-footer {
+  background: #110e09;
+  color: rgba(228, 218, 200, 0.55);
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+}
+
+.site-footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.site-footer-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(228, 218, 200, 0.7);
+  margin: 1.2rem 0;
+}
+
+.site-footer-contact {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.site-footer-contact a {
+  color: var(--sand);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.site-footer-contact a:hover,
+.site-footer-contact a:focus-visible {
+  border-bottom-color: var(--sand);
+}
+
+.site-footer-contact span {
+  display: inline-block;
+  padding: 0 0.6rem;
+  color: rgba(228, 218, 200, 0.35);
+}
+
+/* ============ Contact form ============ */
+.form-wrap {
+  background: var(--sky);
+  padding: 3.5rem 3rem;
+  border: 1px solid rgba(196, 168, 130, 0.3);
+  max-width: 640px;
+  margin: 3rem auto 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.field label {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.85rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(74, 55, 40, 0.25);
+  background: transparent;
+  color: var(--earth);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--gold);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: var(--font-body);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-status {
+  font-size: 0.82rem;
+  color: var(--bark);
+  min-height: 1.2em;
+}
+
+.form-status.is-error {
+  color: #a14a3a;
+}
+
+.form-status.is-success {
+  color: var(--moss);
+}

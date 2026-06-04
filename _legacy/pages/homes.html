@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homes &amp; Packages — Udyana by Aranyavana</title>
+  <meta name="description" content="Udyana Nest and Udyana Canopy — two homes built in the same language of place. Specs, materials, and price bands." />
+  <meta name="theme-color" content="#2C2417" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../css/tokens.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/nav.css" />
+  <link rel="stylesheet" href="../css/sections.css" />
+  <link rel="stylesheet" href="../css/homes.css" />
+  <link rel="stylesheet" href="../css/landscape.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/tabs.js" defer></script>
+</head>
+<body>
+
+  <header class="site-nav" id="siteNav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">Aranyavana <em>·</em> Udyana</a>
+
+      <button class="nav-toggle" id="navToggle" aria-controls="navLinks" aria-expanded="false" aria-label="Open navigation">
+        <span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="../index.html#lake">The Lake</a>
+        <a href="homes.html" aria-current="page">Homes</a>
+        <a href="../index.html#landscape">Landscape</a>
+        <a href="../index.html#location">Location</a>
+        <a href="../index.html#invest">Invest</a>
+        <a href="contact.html">Enquire</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Subpage header band -->
+  <section class="homes" style="padding-top: 9rem;">
+    <div class="container">
+      <div class="homes-header reveal">
+        <p class="eyebrow section-eyebrow" style="color: var(--sand);">Homes &amp; Packages</p>
+        <h1 class="section-title" style="color: var(--mist);">Two homes. <em>One language of place.</em></h1>
+        <p class="section-lede reveal" style="color: rgba(232, 221, 208, 0.78); margin: 1.6rem auto 0; max-width: 64ch;">
+          Both Udyana homes are built from the same vocabulary — compressed earth, clay tile, Kota stone, exposed timber. The Nest is a quiet first home in the forest; the Canopy opens that same language to a family.
+        </p>
+      </div>
+
+      <div class="tab-list" role="tablist" aria-label="Udyana homes">
+        <button class="tab-button" role="tab" id="tab-nest" aria-controls="panel-nest" aria-selected="true">Udyana Nest · 1 BHK</button>
+        <button class="tab-button" role="tab" id="tab-canopy" aria-controls="panel-canopy" aria-selected="false">Udyana Canopy · 2 BHK</button>
+      </div>
+
+      <div class="tab-panel is-active" id="panel-nest" role="tabpanel" aria-labelledby="tab-nest">
+        <div class="home-grid">
+          <figure class="home-visual" aria-label="Udyana Nest exterior">
+            <p class="home-visual-label"><em>Compressed earth walls, clay-tile roof, a single deck open to the trees.</em></p>
+          </figure>
+
+          <div class="home-details">
+            <p class="eyebrow" style="color: var(--sand);">Udyana Nest</p>
+            <h2 style="font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: clamp(2.2rem, 3.5vw, 2.8rem); color: var(--gold-light); margin-bottom: 0.4rem;">1 BHK · <em>800 sq.ft</em></h2>
+            <p class="home-sub">A first home in the forest</p>
+            <p class="home-lede"><em>Small enough to feel held, open enough to feel the weather.</em></p>
+
+            <ul class="home-spec-list">
+              <li><span>Living</span><strong>14 × 12</strong></li>
+              <li><span>Bedroom</span><strong>12 × 12</strong></li>
+              <li><span>Kitchen</span><strong>10 × 8</strong></li>
+              <li><span>Sit-out Deck</span><strong>12 × 8</strong></li>
+              <li><span>Walls</span><strong>CSEB</strong></li>
+              <li><span>Roof</span><strong>RCC + Clay Tile</strong></li>
+              <li><span>Floor</span><strong>Kota Stone</strong></li>
+              <li><span>Footprint</span><strong>Low &amp; quiet</strong></li>
+            </ul>
+
+            <div class="price-bands">
+              <div class="price-band">
+                <span class="price-band-label">Standard</span>
+                <span class="price-band-value">₹22 – 24L</span>
+              </div>
+              <div class="price-band">
+                <span class="price-band-label">Luxury</span>
+                <span class="price-band-value">₹28 – 32L</span>
+              </div>
+            </div>
+
+            <a href="contact.html" class="cta" style="margin-top: 2.4rem;">Enquire about the Nest</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-canopy" role="tabpanel" aria-labelledby="tab-canopy" hidden>
+        <div class="home-grid">
+          <figure class="home-visual" aria-label="Udyana Canopy exterior">
+            <p class="home-visual-label"><em>Stone, timber, glass &mdash; a home that lets the canopy in.</em></p>
+          </figure>
+
+          <div class="home-details">
+            <p class="eyebrow" style="color: var(--sand);">Udyana Canopy</p>
+            <h2 style="font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: clamp(2.2rem, 3.5vw, 2.8rem); color: var(--gold-light); margin-bottom: 0.4rem;">2 BHK · <em>1,200 sq.ft</em></h2>
+            <p class="home-sub">A family home, gently set</p>
+            <p class="home-lede"><em>Built around a long deck, an open kitchen, and a sky you can see from the bed.</em></p>
+
+            <ul class="home-spec-list">
+              <li><span>Living</span><strong>16 × 14</strong></li>
+              <li><span>Master Bed</span><strong>13 × 12</strong></li>
+              <li><span>Bedroom 2</span><strong>12 × 11</strong></li>
+              <li><span>Deck</span><strong>16 × 8</strong></li>
+              <li><span>Walls</span><strong>CSEB Masonry</strong></li>
+              <li><span>Roof</span><strong>Exposed wooden rafters</strong></li>
+              <li><span>Exterior</span><strong>Stone cladding + lime</strong></li>
+              <li><span>Glazing</span><strong>Floor-to-ceiling glass</strong></li>
+            </ul>
+
+            <div class="feature-tags" aria-label="Canopy features">
+              <span>Private Sit-out Deck</span>
+              <span>Firepit Area</span>
+              <span>Hammock Zone</span>
+              <span>Skylight</span>
+              <span>Outdoor Shower</span>
+              <span>Pergola</span>
+            </div>
+
+            <div class="price-bands">
+              <div class="price-band">
+                <span class="price-band-label">Premium</span>
+                <span class="price-band-value">₹34 – 38L</span>
+              </div>
+              <div class="price-band">
+                <span class="price-band-label">Ultra Luxury</span>
+                <span class="price-band-value">₹42 – 48L</span>
+              </div>
+            </div>
+
+            <a href="contact.html" class="cta" style="margin-top: 2.4rem;">Enquire about the Canopy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Landscape packages copied as related content -->
+  <section class="landscape">
+    <div class="container">
+      <div class="landscape-header reveal">
+        <p class="eyebrow section-eyebrow">Landscape Packages</p>
+        <h2 class="section-title">A garden, an orchard, <em>a forest</em>.</h2>
+        <p class="section-lede" style="margin: 1.5rem auto 0;">
+          Each home is paired with a landscape package designed by Aranyavana — chosen from four progressive options.
+        </p>
+      </div>
+
+      <div class="landscape-grid">
+        <article class="landscape-card reveal">
+          <span class="landscape-icon" aria-hidden="true">🌱</span>
+          <p class="landscape-num"><em>01</em></p>
+          <h3>Nature Starter</h3>
+          <p class="landscape-tag">Native &amp; quiet</p>
+          <ul class="landscape-includes">
+            <li>20+ native shrubs</li>
+            <li>Hardy ground cover</li>
+            <li>Drip irrigation</li>
+            <li>Mulch &amp; soil build</li>
+          </ul>
+          <p class="landscape-price"><em>₹1.5 – 3 L</em></p>
+        </article>
+
+        <article class="landscape-card reveal reveal-delay-1">
+          <span class="landscape-icon" aria-hidden="true">🌳</span>
+          <p class="landscape-num"><em>02</em></p>
+          <h3>Udyana Forest</h3>
+          <p class="landscape-tag">Canopy in five years</p>
+          <ul class="landscape-includes">
+            <li>40+ native trees</li>
+            <li>Understory planting</li>
+            <li>Bird &amp; pollinator habitat</li>
+            <li>Seasonal flowering</li>
+          </ul>
+          <p class="landscape-price"><em>₹4 – 8 L</em></p>
+        </article>
+
+        <article class="landscape-card reveal reveal-delay-2">
+          <span class="landscape-icon" aria-hidden="true">🔥</span>
+          <p class="landscape-num"><em>03</em></p>
+          <h3>Airbnb Landscape</h3>
+          <p class="landscape-tag">Guest-ready, photogenic</p>
+          <ul class="landscape-includes">
+            <li>Firepit &amp; seating</li>
+            <li>Pergola &amp; pathways</li>
+            <li>Outdoor lighting</li>
+            <li>Lawn + ornamentals</li>
+          </ul>
+          <p class="landscape-price"><em>₹6 – 12 L+</em></p>
+        </article>
+
+        <article class="landscape-card reveal reveal-delay-3">
+          <span class="landscape-icon" aria-hidden="true">🌿</span>
+          <p class="landscape-num"><em>04</em></p>
+          <h3>Edible Forest</h3>
+          <p class="landscape-tag">Fruit, herbs, abundance</p>
+          <ul class="landscape-includes">
+            <li>Fruit trees &amp; vines</li>
+            <li>Medicinal &amp; culinary herbs</li>
+            <li>Composting &amp; greywater</li>
+            <li>Year-round harvest</li>
+          </ul>
+          <p class="landscape-price"><em>Custom</em></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p class="site-footer-brand">Aranyavana</p>
+    <p class="site-footer-tagline"><em>Forest + Living · Where Nature Leads Life</em></p>
+    <p class="site-footer-contact">
+      <a href="tel:+919999999999">+91 99999 99999</a>
+      <span>·</span>
+      <a href="mailto:hello@aranyavana.com">hello@aranyavana.com</a>
+      <span>·</span>
+      <a href="https://aranyavana.in" rel="noopener">aranyavana.in</a>
+    </p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+/* Homes — tabbed panel section */
+
+.homes {
+  background: var(--bark);
+  color: var(--mist);
+  position: relative;
+  overflow: hidden;
+}
+
+.homes::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(184, 147, 90, 0.10), transparent 60%);
+  pointer-events: none;
+}
+
+.homes-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.homes-header .section-title {
+  color: var(--mist);
+}
+
+.homes-header .section-title em {
+  color: var(--gold-light);
+}
+
+.tab-list {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.tab-button {
+  padding: 1rem 2.2rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(232, 221, 208, 0.65);
+  border: 1px solid rgba(196, 168, 130, 0.3);
+  background: transparent;
+  transition: color 0.4s var(--ease-out),
+              background 0.4s var(--ease-out),
+              border-color 0.4s var(--ease-out);
+}
+
+.tab-button:hover {
+  color: var(--mist);
+  border-color: var(--gold);
+}
+
+.tab-button[aria-selected="true"] {
+  background: var(--gold);
+  color: var(--earth);
+  border-color: var(--gold);
+}
+
+.tab-panel {
+  display: none;
+  position: relative;
+  z-index: 1;
+}
+
+.tab-panel.is-active {
+  display: block;
+  animation: panelFade 0.6s var(--ease-out);
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.home-visual {
+  aspect-ratio: 4/5;
+  background:
+    linear-gradient(135deg, rgba(139, 107, 78, 0.5), rgba(44, 36, 23, 0.7)),
+    radial-gradient(ellipse at 30% 70%, rgba(184, 147, 90, 0.25), transparent 60%);
+  border: 1px solid rgba(196, 168, 130, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(123, 163, 168, 0.18), transparent 50%);
+  pointer-events: none;
+}
+
+.home-visual-label {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.7rem;
+  color: var(--mist);
+  text-align: center;
+  max-width: 22ch;
+  line-height: 1.4;
+}
+
+.home-details h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(2.2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--gold-light);
+  margin-bottom: 0.4rem;
+}
+
+.home-details .home-sub {
+  font-size: 0.78rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 1.6rem;
+}
+
+.home-details p.home-lede {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--mist);
+  margin-bottom: 1.8rem;
+  line-height: 1.55;
+}
+
+.home-spec-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+  margin: 2rem 0;
+  padding: 1.6rem 0;
+  border-top: 1px solid rgba(196, 168, 130, 0.18);
+  border-bottom: 1px solid rgba(196, 168, 130, 0.18);
+}
+
+.home-spec-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.92rem;
+  color: rgba(232, 221, 208, 0.78);
+}
+
+.home-spec-list li strong {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold-light);
+  font-size: 1.05rem;
+}
+
+.home-spec-list li span {
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(232, 221, 208, 0.55);
+}
+
+.feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.8rem 0;
+}
+
+.feature-tags span {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(196, 168, 130, 0.4);
+  color: var(--sand);
+  border-radius: 2px;
+}
+
+.price-bands {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.price-band {
+  padding: 1.4rem 1.2rem;
+  border: 1px solid rgba(196, 168, 130, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.price-band-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--sand);
+}
+
+.price-band-value {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--gold-light);
+}
+
+/* ============ Landscape ============ */
+.landscape {
+  background: var(--sky);
+}
+
+.landscape-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+
+.landscape-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+}
+
+.landscape-card {
+  background: var(--fog);
+  padding: 2.4rem 1.8rem;
+  border: 1px solid rgba(196, 168, 130, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+
+.landscape-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -28px rgba(44, 36, 23, 0.2);
+}
+
+.landscape-icon {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mist);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.landscape-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+
+.landscape-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--earth);
+}
+
+.landscape-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+
+.landscape-includes {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.6rem 0 1rem;
+}
+
+.landscape-includes li {
+  font-size: 0.88rem;
+  color: var(--bark);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.landscape-includes li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.landscape-price {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(196, 168, 130, 0.3);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold);
+}

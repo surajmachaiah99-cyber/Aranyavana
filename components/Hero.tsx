@@ -25,7 +25,7 @@ export default function Hero() {
             poster="/images/hero-lake.jpg"
             aria-hidden="true"
           >
-            <source src="/videos/hero-lake.mp4" type="video/mp4" />
+            <source src="/videos/lake-2.mp4" type="video/mp4" />
           </video>
           {/* Fallback gradient — visible until media drops in */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_70%,#3a4a3a_0%,#1c1a17_70%)] -z-10" />
@@ -42,8 +42,6 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
           className="max-w-3xl"
         >
-          <p className="eyebrow mb-6">· Udyana by Aranyavana</p>
-
           <h1 className="font-display font-light text-cream leading-[0.95] text-[clamp(2.75rem,7vw,6.5rem)] tracking-tight">
             <span className="block">Some investments grow.</span>
             <span className="block italic font-light text-cream/95">

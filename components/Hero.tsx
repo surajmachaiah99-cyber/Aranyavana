@@ -28,26 +28,16 @@ export default function Hero() {
       id="top"
       className="relative isolate h-[100svh] min-h-[760px] w-full overflow-hidden bg-[#14221a]"
     >
-      {/* Background — lake video stays, overlay shifts to charcoal → forest green */}
+      {/* Background — atmospheric gradient (video removed), then dark wash. */}
       <div className="absolute inset-0 -z-10">
         <div
           className={`absolute inset-0 ${
             reduce ? '' : 'animate-ken-burns'
           } will-change-transform`}
         >
-          <video
-            className="h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/hero-lake.jpg"
-            aria-hidden="true"
-          >
-            <source src="/videos/hero-lake.mp4" type="video/mp4" />
-          </video>
-          {/* Fallback gradient — visible until media drops in */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_70%,#1f2a1f_0%,#14221a_70%)] -z-10" />
+          {/* Forest-green radial backdrop — the ken-burns wrapper still
+              gives it a slow, almost-imperceptible drift. */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_70%,#1f2a1f_0%,#14221a_70%)]" />
         </div>
 
         {/* Charcoal/olive → forest green wash — light at top so the lake shows

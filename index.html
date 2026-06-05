@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Udyana by Aranyavana · Own Nature. Build Legacy.</title>
+  <meta
+    name="description"
+    content="A 15-acre living lake. 6,000 sq.ft of earth. A lakefront nature-investment community in Kudlur, Solur — 1 km from the Bangalore–Mangalore Highway."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ========== TOKENS ========== */
+    :root {
+      --color-earth: #2c1810;
+      --color-forest: #1b3a2d;
+      --color-stone: #8b7355;
+      --color-mist: #f5f0e8;
+      --color-water: #4a7c8e;
+      --color-sky: #e8eff5;
+
+      --font-primary: 'Cormorant Garamond', Georgia, serif;
+      --font-secondary: 'Inter', system-ui, sans-serif;
+
+      --ease-natural: cubic-bezier(0.22, 1, 0.36, 1);
+
+      --max-w: 1280px;
+      --gutter: clamp(1.25rem, 4vw, 3.5rem);
+    }
+
+    /* ========== RESET ========== */
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
+    body {
+      background: var(--color-earth);
+      color: var(--color-mist);
+      font-family: var(--font-secondary);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    ::selection { background: var(--color-stone); color: var(--color-earth); }
+
+    /* ========== LAYOUT HELPERS ========== */
+    .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+    .eyebrow {
+      font-family: var(--font-secondary);
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: var(--color-stone);
+    }
+    .rule { display: block; width: 56px; height: 1px; background: var(--color-stone); opacity: 0.6; }
+    .display { font-family: var(--font-primary); font-weight: 300; line-height: 1.04; letter-spacing: -0.005em; }
+    .italic { font-style: italic; }
+
+    /* ========== NAV ========== */
+    nav.site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: 1.5rem var(--gutter);
+      display: flex; align-items: center; justify-content: space-between;
+      background: transparent;
+      transition: background 0.7s var(--ease-natural), backdrop-filter 0.7s var(--ease-natural), border-color 0.7s var(--ease-natural);
+      border-bottom: 1px solid transparent;
+    }
+    nav.site-nav.is-scrolled {
+      background: rgba(44, 24, 16, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom-color: rgba(139, 115, 85, 0.2);
+    }
+    .nav-brand {
+      font-family: var(--font-secondary);
+      font-size: 0.78rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--color-mist); font-weight: 400;
+    }
+    .nav-cta {
+      font-family: var(--font-secondary);
+      font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--color-mist); font-weight: 400;
+      padding: 0.75rem 1.5rem; border: 1px solid rgba(245, 240, 232, 0.4);
+      transition: background 0.5s var(--ease-natural), color 0.5s var(--ease-natural), border-color 0.5s var(--ease-natural);
+    }
+    .nav-cta:hover { background: var(--color-mist); color: var(--color-earth); border-color: var(--color-mist); }
+
+    /* ========== 1. HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      /* Gradient sits underneath as a fallback — if the video fails or
+         is still loading, the scene stays compositionally correct. */
+      background:
+        radial-gradient(ellipse at 30% 70%, rgba(74, 124, 142, 0.4) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 30%, rgba(27, 58, 45, 0.6) 0%, transparent 60%),
+        linear-gradient(160deg, #0e1a14 0%, #1b3a2d 35%, #2a3a32 60%, #1a2520 85%, #0a0f0c 100%);
+      will-change: transform;
+      overflow: hidden;
+    }
+    .hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      /* Slight desaturation + warmth pull so it harmonises with the
+         earth/forest palette without looking like stock footage. */
+      filter: saturate(0.85) contrast(1.05) brightness(0.92);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 30%, rgba(14, 26, 20, 0.6) 100%),
+        linear-gradient(180deg, rgba(14, 26, 20, 0.3) 0%, rgba(14, 26, 20, 0.5) 50%, rgba(14, 26, 20, 0.85) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 0 var(--gutter);
+      max-width: 1000px;
+    }
+    .hero-eyebrow { color: rgba(245, 240, 232, 0.7); margin-bottom: 2rem; }
+    .hero-title {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-size: clamp(2.75rem, 8vw, 6.5rem);
+      line-height: 1.02;
+      color: var(--color-mist);
+      letter-spacing: -0.01em;
+      margin: 0 0 1.75rem;
+    }
+    .hero-title .word { display: inline-block; overflow: hidden; }
+    .hero-title .word > span { display: inline-block; transform: translateY(110%); opacity: 0; }
+    .hero-sub {
+      font-family: var(--font-secondary);
+      font-weight: 300;
+      font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+      letter-spacing: 0.06em;
+      color: rgba(245, 240, 232, 0.75);
+      max-width: 540px; margin: 0 auto;
+      opacity: 0;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+      opacity: 0;
+      z-index: 2;
+    }
+    .hero-scroll-label {
+      font-family: var(--font-secondary);
+      font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: rgba(245, 240, 232, 0.5);
+    }
+    .hero-scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(180deg, rgba(245, 240, 232, 0.5), transparent);
+      animation: scrollPulse 2.6s ease-in-out infinite;
+      transform-origin: top;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* ========== 2. NATURE STATEMENT ========== */
+    .statement {
+      position: relative;
+      padding: clamp(8rem, 18vh, 14rem) 0;
+      background: var(--color-forest);
+      overflow: hidden;
+    }
+    .statement::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(74, 124, 142, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(245, 240, 232, 0.05) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    .statement-inner {
+      position: relative;
+      max-width: 1100px; margin: 0 auto;
+      padding: 0 var(--gutter);
+      text-align: center;
+    }
+    .statement-text {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-size: clamp(1.85rem, 4.5vw, 3.75rem);
+      line-height: 1.25;
+      color: var(--color-mist);
+      letter-spacing: -0.005em;
+    }
+    .statement-text em {
+      font-style: italic;
+      color: var(--color-mist);
+      opacity: 0.85;
+    }
+
+    /* ========== 3. THE LAKE ========== */
+    .lake {
+      position: relative;
+      background: var(--color-earth);
+    }
+    .lake-header {
+      padding: clamp(6rem, 14vh, 10rem) 0 4rem;
+      text-align: center;
+    }
+    .lake-header h2 {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      color: var(--color-mist);
+      margin: 1.25rem 0 0;
+      line-height: 1.05;
+    }
+    .lake-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2rem 0 clamp(6rem, 14vh, 10rem);
+    }
+    @media (min-width: 900px) {
+      .lake-cards { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+    }
+    .lake-card {
+      position: relative;
+      padding: 3rem 2.5rem;
+      background: rgba(245, 240, 232, 0.03);
+      border: 1px solid rgba(139, 115, 85, 0.25);
+      overflow: hidden;
+      transition: border-color 0.7s var(--ease-natural), background 0.7s var(--ease-natural), transform 0.7s var(--ease-natural);
+    }
+    .lake-card:hover {
+      border-color: rgba(139, 115, 85, 0.55);
+      background: rgba(245, 240, 232, 0.05);
+      transform: translateY(-4px);
+    }
+    .lake-card-icon {
+      width: 48px; height: 48px; margin-bottom: 2.5rem;
+      color: var(--color-water);
+    }
+    .lake-card-icon svg { width: 100%; height: 100%; }
+    .lake-card-num {
+      position: absolute; top: 1.25rem; right: 1.75rem;
+      font-family: var(--font-primary); font-weight: 300;
+      font-size: 0.85rem; color: var(--color-stone); opacity: 0.7;
+      letter-spacing: 0.15em;
+    }
+    .lake-card h3 {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-size: 1.65rem;
+      color: var(--color-mist);
+      margin: 0 0 1rem;
+      line-height: 1.2;
+    }
+    .lake-card p {
+      font-family: var(--font-secondary);
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: rgba(245, 240, 232, 0.7);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ========== 4. THE LAND ========== */
+    .land {
+      position: relative;
+      background: var(--color-earth);
+      padding: clamp(5rem, 12vh, 9rem) 0;
+    }
+    .land-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: stretch;
+    }
+    @media (min-width: 900px) {
+      .land-grid { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    }
+    .land-visual {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(74, 124, 142, 0.45) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, rgba(27, 58, 45, 0.7) 0%, transparent 55%),
+        linear-gradient(135deg, #1c2a1f 0%, #2a3a2c 35%, #3a4a3a 55%, #1b3a2d 80%, #0e1a14 100%);
+    }
+    .land-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(80deg, transparent 0px, transparent 18px, rgba(0,0,0,0.06) 18px, rgba(0,0,0,0.06) 19px),
+        radial-gradient(ellipse at center, transparent 50%, rgba(14, 26, 20, 0.55) 100%);
+      mix-blend-mode: multiply;
+    }
+    .land-visual::before {
+      content: '';
+      position: absolute; left: 50%; top: 30%;
+      width: 60%; height: 35%;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, rgba(74, 124, 142, 0.6) 0%, rgba(74, 124, 142, 0.25) 45%, transparent 80%);
+      filter: blur(12px);
+    }
+    .land-visual-label {
+      position: absolute; bottom: 1.75rem; left: 1.75rem; right: 1.75rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      z-index: 2;
+    }
+    .land-visual-label .rule { width: 40px; background: rgba(245, 240, 232, 0.5); margin-bottom: 0.5rem; }
+    .land-visual-label .eyebrow { color: rgba(245, 240, 232, 0.7); }
+    .land-visual-label em {
+      font-family: var(--font-primary);
+      font-style: italic; font-weight: 300;
+      color: var(--color-mist); font-size: 1.15rem;
+      letter-spacing: 0.01em;
+    }
+    .land-copy { max-width: 520px; }
+    .land-copy h2 {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      color: var(--color-mist);
+      margin: 1.5rem 0 1.75rem;
+      line-height: 1.05;
+    }
+    .land-copy p {
+      font-family: var(--font-secondary);
+      font-weight: 300;
+      font-size: 1.025rem;
+      color: rgba(245, 240, 232, 0.75);
+      line-height: 1.9;
+      margin: 0;
+    }
+
+    /* ========== 5. LOCATION ========== */
+    .location {
+      position: relative;
+      background: var(--color-mist);
+      color: var(--color-earth);
+      padding: clamp(6rem, 14vh, 10rem) 0;
+      overflow: hidden;
+    }
+    .location::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(74, 124, 142, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(139, 115, 85, 0.06) 0%, transparent 45%);
+      pointer-events: none;
+    }
+    .location-inner { position: relative; max-width: 1000px; margin: 0 auto; padding: 0 var(--gutter); text-align: center; }
+    .location-eyebrow { color: var(--color-stone); }
+    .location h2 {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      color: var(--color-earth);
+      line-height: 1.1;
+      margin: 1.25rem 0 4rem;
+    }
+    .location-callouts {
+      display: grid; grid-template-columns: 1fr; gap: 2.5rem;
+      max-width: 720px; margin: 0 auto;
+    }
+    @media (min-width: 700px) { .location-callouts { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+    .callout {
+      text-align: left;
+      padding-left: 1.5rem;
+      border-left: 1px solid rgba(139, 115, 85, 0.5);
+    }
+    .callout-label {
+      font-family: var(--font-secondary);
+      font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--color-stone);
+      margin-bottom: 0.6rem;
+    }
+    .callout-value {
+      font-family: var(--font-primary); font-weight: 300;
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      color: var(--color-earth);
+      letter-spacing: -0.005em;
+      line-height: 1.1;
+    }
+    .callout-note {
+      font-family: var(--font-secondary); font-weight: 300;
+      font-size: 0.85rem; color: rgba(44, 24, 16, 0.55);
+      margin-top: 0.5rem;
+    }
+
+    /* ========== 6. PHILOSOPHY ========== */
+    .philosophy {
+      position: relative;
+      padding: clamp(8rem, 18vh, 13rem) 0;
+      background:
+        radial-gradient(ellipse at center, rgba(27, 58, 45, 0.4) 0%, transparent 70%),
+        var(--color-earth);
+      overflow: hidden;
+    }
+    .philosophy::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(245, 240, 232, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .philosophy-inner {
+      position: relative;
+      max-width: 880px; margin: 0 auto;
+      padding: 0 var(--gutter);
+      text-align: center;
+    }
+    .philosophy-quote {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1.65rem, 3.3vw, 2.65rem);
+      line-height: 1.4;
+      color: var(--color-mist);
+      letter-spacing: -0.005em;
+    }
+    .philosophy-quote-mark {
+      display: block;
+      font-family: var(--font-primary);
+      font-style: italic; font-weight: 300;
+      font-size: clamp(5rem, 10vw, 8rem);
+      line-height: 0.7;
+      color: rgba(139, 115, 85, 0.35);
+      margin-bottom: 1rem;
+    }
+    .philosophy-attr {
+      margin-top: 3rem;
+      display: inline-flex; align-items: center; gap: 1rem;
+      font-family: var(--font-secondary);
+      font-size: 0.72rem; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--color-stone);
+    }
+    .philosophy-attr::before, .philosophy-attr::after {
+      content: ''; display: block; width: 40px; height: 1px; background: var(--color-stone); opacity: 0.5;
+    }
+
+    /* ========== 7. INVEST ========== */
+    .invest {
+      position: relative;
+      padding: clamp(6rem, 14vh, 10rem) 0;
+      background: var(--color-forest);
+      overflow: hidden;
+      text-align: center;
+    }
+    .invest::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(245, 240, 232, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.3) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .invest-inner { position: relative; max-width: 760px; margin: 0 auto; padding: 0 var(--gutter); }
+    .invest-eyebrow { color: rgba(245, 240, 232, 0.55); margin-bottom: 1.5rem; }
+    .invest h2 {
+      font-family: var(--font-primary);
+      font-weight: 300;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--color-mist);
+      line-height: 1.05;
+      margin: 0 0 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    .invest-sub {
+      font-family: var(--font-secondary);
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: rgba(245, 240, 232, 0.7);
+      margin: 0 0 3rem;
+    }
+    .invest-cta {
+      display: inline-block;
+      padding: 1.1rem 2.5rem;
+      background: var(--color-mist);
+      color: var(--color-earth);
+      font-family: var(--font-secondary);
+      font-weight: 400;
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-mist);
+      transition: background 0.6s var(--ease-natural), color 0.6s var(--ease-natural);
+    }
+    .invest-cta:hover { background: transparent; color: var(--color-mist); }
+    .invest-tag {
+      font-family: var(--font-primary);
+      font-style: italic; font-weight: 300;
+      font-size: 1.05rem;
+      color: rgba(245, 240, 232, 0.55);
+      margin-top: 2rem;
+    }
+
+    /* ========== 8. FOOTER ========== */
+    footer {
+      background: var(--color-earth);
+      padding: 5rem 0 2.5rem;
+      border-top: 1px solid rgba(139, 115, 85, 0.2);
+    }
+    .footer-inner {
+      display: grid; grid-template-columns: 1fr; gap: 3rem;
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    @media (min-width: 800px) {
+      .footer-inner { grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; align-items: start; }
+    }
+    .footer-brand { font-family: var(--font-secondary); font-size: 1rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--color-mist); }
+    .footer-tag {
+      font-family: var(--font-primary); font-style: italic; font-weight: 300;
+      color: rgba(245, 240, 232, 0.6); margin-top: 0.85rem; font-size: 1.05rem;
+    }
+    .footer-col h4 {
+      font-family: var(--font-secondary); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--color-stone); margin: 0 0 1rem; font-weight: 400;
+    }
+    .footer-col a {
+      display: block; padding: 0.35rem 0;
+      font-family: var(--font-secondary); font-size: 0.9rem; font-weight: 300;
+      color: rgba(245, 240, 232, 0.6);
+      transition: color 0.4s var(--ease-natural);
+    }
+    .footer-col a:hover { color: var(--color-mist); }
+    .footer-bottom {
+      margin-top: 4rem;
+      padding-top: 2rem; padding-left: var(--gutter); padding-right: var(--gutter);
+      border-top: 1px solid rgba(139, 115, 85, 0.15);
+      display: flex; flex-direction: column; gap: 0.5rem;
+      max-width: var(--max-w); margin-left: auto; margin-right: auto;
+      font-family: var(--font-secondary); font-size: 0.75rem; letter-spacing: 0.08em;
+      color: rgba(245, 240, 232, 0.4);
+    }
+    @media (min-width: 700px) {
+      .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+
+    /* ========== REVEAL DEFAULTS (used before GSAP overrides) ========== */
+    .reveal { opacity: 0; transform: translateY(28px); }
+
+    /* ========== REDUCED MOTION ========== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition-duration: 0.001ms !important; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
+      .hero-title .word > span { transform: none; opacity: 1; }
+      .hero-sub, .hero-scroll { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ========== NAV ========== -->
+  <nav class="site-nav" id="siteNav">
+    <a href="#top" class="nav-brand">Aranyavana</a>
+    <a href="#invest" class="nav-cta">Request Consultation</a>
+  </nav>
+
+  <!-- ========== 1. HERO ========== -->
+  <section class="hero" id="top">
+    <div class="hero-bg" id="heroBg">
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="videos/hero.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <p class="eyebrow hero-eyebrow">· Udyana · Kudlur · Solur</p>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="word"><span>Own</span></span>
+        <span class="word"><span>Nature.</span></span>
+        <br />
+        <span class="word"><span>Build</span></span>
+        <span class="word"><span>Legacy.</span></span>
+      </h1>
+      <p class="hero-sub" id="heroSub">
+        Udyana by Aranyavana — Lakefront Estate Plots, Kudlur
+      </p>
+    </div>
+
+    <div class="hero-scroll" id="heroScroll" aria-hidden="true">
+      <span class="hero-scroll-label">Scroll</span>
+      <span class="hero-scroll-line"></span>
+    </div>
+  </section>
+
+  <!-- ========== 2. NATURE STATEMENT ========== -->
+  <section class="statement" data-reveal>
+    <div class="statement-inner">
+      <p class="statement-text reveal">
+        A 15-acre living lake.<br />
+        6,000 sq.ft of earth.<br />
+        <em>A legacy that outlasts markets.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== 3. THE LAKE ========== -->
+  <section class="lake">
+    <div class="container">
+      <div class="lake-header">
+        <p class="eyebrow reveal" data-reveal>· The Lake</p>
+        <h2 class="reveal" data-reveal>The water decides everything.</h2>
+      </div>
+
+      <div class="lake-cards">
+        <article class="lake-card reveal" data-reveal>
+          <span class="lake-card-num">01</span>
+          <div class="lake-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 22 C 10 18, 16 26, 24 22 S 38 18, 44 22" />
+              <path d="M4 30 C 10 26, 16 34, 24 30 S 38 26, 44 30" opacity="0.7" />
+              <path d="M4 38 C 10 34, 16 42, 24 38 S 38 34, 44 38" opacity="0.45" />
+            </svg>
+          </div>
+          <h3>15 Acres of Water</h3>
+          <p>A living lake at the centre of the community — not a token amenity, but the reason this land exists in this shape. Wind, light, and life organise themselves around it.</p>
+        </article>
+
+        <article class="lake-card reveal" data-reveal>
+          <span class="lake-card-num">02</span>
+          <div class="lake-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="14" width="32" height="20" rx="0" />
+              <line x1="8" y1="22" x2="40" y2="22" opacity="0.5" />
+              <line x1="24" y1="14" x2="24" y2="34" opacity="0.5" />
+              <circle cx="16" cy="28" r="1.5" fill="currentColor" />
+            </svg>
+          </div>
+          <h3>Lakefront Ownership</h3>
+          <p>Eighteen estate plots. Each one bordering water. There is no second row. There is no future phase. The lake's edge is finite — and once held, it does not return to the market.</p>
+        </article>
+
+        <article class="lake-card reveal" data-reveal>
+          <span class="lake-card-num">03</span>
+          <div class="lake-card-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M24 38 L 24 20" />
+              <path d="M24 20 C 16 20, 14 14, 17 10 C 13 8, 14 4, 19 4 C 21 1, 27 1, 29 4 C 34 4, 35 8, 31 10 C 34 14, 32 20, 24 20 Z" />
+              <path d="M14 42 L 34 42" opacity="0.5" />
+            </svg>
+          </div>
+          <h3>Water as Legacy</h3>
+          <p>A child remembers the lake they grew up beside. A grandchild remembers the lake their family kept. Owning water — clean, secure, generational — is the quietest form of wealth.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4. THE LAND ========== -->
+  <section class="land" id="land">
+    <div class="container">
+      <div class="land-grid">
+        <div class="land-visual reveal" data-reveal aria-label="Aerial illustration of an estate plot bordering the lake">
+          <div class="land-visual-label">
+            <span class="rule"></span>
+            <span class="eyebrow">· Aerial Study</span>
+            <em>6,000 sq.ft · Lakefront orientation</em>
+          </div>
+        </div>
+
+        <div class="land-copy">
+          <p class="eyebrow reveal" data-reveal>· The Land</p>
+          <h2 class="reveal" data-reveal>Estate Plots.<br />Not Layouts.</h2>
+          <p class="reveal" data-reveal>
+            Approximately 6,000 sq.ft of nature-integrated land. Designed not to be subdivided, but to be stewarded. Each plot keeps its contours, its trees, and its view of the water — held in the shape the land already has.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 5. LOCATION ========== -->
+  <section class="location">
+    <div class="location-inner">
+      <p class="eyebrow location-eyebrow reveal" data-reveal>· Location</p>
+      <h2 class="reveal" data-reveal>1 km from the highway.<br />A world away from the city.</h2>
+
+      <div class="location-callouts">
+        <div class="callout reveal" data-reveal>
+          <p class="callout-label">From the Highway</p>
+          <p class="callout-value">~ 1 km</p>
+          <p class="callout-note">Bangalore–Mangalore Highway (NH 75)</p>
+        </div>
+        <div class="callout reveal" data-reveal>
+          <p class="callout-label">From the City</p>
+          <p class="callout-value">~ 60 km</p>
+          <p class="callout-note">Bangalore City Centre</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 6. PHILOSOPHY ========== -->
+  <section class="philosophy">
+    <div class="philosophy-inner">
+      <span class="philosophy-quote-mark reveal" data-reveal aria-hidden="true">&ldquo;</span>
+      <blockquote class="philosophy-quote reveal" data-reveal>
+        We don't sell plots. We steward land.<br />
+        Every estate at Udyana is a decision to invest in nature,<br />
+        preserve water, and build something your children<br />
+        will never want to sell.
+      </blockquote>
+      <p class="philosophy-attr reveal" data-reveal>Aranyavana</p>
+    </div>
+  </section>
+
+  <!-- ========== 7. INVEST ========== -->
+  <section class="invest" id="invest">
+    <div class="invest-inner">
+      <p class="eyebrow invest-eyebrow reveal" data-reveal>· The Opportunity</p>
+      <h2 class="reveal" data-reveal>Starting from ₹75 Lakhs</h2>
+      <p class="invest-sub reveal" data-reveal>
+        6,000 sq.ft Lakefront Estate Plots · Limited Inventory
+      </p>
+      <a href="mailto:hello@aranyavana.com?subject=Private%20Consultation%20%E2%80%94%20Udyana" class="invest-cta reveal" data-reveal>
+        Request a Private Consultation
+      </a>
+      <p class="invest-tag reveal" data-reveal>
+        No brokers. No pressure. Just land.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== 8. FOOTER ========== -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Aranyavana</div>
+        <p class="footer-tag">Own Nature. Build Legacy.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#top">About</a>
+        <a href="#land">Projects</a>
+        <a href="#invest">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <a>Udyana</a>
+        <a>Kudlur, Solur</a>
+        <a>Karnataka, India</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Aranyavana Infra Developers LLP</span>
+      <span>All Rights Reserved</span>
+    </div>
+  </footer>
+
+  <!-- ========== GSAP ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- NAV scroll state ---------- */
+      const nav = document.getElementById('siteNav');
+      const onScrollNav = () => {
+        if (window.scrollY > 32) nav.classList.add('is-scrolled');
+        else nav.classList.remove('is-scrolled');
+      };
+      window.addEventListener('scroll', onScrollNav, { passive: true });
+      onScrollNav();
+
+      if (!window.gsap) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* ---------- HERO entry: stagger word reveal ---------- */
+      if (!reduceMotion) {
+        const words = document.querySelectorAll('#heroTitle .word > span');
+        gsap.to(words, {
+          y: '0%',
+          opacity: 1,
+          duration: 1.4,
+          ease: 'power3.out',
+          stagger: 0.12,
+          delay: 0.25,
+        });
+        gsap.to('#heroSub', {
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power2.out',
+          delay: 1.05,
+        });
+        gsap.to('#heroScroll', {
+          opacity: 1,
+          duration: 1,
+          ease: 'power2.out',
+          delay: 1.5,
+        });
+      } else {
+        gsap.set('#heroTitle .word > span, #heroSub, #heroScroll', { y: 0, opacity: 1 });
+      }
+
+      /* ---------- HERO parallax ---------- */
+      if (!reduceMotion) {
+        gsap.to('#heroBg', {
+          yPercent: 18,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      }
+
+      /* ---------- Reveal on scroll ---------- */
+      const reveals = document.querySelectorAll('.reveal, [data-reveal] .reveal');
+      reveals.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 32, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+
+      /* ---------- Statement (slow, deliberate) ---------- */
+      gsap.fromTo(
+        '.statement-text',
+        { y: 36, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.6,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '.statement', start: 'top 75%' },
+        }
+      );
+
+      /* ---------- Lake cards stagger ---------- */
+      gsap.fromTo(
+        '.lake-card',
+        { y: 48, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.3,
+          ease: 'power3.out',
+          stagger: 0.18,
+          scrollTrigger: { trigger: '.lake-cards', start: 'top 80%' },
+        }
+      );
+
+      /* ---------- Philosophy fade ---------- */
+      gsap.fromTo(
+        '.philosophy-quote',
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.8,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: '.philosophy', start: 'top 70%' },
+        }
+      );
+    })();
+  </script>
+</body>
+</html>

@@ -23,10 +23,15 @@ export default function Navbar() {
       <div className="container-edit flex items-center justify-center py-6 md:py-8">
         <a
           href="#top"
-          className="font-sc text-[#D1C2A5] text-xl md:text-3xl tracking-widest3 hover:text-[#E5D9C4] transition-colors duration-500"
-          aria-label="Aranyavana — home"
+          className="group flex flex-col items-center gap-1 text-[#D1C2A5] hover:text-[#E5D9C4] transition-colors duration-500"
+          aria-label="Aranyavana — Curated Nature Living"
         >
-          ARANYAVANA
+          <span className="font-sc text-xl md:text-3xl tracking-widest3 leading-none">
+            ARANYAVANA
+          </span>
+          <span className="font-display italic font-light text-[0.7rem] md:text-[0.85rem] text-[#D1C2A5]/65 group-hover:text-[#E5D9C4]/75 tracking-[0.05em] leading-none transition-colors duration-500">
+            Curated Nature Living
+          </span>
         </a>
       </div>
     </header>

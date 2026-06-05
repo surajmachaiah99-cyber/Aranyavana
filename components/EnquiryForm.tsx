@@ -204,7 +204,7 @@ export default function EnquiryForm() {
                       disabled={isSubmitting}
                       className="btn-fill-sand"
                     >
-                      {isSubmitting ? 'SENDING…' : 'REQUEST PRIVATE BRIEFING'}
+                      {isSubmitting ? 'Sending…' : 'Request private briefing'}
                     </button>
                     <p className="mt-5 font-body font-light text-mist/45 text-[0.72rem] tracking-wide">
                       We respond within 24 hours. By submitting, you consent to

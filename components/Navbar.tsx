@@ -34,23 +34,11 @@ export default function Navbar() {
         <div className="container-edit flex items-center justify-between py-5">
           <a
             href="#top"
-            className="font-sc text-mist text-[0.78rem] tracking-widest2 hover:text-sand transition-colors duration-500"
+            className="font-sc text-2xl md:text-5xl tracking-widest2 transition-colors duration-500 text-[#D1C2A5] hover:text-[#E5D9C4]"
             aria-label="Aranyavana — home"
           >
             ARANYAVANA
           </a>
-
-          <nav className="hidden md:flex items-center gap-10">
-            <span className="font-body font-light text-[0.85rem] text-mist/70 italic">
-              Udyana
-            </span>
-            <a
-              href="#enquiry"
-              className="font-sc text-[0.7rem] tracking-widest2 text-sand border border-sand/60 px-5 py-3 hover:bg-sand hover:text-earth transition-colors duration-700 ease-editorial"
-            >
-              REQUEST INVITATION
-            </a>
-          </nav>
 
           <button
             type="button"
@@ -71,7 +59,7 @@ export default function Navbar() {
         aria-hidden={!open}
       >
         <div className="container-edit flex items-center justify-between py-5">
-          <span className="font-sc text-mist text-[0.78rem] tracking-widest2">
+          <span className="font-sc text-[#D1C2A5] text-2xl tracking-widest2">
             ARANYAVANA
           </span>
           <button
@@ -118,7 +106,7 @@ export default function Navbar() {
             onClick={close}
             className="mt-8 btn-ghost-sand"
           >
-            REQUEST INVITATION
+            Request a private briefing
           </a>
         </nav>
       </div>

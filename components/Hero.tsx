@@ -1,31 +1,34 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
 
-/**
- * Hero — luxury minimalist lakefront brief.
- *
- * Layered, top → bottom:
- *  1. Lake video (kept) with slow Ken Burns
- *  2. Deep forest-green wash + vignette so type stays legible
- *  3. Top: spaced-out brand tagline
- *  4. Center: "Udyana" + lyric subheading + "BY ARANYAVANA" credit
- *  5. Bottom: a single transparent gold-bordered CTA
- */
+const container: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.18, delayChildren: 0.35 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export default function Hero() {
   const reduce = useReducedMotion();
-
-  // Champagne / cream palette per spec
-  const champagne = '#D1C2A5';
-  const cream = '#E5D9C4';
-  const titleCream = '#F4ECDD';
+  const initial = reduce ? 'visible' : 'hidden';
 
   return (
     <section
       id="top"
-      className="relative h-[100svh] min-h-[760px] w-full overflow-hidden"
+      className="relative h-[100svh] min-h-[760px] w-full overflow-hidden bg-[#14221a]"
     >
-      {/* ── Background layer ── */}
+      {/* Background — lake video stays, overlay shifts to charcoal → forest green */}
       <div className="absolute inset-0 -z-10">
         <div
           className={`absolute inset-0 ${
@@ -43,72 +46,79 @@ export default function Hero() {
           >
             <source src="/videos/hero-lake.mp4" type="video/mp4" />
           </video>
-          {/* Fallback gradient — only seen if the video fails */}
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_30%_70%,#3a4a3a_0%,#14221a_70%)]" />
+          {/* Fallback gradient — visible until media drops in */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_70%,#1f2a1f_0%,#14221a_70%)] -z-10" />
         </div>
 
-        {/* Deep forest wash: muted charcoal-olive top → rich forest green bottom */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0e1410]/50 via-[#14221a]/55 to-[#14221a]/95" />
-        {/* Atmospheric vignette */}
-        <div className="absolute inset-0 hero-vignette" />
+        {/* Charcoal/olive → forest green wash — light at top so the lake shows
+            through, deeper at the bottom for CTA legibility. */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#0e161266_0%,#14221a4d_30%,#14221a80_65%,#14221acc_100%)]" />
+        {/* Soft vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,#0a110d_100%)] opacity-50" />
       </div>
 
-      {/* ── Content stack ── */}
-      <div className="container-edit relative z-10 h-full flex flex-col items-center justify-between pt-32 md:pt-40 pb-16 md:pb-20 text-center">
-        {/* Top brand tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          className="font-body font-light text-[0.7rem] md:text-[0.78rem] tracking-[0.35em]"
-          style={{ color: cream }}
-        >
-          CURATED NATURE LIVING · SOLUR, off NH-75
-        </motion.p>
+      {/* Content — top spacer → centered stack → CTA at the floor */}
+      <motion.div
+        variants={container}
+        initial={initial}
+        animate="visible"
+        className="container-edit relative z-10 h-full flex flex-col items-center justify-between pt-32 md:pt-40 pb-16 md:pb-20 text-center"
+      >
+        {/* Spacer for nav clearance */}
+        <span aria-hidden="true" />
 
-        {/* Center group: title + subheading + credit */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.55 }}
-          className="flex flex-col items-center"
-        >
-          <h1
-            className="font-display italic font-light leading-[0.92] tracking-[-0.015em] text-[clamp(4.5rem,13vw,10rem)]"
-            style={{ color: titleCream }}
+        {/* Centered editorial stack */}
+        <div className="flex flex-col items-center max-w-4xl mx-auto">
+          {/* Tagline */}
+          <motion.p
+            variants={item}
+            className="font-body font-light text-[#E5D9C4]/85 text-[clamp(0.72rem,0.95vw,0.88rem)] tracking-[0.4em] uppercase"
+          >
+            Curated Nature Living · Solur, off NH-75
+          </motion.p>
+
+          {/* Hairline divider */}
+          <motion.span
+            variants={item}
+            aria-hidden="true"
+            className="block h-px w-14 md:w-20 bg-[#D1C2A5]/45 my-9 md:my-12"
+          />
+
+          {/* Project title */}
+          <motion.h1
+            variants={item}
+            className="font-display italic font-light text-cream text-[clamp(4.5rem,11vw,9.5rem)] leading-[0.95] tracking-tight"
           >
             Udyana
-          </h1>
+          </motion.h1>
 
-          <p
-            className="mt-7 md:mt-9 font-display italic font-light leading-snug text-[clamp(1.15rem,2.1vw,1.6rem)] max-w-xl"
-            style={{ color: cream }}
+          {/* Sub-heading */}
+          <motion.p
+            variants={item}
+            className="mt-6 md:mt-9 font-display italic font-light text-[#E5D9C4] text-[clamp(1.25rem,2.1vw,1.95rem)] leading-snug max-w-2xl"
           >
             Where the lake holds time still.
-          </p>
+          </motion.p>
 
-          <p
-            className="mt-10 md:mt-12 font-body font-light text-[0.65rem] md:text-[0.72rem] tracking-[0.45em]"
-            style={{ color: champagne }}
+          {/* Developer credit */}
+          <motion.p
+            variants={item}
+            className="mt-10 md:mt-14 font-body font-light text-[#D1C2A5] text-[0.7rem] md:text-[0.78rem] tracking-[0.5em] uppercase"
           >
-            BY ARANYAVANA
-          </p>
-        </motion.div>
+            By Aranyavana
+          </motion.p>
+        </div>
 
-        {/* Bottom CTA — centered, transparent, thin champagne-gold border */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 1.1 }}
-        >
+        {/* CTA — centered at the floor */}
+        <motion.div variants={item}>
           <a
             href="#enquiry"
-            className="group inline-flex items-center justify-center px-9 md:px-11 py-4 md:py-[1.05rem] border border-[#D1C2A5]/70 text-[#D1C2A5] font-body font-light text-[0.74rem] md:text-[0.8rem] tracking-[0.28em] transition-[background-color,border-color,box-shadow,color] duration-700 ease-editorial hover:bg-[#D1C2A5]/10 hover:border-[#E5D9C4] hover:text-[#F4ECDD] hover:shadow-[0_0_28px_-2px_rgba(209,194,165,0.35)]"
+            className="group inline-flex items-center justify-center px-9 md:px-11 py-3.5 md:py-4 border border-[#D1C2A5]/65 text-[#D1C2A5] font-body font-light text-[0.72rem] md:text-[0.78rem] tracking-[0.35em] uppercase transition-[background-color,border-color,color,box-shadow] duration-700 ease-editorial hover:bg-[#D1C2A5]/10 hover:border-[#E5D9C4] hover:text-[#E5D9C4] hover:shadow-[0_0_42px_-6px_rgba(229,217,196,0.4)]"
           >
-            REQUEST A PRIVATE BRIEFING
+            Request a Private Briefing
           </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

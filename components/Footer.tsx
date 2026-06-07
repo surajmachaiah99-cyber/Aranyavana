@@ -13,7 +13,7 @@ export default function Footer() {
 
         <div className="md:text-center">
           <p className="font-body font-light text-mist/80 text-[0.9rem]">
-            Udyana · Kudlur, Solur, Karnataka
+            Udyana · The Lake Retreat Solur, Nelamangala
           </p>
           <p className="mt-2 font-body font-light text-mist/45 text-[0.78rem]">
             hello@aranyavana.com
@@ -26,9 +26,6 @@ export default function Footer() {
           </p>
           <p className="font-body font-light text-mist/45 text-[0.72rem]">
             All Rights Reserved
-          </p>
-          <p className="font-sc text-sand/65 text-[0.65rem] tracking-widest2">
-            · RERA Registration Pending
           </p>
         </div>
       </div>

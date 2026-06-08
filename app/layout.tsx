@@ -1,20 +1,27 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Jost } from 'next/font/google';
+import { Cormorant_Garamond, Cormorant_SC, Poppins } from 'next/font/google';
 import './globals.css';
 import Grain from '@/components/Grain';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '500'],
   style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: 'swap',
 });
 
-const jost = Jost({
+const cormorantSC = Cormorant_SC({
   subsets: ['latin'],
-  weight: ['200', '300', '400', '500'],
-  variable: '--font-jost',
+  weight: ['300', '500'],
+  variable: '--font-cormorant-sc',
+  display: 'swap',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-poppins',
   display: 'swap',
 });
 
@@ -35,9 +42,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${jost.variable} scroll-smooth`}
+      className={`${cormorant.variable} ${cormorantSC.variable} ${poppins.variable} scroll-smooth`}
     >
-      <body className="bg-paper font-body text-bark antialiased">
+      <body className="bg-earth font-body text-sky antialiased">
         <Grain />
         {children}
       </body>

@@ -194,6 +194,45 @@ const SEEDBALL_STYLES = `
     font-weight: 400;
   }
 
+  /* ── Philosophy closer ──
+     Full-width punchline below the 2-col grid. Inherits the Thesis
+     section's strongest line, now used as the editorial exit of the
+     philosophy block (eliminates the standalone Thesis section). */
+  .ara-sb .sb-philosophy-closer {
+    grid-column: 1 / -1;
+    margin-top: 72px;
+    padding-top: 56px;
+    border-top: 1px solid rgba(196,170,135,0.12);
+    text-align: center;
+  }
+  .ara-sb .sb-philosophy-closer-dot {
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: var(--sb-sand);
+    border-radius: 50%;
+    margin: 0 auto 28px;
+    opacity: 0.7;
+  }
+  .ara-sb .sb-philosophy-closer-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(26px, 4.2vw, 48px);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--sb-cream);
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .ara-sb .sb-philosophy-closer-quote span {
+    display: block;
+  }
+  .ara-sb .sb-philosophy-closer-quote em {
+    font-style: italic;
+    color: var(--sb-sand);
+  }
+
   /* ══════════════════════════════════════════
      SECTION B — RITUAL STEPS
   ══════════════════════════════════════════ */
@@ -582,6 +621,15 @@ export default function SeedballSection() {
               <p>This is not a gesture. It is a <strong>founding principle.</strong> A declaration that the land we steward is already alive — and our job is to deepen that life, not erase it.</p>
               <p>By the time our communities are complete, the forest has already begun. Trees that will stand for a hundred years. Long after our names are forgotten.</p>
             </div>
+
+            {/* ── Closing punchline — absorbed from the deleted Thesis section ── */}
+            <figure className="sb-philosophy-closer sb-reveal sb-reveal-d3">
+              <span aria-hidden="true" className="sb-philosophy-closer-dot" />
+              <blockquote className="sb-philosophy-closer-quote">
+                <span>Nature is not the backdrop to life here.</span>
+                <span><em>Nature is the architect.</em></span>
+              </blockquote>
+            </figure>
           </div>
         </div>
 

@@ -1,6 +1,57 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+/**
+ * Ritual steps data — promoted to module scope so the tab switcher
+ * inside SeedballSection can render the right SVG, body and sub-label
+ * for whichever step is currently active.
+ */
+const RITUAL_STEPS = [
+  {
+    id: '01',
+    title: 'The Land Is Read',
+    body: 'Before seeding, we study the land — its topography, water flow, wind corridors, and existing ecology. The seedball species are chosen to belong here.',
+    tag: '· Site Ecology Study',
+    Icon: () => (
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="22" r="10" stroke="#c4aa87" strokeWidth="0.8" opacity="0.4" />
+        <circle cx="20" cy="22" r="6" fill="rgba(196,170,135,0.15)" stroke="#c4aa87" strokeWidth="0.5" />
+        <line x1="20" y1="12" x2="20" y2="6" stroke="#c4aa87" strokeWidth="0.8" opacity="0.4" />
+        <line x1="20" y1="6" x2="17" y2="10" stroke="#c4aa87" strokeWidth="0.6" opacity="0.3" />
+        <line x1="20" y1="6" x2="23" y2="10" stroke="#c4aa87" strokeWidth="0.6" opacity="0.3" />
+      </svg>
+    ),
+  },
+  {
+    id: '02',
+    title: 'The Seeding',
+    body: '5,000 seedballs — hand-rolled in clay, soil, and native seed — are scattered across the land by hand. No machinery. No chemicals. Just intention and earth.',
+    tag: '· By Hand · By Intention',
+    Icon: () => (
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="24" r="8" fill="rgba(196,170,135,0.12)" stroke="#c4aa87" strokeWidth="0.7" />
+        <path d="M12 24 Q20 10 28 24" stroke="#c4aa87" strokeWidth="0.6" fill="none" opacity="0.4" />
+        <circle cx="20" cy="24" r="3" fill="rgba(196,170,135,0.3)" />
+      </svg>
+    ),
+  },
+  {
+    id: '03',
+    title: 'The Forest Begins',
+    body: 'Months before residents arrive, the land is already transforming. Native trees take root. Wildlife returns. The community inherits a living ecosystem, not a cleared site.',
+    tag: '· Living Before Sold',
+    Icon: () => (
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 34 L20 18" stroke="#c4aa87" strokeWidth="0.8" opacity="0.5" />
+        <path d="M20 22 Q26 16 30 18" stroke="#c4aa87" strokeWidth="0.6" fill="none" opacity="0.4" />
+        <path d="M20 26 Q14 20 10 22" stroke="#c4aa87" strokeWidth="0.6" fill="none" opacity="0.4" />
+        <ellipse cx="20" cy="34" rx="6" ry="2" stroke="#c4aa87" strokeWidth="0.5" opacity="0.3" />
+      </svg>
+    ),
+  },
+] as const;
 
 /**
  * SeedballSection — direct port of aranyavana-seedball-integration.html
@@ -236,6 +287,120 @@ const SEEDBALL_STYLES = `
     opacity: 0.55;
   }
 
+  /* ── RITUAL TAB SWITCHER ──
+     Replaces the original .sb-steps-grid card layout. The old
+     .sb-step-* rules above are kept dormant for easy revert. */
+  .ara-sb .sb-tabs {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .ara-sb .sb-tab-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid rgba(196,170,135,0.18);
+    margin-bottom: 56px;
+  }
+  @media (max-width: 768px) {
+    .ara-sb .sb-tab-strip {
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: rgba(196,170,135,0.1);
+      border-bottom: none;
+    }
+  }
+  .ara-sb .sb-tab-btn {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 26px 18px;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    font: inherit;
+    color: rgba(240,232,216,0.55);
+    transition: color 0.4s ease, background 0.4s ease;
+  }
+  .ara-sb .sb-tab-btn:hover { color: rgba(240,232,216,0.85); }
+  .ara-sb .sb-tab-btn:focus-visible {
+    outline: 1px solid var(--sb-sand);
+    outline-offset: -2px;
+  }
+  .ara-sb .sb-tab-btn.is-active { color: var(--sb-cream); }
+  @media (max-width: 768px) {
+    .ara-sb .sb-tab-btn { background: var(--sb-moss); padding: 22px 24px; }
+  }
+  .ara-sb .sb-tab-btn::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--sb-sand);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (max-width: 768px) {
+    .ara-sb .sb-tab-btn::after { bottom: 0; }
+  }
+  .ara-sb .sb-tab-btn.is-active::after { transform: scaleX(1); }
+
+  .ara-sb .sb-tab-num {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--sb-sand);
+    opacity: 0.7;
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+  .ara-sb .sb-tab-title {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(16px, 2vw, 20px);
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+  }
+
+  /* Tab panel — body styling matches the user-supplied snippet */
+  .ara-sb .sb-tab-panel {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 36px;
+    align-items: start;
+    padding: 8px 18px;
+  }
+  @media (max-width: 768px) {
+    .ara-sb .sb-tab-panel { grid-template-columns: 1fr; gap: 20px; }
+  }
+  .ara-sb .sb-tab-icon { width: 56px; height: 56px; opacity: 0.75; }
+  .ara-sb .sb-tab-icon svg { width: 100%; height: 100%; }
+
+  .ara-sb .sb-tab-body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.65;
+    letter-spacing: 0.03em;
+    color: var(--sb-parchment);
+    margin: 0;
+    max-width: 580px;
+  }
+  .ara-sb .sb-tab-tag {
+    display: inline-block;
+    margin-top: 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sb-sand);
+    opacity: 0.7;
+  }
+
   /* ══════════════════════════════════════════
      SECTION C — SPECIES STRIP
   ══════════════════════════════════════════ */
@@ -306,6 +471,67 @@ const SEEDBALL_STYLES = `
   }
 `;
 
+/**
+ * RitualTabs — click-to-switch tab UI that replaces the original
+ * 3-card grid. Tabs read 01/02/03 with the step title. Active tab
+ * gets a gold underline; the panel below cross-fades between steps
+ * via AnimatePresence. Body styling per the supplied Montserrat
+ * snippet, mapped to the scoped .sb-tab-* classes above so it stays
+ * inside the .ara-sb namespace and doesn't leak.
+ */
+function RitualTabs() {
+  const [activeId, setActiveId] = useState<(typeof RITUAL_STEPS)[number]['id']>('01');
+  const active = RITUAL_STEPS.find((s) => s.id === activeId) ?? RITUAL_STEPS[0];
+
+  return (
+    <div className="sb-tabs">
+      <div className="sb-tab-strip" role="tablist" aria-label="Seeding ritual steps">
+        {RITUAL_STEPS.map((step) => {
+          const isActive = step.id === activeId;
+          return (
+            <button
+              key={step.id}
+              type="button"
+              role="tab"
+              id={`sb-tab-${step.id}`}
+              aria-selected={isActive}
+              aria-controls={`sb-panel-${step.id}`}
+              tabIndex={isActive ? 0 : -1}
+              onClick={() => setActiveId(step.id)}
+              className={`sb-tab-btn${isActive ? ' is-active' : ''}`}
+            >
+              <span className="sb-tab-num">{step.id}</span>
+              <span className="sb-tab-title">{step.title}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={active.id}
+          role="tabpanel"
+          id={`sb-panel-${active.id}`}
+          aria-labelledby={`sb-tab-${active.id}`}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="sb-tab-panel"
+        >
+          <div className="sb-tab-icon">
+            <active.Icon />
+          </div>
+          <div>
+            <p className="sb-tab-body">{active.body}</p>
+            <span className="sb-tab-tag">{active.tag}</span>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function SeedballSection() {
   // Mirrors the original IIFE in aranyavana-seedball-integration.html.
   // Scope-limited to .ara-sb .sb-reveal so it never double-fires on the
@@ -372,50 +598,7 @@ export default function SeedballSection() {
                 A practice repeated at Udyana, and at every community we build hereafter. This is how Aranyavana begins.
               </p>
             </div>
-            <div className="sb-steps-grid">
-              <div className="sb-step-card sb-reveal">
-                <div className="sb-step-num">01</div>
-                <svg className="sb-step-icon" viewBox="0 0 40 40" fill="none">
-                  <circle cx="20" cy="22" r="10" stroke="#c4aa87" strokeWidth="0.8" opacity="0.4" />
-                  <circle cx="20" cy="22" r="6" fill="rgba(196,170,135,0.15)" stroke="#c4aa87" strokeWidth="0.5" />
-                  <line x1="20" y1="12" x2="20" y2="6" stroke="#c4aa87" strokeWidth="0.8" opacity="0.4" />
-                  <line x1="20" y1="6" x2="17" y2="10" stroke="#c4aa87" strokeWidth="0.6" opacity="0.3" />
-                  <line x1="20" y1="6" x2="23" y2="10" stroke="#c4aa87" strokeWidth="0.6" opacity="0.3" />
-                </svg>
-                <h3 className="sb-step-title">The Land Is Read</h3>
-                <p className="sb-step-body">
-                  Before seeding, we study the land — its topography, water flow, wind corridors, and existing ecology. The seedball species are chosen to belong here.
-                </p>
-                <span className="sb-step-tag">· Site Ecology Study</span>
-              </div>
-              <div className="sb-step-card sb-reveal sb-reveal-d1">
-                <div className="sb-step-num">02</div>
-                <svg className="sb-step-icon" viewBox="0 0 40 40" fill="none">
-                  <circle cx="20" cy="24" r="8" fill="rgba(196,170,135,0.12)" stroke="#c4aa87" strokeWidth="0.7" />
-                  <path d="M12 24 Q20 10 28 24" stroke="#c4aa87" strokeWidth="0.6" fill="none" opacity="0.4" />
-                  <circle cx="20" cy="24" r="3" fill="rgba(196,170,135,0.3)" />
-                </svg>
-                <h3 className="sb-step-title">The Seeding</h3>
-                <p className="sb-step-body">
-                  5,000 seedballs — hand-rolled in clay, soil, and native seed — are scattered across the land by hand. No machinery. No chemicals. Just intention and earth.
-                </p>
-                <span className="sb-step-tag">· By Hand · By Intention</span>
-              </div>
-              <div className="sb-step-card sb-reveal sb-reveal-d2">
-                <div className="sb-step-num">03</div>
-                <svg className="sb-step-icon" viewBox="0 0 40 40" fill="none">
-                  <path d="M20 34 L20 18" stroke="#c4aa87" strokeWidth="0.8" opacity="0.5" />
-                  <path d="M20 22 Q26 16 30 18" stroke="#c4aa87" strokeWidth="0.6" fill="none" opacity="0.4" />
-                  <path d="M20 26 Q14 20 10 22" stroke="#c4aa87" strokeWidth="0.6" fill="none" opacity="0.4" />
-                  <ellipse cx="20" cy="34" rx="6" ry="2" stroke="#c4aa87" strokeWidth="0.5" opacity="0.3" />
-                </svg>
-                <h3 className="sb-step-title">The Forest Begins</h3>
-                <p className="sb-step-body">
-                  Months before residents arrive, the land is already transforming. Native trees take root. Wildlife returns. The community inherits a living ecosystem, not a cleared site.
-                </p>
-                <span className="sb-step-tag">· Living Before Sold</span>
-              </div>
-            </div>
+            <RitualTabs />
           </div>
         </div>
 

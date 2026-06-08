@@ -17,9 +17,9 @@ const config: Config = {
       },
       fontFamily: {
         display: ['var(--font-cormorant)', 'Cormorant Garamond', 'serif'],
-        body: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
+        body: ['var(--font-montserrat)', 'Montserrat', 'sans-serif'],
         sc: ['var(--font-cormorant-sc)', 'Cormorant SC', 'serif'],
-        poppins: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
+        montserrat: ['var(--font-montserrat)', 'Montserrat', 'sans-serif'],
       },
       letterSpacing: {
         widest2: '0.3em',

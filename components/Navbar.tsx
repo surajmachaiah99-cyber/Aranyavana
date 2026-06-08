@@ -14,22 +14,26 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-700 ease-editorial ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-[300ms] ease-editorial ${
         scrolled
-          ? 'bg-[#0e1612]/85 backdrop-blur-md border-b border-[#D1C2A5]/15'
+          ? 'bg-bark/90 backdrop-blur-md border-b border-soleil/15'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
       <div className="container-edit flex items-center justify-center py-6 md:py-8">
         <a
           href="#top"
-          className="group flex flex-col items-center gap-1 text-[#D1C2A5] hover:text-[#E5D9C4] transition-colors duration-500"
+          className={`group flex flex-col items-center gap-1 transition-colors duration-[300ms] ease-editorial ${
+            scrolled ? 'text-parchment' : 'text-parchment'
+          } hover:text-soleil`}
           aria-label="Aranyavana — Curated Nature Living"
         >
-          <span className="font-sc text-xl md:text-3xl tracking-widest3 leading-none">
+          {/* Brand wordmark — Jost (per spec: nav uses sans), tracked uppercase */}
+          <span className="font-body text-xl md:text-3xl tracking-[0.3em] leading-none uppercase">
             ARANYAVANA
           </span>
-          <span className="font-display italic font-light text-[0.7rem] md:text-[0.85rem] text-[#D1C2A5]/65 group-hover:text-[#E5D9C4]/75 tracking-[0.05em] leading-none transition-colors duration-500">
+          {/* Tagline — italic Cormorant for the soft brand line */}
+          <span className="font-display italic font-light text-[0.7rem] md:text-[0.85rem] text-parchment/65 group-hover:text-soleil/85 tracking-[0.05em] leading-none transition-colors duration-[300ms] ease-editorial">
             Curated Nature Living
           </span>
         </a>

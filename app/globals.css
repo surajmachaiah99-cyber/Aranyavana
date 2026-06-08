@@ -3,15 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --color-earth: #1c1a17;
-  --color-stone: #2e2b27;
-  --color-bark: #4a4035;
-  --color-sand: #c4a882;
-  --color-mist: #e8e0d4;
-  --color-water: #7b9e9b;
-  --color-leaf: #4d5c3a;
-  --color-sky: #d6ddd8;
-  --color-cream: #f5f0e8;
+  /* Spec palette */
+  --color-soleil:    #e8a642;
+  --color-harvest:   #c47b1a;
+  --color-dusk:      #f2c96a;
+  --color-canopy:    #2d5c2e;
+  --color-fern:      #4a7c45;
+  --color-bark:      #2a1f14;
+  --color-soil:      #4a3520;
+  --color-clay:      #8b6b47;
+  --color-stone:     #c4aa8a;
+  --color-parchment: #f0e8d8;
+  --color-paper:     #faf6ef;
+  --color-cerulean:  #4e7fa8;
+  --color-twilight:  #2b5078;
 }
 
 @layer base {
@@ -22,172 +27,179 @@
   }
 
   body {
-    background-color: var(--color-earth);
-    color: var(--color-sky);
-    font-family: var(--font-poppins), 'Poppins', sans-serif;
+    background-color: var(--color-paper);
+    color: var(--color-bark);
+    font-family: var(--font-jost), 'Jost', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: var(--color-sand);
-    color: var(--color-earth);
+    background-color: var(--color-soleil);
+    color: var(--color-bark);
   }
-
 }
 
 @layer components {
+  /* ── eyebrow / micro-label per spec
+        0.75rem · weight 400 · 0.25em tracking · uppercase ─────────── */
   .eyebrow {
-    font-family: var(--font-cormorant-sc), 'Cormorant SC', serif;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--color-sand);
+    font-family: var(--font-jost), 'Jost', sans-serif;
+    font-weight: 400;
     font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-clay);
   }
 
+  /* Thin amber rule (used as accent divider between micro-elements) */
   .rule {
     display: block;
     height: 1px;
     width: 56px;
-    background-color: rgba(196, 168, 130, 0.4);
+    background-color: rgba(232, 166, 66, 0.30);
   }
 
   .container-edit {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1320px;          /* spec: 1320px */
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-
   @media (min-width: 768px) {
-    .container-edit {
-      padding-left: 3rem;
-      padding-right: 3rem;
-    }
+    .container-edit { padding-left: 2rem; padding-right: 2rem; }
   }
-
   @media (min-width: 1280px) {
-    .container-edit {
-      padding-left: 5rem;
-      padding-right: 5rem;
-    }
+    .container-edit { padding-left: 2rem; padding-right: 2rem; }
   }
 
-  .btn-ghost-sand {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.95rem 2.25rem;
-    border: 1px solid var(--color-sand);
-    color: var(--color-sand);
-    font-family: var(--font-poppins), 'Poppins', sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    text-transform: none;
-    font-size: 0.9rem;
-    background: transparent;
-    transition: background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-      color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .btn-ghost-sand:hover {
-    background-color: var(--color-sand);
-    color: var(--color-earth);
-  }
-
+  /* ── Primary CTA: solid amber on bark text ─────────────────────── */
   .btn-fill-sand {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    padding: 1.05rem 2rem;
-    background-color: var(--color-sand);
-    color: var(--color-earth);
-    font-family: var(--font-poppins), 'Poppins', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: none;
-    font-size: 0.95rem;
-    transition: background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-      color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    padding: 14px 32px;
+    background-color: var(--color-soleil);
+    color: var(--color-bark);
+    border: none;
+    border-radius: 2px;
+    font-family: var(--font-jost), 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-
   .btn-fill-sand:hover {
-    background-color: var(--color-mist);
+    background-color: var(--color-harvest);
+    box-shadow: 0 0 40px rgba(232, 166, 66, 0.25);
   }
-
   .btn-fill-sand:disabled {
-    opacity: 0.5;
+    opacity: 0.55;
     cursor: wait;
   }
 
+  /* ── Ghost CTA: amber border + amber text ─────────────────────── */
+  .btn-ghost-sand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--color-soleil);
+    border: 1.5px solid var(--color-soleil);
+    border-radius: 2px;
+    font-family: var(--font-jost), 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-ghost-sand:hover {
+    background-color: var(--color-soleil);
+    color: var(--color-bark);
+    box-shadow: 0 0 40px rgba(232, 166, 66, 0.25);
+  }
+
+  /* ── Tag pill (used on cards / micro tags) ─────────────────────── */
   .pill {
     display: inline-flex;
     align-items: center;
     padding: 0.4rem 0.95rem;
     border-radius: 9999px;
-    background-color: rgba(77, 92, 58, 0.25);
-    color: var(--color-sky);
+    background-color: rgba(74, 124, 69, 0.10);       /* fern @ 10% */
+    color: var(--color-bark);
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    border: 1px solid rgba(77, 92, 58, 0.5);
+    border: 1px solid rgba(74, 124, 69, 0.30);
   }
 
+  /* Pill variant for dark sections (Financial / Footer) */
+  .pill-on-dark {
+    background-color: rgba(232, 166, 66, 0.12);
+    color: var(--color-parchment);
+    border: 1px solid rgba(232, 166, 66, 0.30);
+  }
+
+  /* ── Form inputs per spec ──────────────────────────────────────── */
   .input-edit {
     width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(196, 168, 130, 0.25);
-    padding: 0.95rem 0 0.7rem;
-    color: var(--color-cream);
-    font-family: var(--font-poppins), sans-serif;
+    background-color: var(--color-paper);
+    border: 1.5px solid rgba(42, 31, 20, 0.20);
+    border-radius: 4px;
+    padding: 14px 16px;
+    color: var(--color-bark);
+    font-family: var(--font-jost), 'Jost', sans-serif;
     font-weight: 300;
-    font-size: 1rem;
-    transition: border-color 0.4s ease;
+    font-size: 0.875rem;
+    transition: border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-
   .input-edit:focus {
     outline: none;
-    border-bottom-color: var(--color-sand);
+    border-color: var(--color-soleil);
+    box-shadow: 0 0 0 3px rgba(232, 166, 66, 0.15);
   }
-
   .input-edit::placeholder {
-    color: rgba(214, 221, 216, 0.35);
+    color: rgba(42, 31, 20, 0.35);
   }
 
   .label-edit {
     display: block;
-    font-family: var(--font-cormorant-sc), serif;
-    color: var(--color-sand);
+    font-family: var(--font-jost), 'Jost', sans-serif;
+    font-weight: 400;
+    color: var(--color-clay);
     font-size: 0.7rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.4rem;
   }
 }
 
-/* Grain overlay — applied via the <Grain /> component */
+/* ── Grain overlay — softer on the new paper ground ───────────────── */
 .grain-overlay {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 100;
-  opacity: 0.08;
-  mix-blend-mode: overlay;
+  opacity: 0.04;                /* lighter on paper than on earth */
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* Vignette utility for hero */
+/* Hero vignette (still used by Hero) */
 .hero-vignette {
   background: radial-gradient(
     ellipse at center,
-    rgba(28, 26, 23, 0) 40%,
-    rgba(28, 26, 23, 0.55) 100%
+    rgba(42, 31, 20, 0) 40%,
+    rgba(42, 31, 20, 0.55) 100%
   );
 }
 

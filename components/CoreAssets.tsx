@@ -18,7 +18,7 @@ const CARDS: Card[] = [
     title: 'The 15-Acre Living Lake',
     body: 'Not a peripheral amenity, but the organizing intelligence of the community. A secure, natural water resource that guarantees environmental permanence for your family.',
     pill: '· Water Security',
-    iconColor: 'text-water',
+    iconColor: 'text-cerulean',
     Icon: () => <WaveIcon />,
   },
   {
@@ -26,7 +26,7 @@ const CARDS: Card[] = [
     title: 'The 1km Transition',
     body: 'Situated exactly 1 kilometer from the Bangalore–Mangalore Highway. A brief, scenic drive acts as a decompression chamber — the city gives you success; nature gives you peace.',
     pill: '· Highway Proximity',
-    iconColor: 'text-sand',
+    iconColor: 'text-soleil',
     Icon: () => <HorizonIcon />,
   },
   {
@@ -34,19 +34,25 @@ const CARDS: Card[] = [
     title: 'The 6,000 Sq.Ft. Sanctum',
     body: 'Expansive, low-density estate plots engineered to protect your privacy and optimize wind, light, and open skies.',
     pill: '· Estate Scale',
-    iconColor: 'text-leaf',
+    iconColor: 'text-canopy',
     Icon: () => <GroveIcon />,
   },
 ];
 
 export default function CoreAssets() {
   return (
-    <section id="assets" className="bg-stone py-32 md:py-40 relative">
-      <div className="container-edit">
+    <section id="assets" className="relative bg-paper py-32 md:py-40">
+      {/* Soft parchment fade so the section settles into the next */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[linear-gradient(160deg,#FAF6EF_0%,#F0E8D8_100%)]"
+      />
+
+      <div className="container-edit relative">
         <SectionReveal className="max-w-3xl">
           <p className="eyebrow mb-5">· The Offering</p>
           <span className="rule mb-10" />
-          <h2 className="font-display font-light text-cream text-[clamp(2rem,4vw,3.25rem)] leading-[1.05]">
+          <h2 className="font-display font-light text-bark text-[clamp(2rem,4vw,4rem)] leading-[1.1] tracking-[-0.02em]">
             Three Reasons This Land Is Finite
           </h2>
         </SectionReveal>
@@ -55,9 +61,9 @@ export default function CoreAssets() {
           {CARDS.map((c) => (
             <StaggerItem
               key={c.number}
-              className="group relative flex flex-col p-12 border border-bark/70 bg-earth/40 transition-all duration-700 ease-editorial hover:border-sand/50 hover:shadow-[0_30px_80px_-30px_rgba(196,168,130,0.18)] hover:-translate-y-1"
+              className="group relative flex flex-col p-12 border border-bark/10 bg-paper rounded-sm shadow-[0_4px_16px_rgba(42,31,20,0.06)] transition-all duration-[300ms] ease-editorial hover:border-soleil/40 hover:shadow-[0_12px_40px_rgba(232,166,66,0.18)] hover:-translate-y-1"
             >
-              <p className="font-sc text-sand/80 text-[0.7rem] tracking-widest2 mb-10">
+              <p className="font-body font-normal text-clay/80 text-[0.75rem] tracking-[0.25em] uppercase mb-10">
                 {c.number}
               </p>
 
@@ -65,11 +71,11 @@ export default function CoreAssets() {
                 <c.Icon />
               </div>
 
-              <h3 className="font-display font-light text-cream text-[1.6rem] leading-tight mb-5">
+              <h3 className="font-display font-normal text-bark text-[clamp(1.25rem,2vw,1.75rem)] leading-tight mb-5">
                 {c.title}
               </h3>
 
-              <p className="font-body font-light text-sky/85 text-[0.95rem] leading-[1.85] mb-10">
+              <p className="font-body font-light text-soil/80 text-[0.95rem] leading-[1.9] mb-10">
                 {c.body}
               </p>
 

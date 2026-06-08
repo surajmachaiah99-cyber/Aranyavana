@@ -4,6 +4,7 @@ import SeedballSection from '@/components/SeedballSection';
 import Thesis from '@/components/Thesis';
 import CoreAssets from '@/components/CoreAssets';
 import Architectural from '@/components/Architectural';
+import BuildSection from '@/components/BuildSection';
 import Financial from '@/components/Financial';
 import EnquiryForm from '@/components/EnquiryForm';
 import Footer from '@/components/Footer';
@@ -17,6 +18,7 @@ export default function Page() {
       <Thesis />
       <CoreAssets />
       <Architectural />
+      <BuildSection />
       <Financial />
       <EnquiryForm />
       <Footer />

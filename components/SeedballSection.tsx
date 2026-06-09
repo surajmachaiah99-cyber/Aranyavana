@@ -95,13 +95,13 @@ const SEEDBALL_STYLES = `
     overflow-x: hidden;
     background: var(--sb-forest);
     color: var(--sb-parchment);
-    font-family: 'Jost', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 300;
   }
 
   /* ── SHARED UTILITIES ── */
   .ara-sb .sb-section-label {
-    font-family: 'Jost', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 200;
     font-size: 10px;
     letter-spacing: 0.4em;
@@ -317,7 +317,7 @@ const SEEDBALL_STYLES = `
   .ara-sb .sb-step-tag {
     display: inline-block;
     margin-top: 20px;
-    font-family: 'Jost', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 200;
     font-size: 9px;
     letter-spacing: 0.32em;
@@ -495,7 +495,7 @@ const SEEDBALL_STYLES = `
     margin-bottom: 4px;
   }
   .ara-sb .sb-species-local {
-    font-family: 'Jost', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 200;
     font-size: 11px;
     color: var(--sb-sand);

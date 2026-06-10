@@ -125,7 +125,7 @@ const LANDSCAPES: Landscape[] = [
 const HOMES: Home[] = [
   {
     id: 'h1',
-    name: 'The Hide',
+    name: 'The Earth-Block Pavilion',
     trigger: '1 BHK · From ₹22 Lakhs',
     area: '800 sq.ft',
     styleLabel: 'Architectural Style',
@@ -164,7 +164,7 @@ const HOMES: Home[] = [
   },
   {
     id: 'h2',
-    name: 'The Canopy',
+    name: 'The Verandah House',
     trigger: '2 BHK · From ₹34 Lakhs',
     area: '1200 sq.ft',
     styleLabel: 'Design Language',
@@ -791,6 +791,113 @@ export default function HomesThatBreathe() {
     return () => obs.disconnect();
   }, []);
 
+  // Homes slider — direct port of the spec's IIFE per its framework note:
+  // "wrap the above inside a useEffect ... in the relevant component file".
+  // Uses DOM queries (not React state) so the spec's behavior is preserved
+  // byte-for-byte: 4.5s autoplay, dot/thumb/arrow/keyboard/swipe controls,
+  // pause-on-hover, prefers-reduced-motion bail-out.
+  useEffect(() => {
+    const track = document.getElementById('hsTrack');
+    if (!track) return; // slider not on this page
+
+    const slides = track.querySelectorAll<HTMLElement>('.hs-slide');
+    const dots = document.querySelectorAll<HTMLButtonElement>('#hsDots .hs-dot');
+    const thumbs = document.querySelectorAll<HTMLElement>('#hsThumbs .hs-thumb');
+    const counter = document.getElementById('hsCurrent');
+    const total = slides.length;
+    if (!total) return;
+
+    let current = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const DELAY = 4500;
+
+    const goTo = (n: number) => {
+      slides[current]?.classList.remove('hs-active');
+      dots[current]?.classList.remove('hs-dot-active');
+      thumbs[current]?.classList.remove('hs-thumb-active');
+      current = ((n % total) + total) % total;
+      slides[current]?.classList.add('hs-active');
+      dots[current]?.classList.add('hs-dot-active');
+      thumbs[current]?.classList.add('hs-thumb-active');
+      if (counter) counter.textContent = String(current + 1);
+      resetTimer();
+    };
+
+    const resetTimer = () => {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), DELAY);
+    };
+
+    const btnNext = document.getElementById('hsNext');
+    const btnPrev = document.getElementById('hsPrev');
+    const onNext = () => goTo(current + 1);
+    const onPrev = () => goTo(current - 1);
+    btnNext?.addEventListener('click', onNext);
+    btnPrev?.addEventListener('click', onPrev);
+
+    const dotHandlers: Array<() => void> = [];
+    dots.forEach((d) => {
+      const h = () => goTo(parseInt(d.dataset.i ?? '0', 10));
+      dotHandlers.push(h);
+      d.addEventListener('click', h);
+    });
+
+    const thumbHandlers: Array<() => void> = [];
+    thumbs.forEach((t) => {
+      const h = () => goTo(parseInt(t.dataset.i ?? '0', 10));
+      thumbHandlers.push(h);
+      t.addEventListener('click', h);
+    });
+
+    const onKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') goTo(current + 1);
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+    };
+    document.addEventListener('keydown', onKeydown);
+
+    let touchStartX: number | null = null;
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      if (touchStartX === null) return;
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+      touchStartX = null;
+    };
+    track.addEventListener('touchstart', onTouchStart, { passive: true });
+    track.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    const onMouseEnter = () => {
+      if (timer) clearInterval(timer);
+    };
+    const onMouseLeave = () => resetTimer();
+    track.addEventListener('mouseenter', onMouseEnter);
+    track.addEventListener('mouseleave', onMouseLeave);
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      slides.forEach((s) => {
+        s.style.transition = 'none';
+      });
+    } else {
+      resetTimer();
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+      btnNext?.removeEventListener('click', onNext);
+      btnPrev?.removeEventListener('click', onPrev);
+      dots.forEach((d, i) => d.removeEventListener('click', dotHandlers[i]));
+      thumbs.forEach((t, i) => t.removeEventListener('click', thumbHandlers[i]));
+      document.removeEventListener('keydown', onKeydown);
+      track.removeEventListener('touchstart', onTouchStart);
+      track.removeEventListener('touchend', onTouchEnd);
+      track.removeEventListener('mouseenter', onMouseEnter);
+      track.removeEventListener('mouseleave', onMouseLeave);
+    };
+  }, []);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: S3_STYLES }} />
@@ -1008,6 +1115,160 @@ export default function HomesThatBreathe() {
                 })}
               </div>
             </article>
+          </div>
+
+          {/* ── HOMES THAT BREATHE · PHOTO SLIDER ──
+             Drop-in slider per the aranyavana-homes-slider spec.
+             Lives as a full-width row between the 2-card grid and the
+             bottom CTA strip — i.e. NOT inside either card, per spec's
+             "Do not insert it inside a card" rule. */}
+          <div className="ht-slider-wrap fade-up d5">
+            <div className="hs-track" id="hsTrack">
+              <div className="hs-slide hs-active" data-index="0">
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/vanasiri-canopy.jpg"
+                    alt="Earth-block villa integrated with forest canopy"
+                    loading="lazy"
+                  />
+                  <div className="hs-overlay" />
+                </div>
+                <div className="hs-caption">
+                  <span className="hs-caption-sub">
+                    CSEB · Compressed Stabilised Earth Blocks
+                  </span>
+                  <p className="hs-caption-main">
+                    Born from the earth. Held by the forest.
+                  </p>
+                </div>
+              </div>
+
+              <div className="hs-slide" data-index="1">
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/vanasiri-windows.jpg"
+                    alt="Panoramic windows and surrounding tree canopy"
+                    loading="lazy"
+                  />
+                  <div className="hs-overlay" />
+                </div>
+                <div className="hs-caption">
+                  <span className="hs-caption-sub">
+                    Passive Cooling · Panoramic Windows
+                  </span>
+                  <p className="hs-caption-main">
+                    Light pours in. The canopy holds court outside.
+                  </p>
+                </div>
+              </div>
+
+              <div className="hs-slide" data-index="2">
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/vanasiri-courtyard.jpg"
+                    alt="Stone courtyard with seating and climbing vines"
+                    loading="lazy"
+                  />
+                  <div className="hs-overlay" />
+                </div>
+                <div className="hs-caption">
+                  <span className="hs-caption-sub">
+                    Thermal Comfort · Natural Materials
+                  </span>
+                  <p className="hs-caption-main">
+                    Where stone, vine, and silence meet.
+                  </p>
+                </div>
+              </div>
+
+              <div className="hs-slide" data-index="3">
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/vanasiri-entry.jpg"
+                    alt="Terracotta roof entry with natural timber details"
+                    loading="lazy"
+                  />
+                  <div className="hs-overlay" />
+                </div>
+                <div className="hs-caption">
+                  <span className="hs-caption-sub">
+                    Terracotta Roof · Timber Entry
+                  </span>
+                  <p className="hs-caption-main">
+                    Terracotta fired by sun. Cooled by shadow.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="hs-controls">
+              <div className="hs-dots" id="hsDots">
+                <button
+                  type="button"
+                  className="hs-dot hs-dot-active"
+                  data-i="0"
+                  aria-label="Slide 1"
+                />
+                <button type="button" className="hs-dot" data-i="1" aria-label="Slide 2" />
+                <button type="button" className="hs-dot" data-i="2" aria-label="Slide 3" />
+                <button type="button" className="hs-dot" data-i="3" aria-label="Slide 4" />
+              </div>
+              <div className="hs-counter">
+                <span className="hs-counter-current" id="hsCurrent">
+                  1
+                </span>{' '}
+                / 4
+              </div>
+              <div className="hs-arrows">
+                <button
+                  type="button"
+                  className="hs-arrow"
+                  id="hsPrev"
+                  aria-label="Previous slide"
+                >
+                  ←
+                </button>
+                <button
+                  type="button"
+                  className="hs-arrow"
+                  id="hsNext"
+                  aria-label="Next slide"
+                >
+                  →
+                </button>
+              </div>
+            </div>
+
+            <div className="hs-thumbs" id="hsThumbs">
+              <div className="hs-thumb hs-thumb-active" data-i="0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/vanasiri-canopy.jpg" alt="Slide 1 thumbnail" loading="lazy" />
+              </div>
+              <div className="hs-thumb" data-i="1">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/vanasiri-windows.jpg" alt="Slide 2 thumbnail" loading="lazy" />
+              </div>
+              <div className="hs-thumb" data-i="2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/vanasiri-courtyard.jpg" alt="Slide 3 thumbnail" loading="lazy" />
+              </div>
+              <div className="hs-thumb" data-i="3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/vanasiri-entry.jpg" alt="Slide 4 thumbnail" loading="lazy" />
+              </div>
+            </div>
+
+            <div className="hs-tags">
+              <span className="hs-tag">Thermal Comfort</span>
+              <span className="hs-tag">Born from the Earth</span>
+              <span className="hs-tag">Passive Cooling</span>
+              <span className="hs-tag">Extensions of the Forest Canopy</span>
+              <span className="hs-tag">Terracotta Roof</span>
+            </div>
           </div>
 
           {/* Bottom strip */}

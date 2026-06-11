@@ -30,7 +30,7 @@ import { useEffect, useState } from 'react';
 // ────────────────────────────────────────────────────────────────────
 
 type Landscape = {
-  id: 'l1' | 'l2' | 'l3' | 'l4';
+  id: 'l1' | 'l2';
   name: string;
   trigger: string;
   tagline: string;
@@ -89,36 +89,6 @@ const LANDSCAPES: Landscape[] = [
       'Water feature + lighting',
     ],
     investment: 'Rs. 4 – 8 Lakhs',
-  },
-  {
-    id: 'l3',
-    name: 'The Sanctuary',
-    trigger: 'From ₹6 Lakhs',
-    tagline: 'For investment buyers & hospitality enthusiasts',
-    includes: [
-      'Spacious deck area',
-      'Pathway lighting',
-      'Bonfire zone',
-      'Tropical planting',
-      'Hammock garden',
-      'Photo spots + breakfast corner',
-    ],
-    investment: 'Rs. 6 – 12 Lakhs+',
-  },
-  {
-    id: 'l4',
-    name: 'The Biosphere',
-    trigger: 'Custom',
-    tagline: 'For families who want to harvest nature daily',
-    includes: [
-      'Mango, Avocado, Guava trees',
-      'Coffee integration',
-      'Pepper vines & Banana plants',
-      'Lifestyle + sustainability design',
-      'Medicinal herbs',
-      'Edible garden planning',
-    ],
-    investment: 'Custom Pricing',
   },
 ];
 
@@ -938,9 +908,9 @@ export default function HomesThatBreathe() {
                 Let the land<br /> come <em>alive.</em>
               </h3>
               <p className="card-body">
-                Four landscape packages designed around native ecology, slow
+                Two landscape packages designed around native ecology, slow
                 living and the unique character of your plot — from a first
-                grove of trees to a full edible forest sanctuary.
+                grove of trees to a private woodland sanctuary.
               </p>
 
               <div className="card-packages" role="list">

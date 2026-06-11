@@ -87,7 +87,7 @@ export default function Hero() {
             variants={item}
             className="mt-6 md:mt-9 font-display italic font-light text-[#E5D9C4] text-[clamp(1.25rem,2.1vw,1.95rem)] leading-snug max-w-2xl"
           >
-            Where the lake holds time still.
+            Curated Nature Living. A 15-Acre Gated Eco-Community Paired with a Mirroring 15-Acre Living Lake.
           </motion.p>
 
           {/* Developer credit */}

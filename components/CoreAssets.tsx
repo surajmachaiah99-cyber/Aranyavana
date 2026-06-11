@@ -31,9 +31,9 @@ const CARDS: Card[] = [
   },
   {
     number: '03',
-    title: 'The 6,000 Sq.Ft. Sanctum',
-    body: 'Expansive, low-density estate plots engineered to protect your privacy and optimize wind, light, and open skies.',
-    pill: '· Estate Scale',
+    title: 'The Biosphere',
+    body: "An expansive, low-density ecosystem engineered to let the land come alive. By maintaining a perfect one-to-one balance between our 15 acres of protected gated community and the adjacent 15-acre living lake, this biosphere optimizes wind corridors, migratory bird pathways, and local microclimates. Your estate plot isn't just surrounded by nature — it is a vital organ within a self-sustaining, thriving biological sanctuary.",
+    pill: '· Living Ecosystem',
     iconColor: 'text-leaf',
     Icon: () => <GroveIcon />,
   },

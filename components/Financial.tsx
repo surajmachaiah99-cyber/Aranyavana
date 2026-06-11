@@ -2,9 +2,9 @@ import SectionReveal from '@/components/SectionReveal';
 import { StaggerGroup, StaggerItem } from '@/components/Stagger';
 
 const STATS: Array<{ value: string; label: string }> = [
-  { value: '18', label: 'Estate Plots Total' },
-  { value: '15 Acres', label: 'Natural Lake' },
-  { value: '1 km', label: 'From NH 75' },
+  { value: '15 Acres', label: 'Gated Eco-Community' },
+  { value: '15 Acres', label: 'Living Lake' },
+  { value: '1:1', label: 'Land-to-Water Ratio' },
 ];
 
 export default function Financial() {

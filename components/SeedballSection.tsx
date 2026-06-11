@@ -233,6 +233,17 @@ const SEEDBALL_STYLES = `
     color: var(--sb-sand);
   }
 
+  /* Section 1 Seed Ball Placement */
+  .ara-sb .section-one-seedball {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+    margin-top: 2rem;
+    border-radius: 0px;
+    opacity: 0.95;
+  }
+
   /* ══════════════════════════════════════════
      SECTION B — RITUAL STEPS
   ══════════════════════════════════════════ */
@@ -614,6 +625,14 @@ export default function SeedballSection() {
               <div className="sb-blockquote sb-reveal sb-reveal-d3">
                 <p>&ldquo;We think in generations.<br />So do you.&rdquo;</p>
               </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/seedball-hand.jpg"
+                alt="A hand-rolled seedball germinating in a palm"
+                loading="lazy"
+                decoding="async"
+                className="section-one-seedball sb-reveal sb-reveal-d3"
+              />
             </div>
             <div className="sb-philosophy-body sb-reveal sb-reveal-d2">
               <p>Most developers begin with machinery — grading, flattening, imposing geometry on the earth. At Aranyavana, our first act is the opposite.</p>

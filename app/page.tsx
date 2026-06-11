@@ -4,6 +4,7 @@ import SeedballSection from '@/components/SeedballSection';
 import CoreAssets from '@/components/CoreAssets';
 import HomesThatBreathe from '@/components/HomesThatBreathe';
 import Financial from '@/components/Financial';
+import Balance from '@/components/Balance';
 import EnquiryForm from '@/components/EnquiryForm';
 import Footer from '@/components/Footer';
 
@@ -16,6 +17,7 @@ export default function Page() {
       <CoreAssets />
       <HomesThatBreathe />
       <Financial />
+      <Balance />
       <EnquiryForm />
       <Footer />
     </main>

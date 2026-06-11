@@ -139,7 +139,6 @@ const HOMES: Home[] = [
     area: '1200 sq.ft',
     styleLabel: 'Design Language',
     styleDesc: '"Luxury Earth Retreat"',
-    styleNote: 'Coorg Homes · Bali Villas · Tropical Resorts',
     spaceProgram: [
       ['Living Room', '16 × 14 ft'],
       ['Kitchen + Dining', '12 × 10 ft'],

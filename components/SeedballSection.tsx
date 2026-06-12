@@ -242,6 +242,9 @@ const SEEDBALL_STYLES = `
     margin-top: 2rem;
     border-radius: 0px;
     opacity: 0.95;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center 55%;
   }
 
   /* ══════════════════════════════════════════

@@ -635,6 +635,7 @@ export default function SeedballSection() {
               />
             </div>
             <div className="sb-philosophy-body sb-reveal sb-reveal-d2">
+              <p>In Vedic tradition, <strong>Vana</strong> is the managed grove. <strong>Aranya</strong> is the primal forest that needs no human hand. Aranyavana is the deliberate synthesis — we steward, we do not dominate.</p>
               <p>Most developers begin with machinery — grading, flattening, imposing geometry on the earth. At Aranyavana, our first act is the opposite.</p>
               <p>Before a single boundary is marked, before any road is laid or structure rises, <strong>we seed the land.</strong> Thousands of native seedballs, hand-scattered across every project we build.</p>
               <p>This is not a gesture. It is a <strong>founding principle.</strong> A declaration that the land we steward is already alive — and our job is to deepen that life, not erase it.</p>

@@ -150,7 +150,7 @@ const HOMES: Home[] = [
     ],
     materials: [
       ['Structure', 'RCC Frame, Seismic Compliant'],
-      ['Walls', 'Exposed CSEB Masonry, Breathable'],
+      ['Walls', 'Exposed CSEB Masonry · Lime-plastered (cools interiors 3–4°C below concrete)'],
       ['Flooring', 'Natural Stone / IPS / Rustic Tiles'],
       ['Exterior', 'Stone Cladding Accents + Lime Texture'],
       ['Roof', 'Sloped Tiled Roof with Insulation Layer'],

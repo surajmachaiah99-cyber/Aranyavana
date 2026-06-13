@@ -15,7 +15,7 @@ type Card = {
 const CARDS: Card[] = [
   {
     number: '01',
-    title: 'The 15-Acre Living Lake',
+    title: 'The 60-Acre Living Lake',
     body: 'Not a peripheral amenity, but the organizing intelligence of the community. A secure, natural water resource that guarantees environmental permanence for your family.',
     pill: '· Water Security',
     iconColor: 'text-water',
@@ -32,7 +32,7 @@ const CARDS: Card[] = [
   {
     number: '03',
     title: 'The Biosphere',
-    body: "An expansive, low-density ecosystem engineered to let the land come alive. By maintaining a perfect one-to-one balance between our 15 acres of protected gated community and the adjacent 15-acre living lake, this biosphere optimizes wind corridors, migratory bird pathways, and local microclimates. Your estate plot isn't just surrounded by nature — it is a vital organ within a self-sustaining, thriving biological sanctuary.",
+    body: "An expansive, low-density ecosystem engineered to let the land come alive. Anchored by a sixty-acre perennial lake — four times the footprint of the estate itself — this biosphere commands its own weather. Wind corridors sweep off the water, migratory bird pathways converge on the shoreline, and the local microclimate is held in permanent equilibrium by sheer ecological mass. Your estate plot isn't just surrounded by nature — it is a vital organ within a self-sustaining, thriving biological sanctuary.",
     pill: '· Living Ecosystem',
     iconColor: 'text-leaf',
     Icon: () => <GroveIcon />,

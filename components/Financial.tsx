@@ -3,8 +3,8 @@ import { StaggerGroup, StaggerItem } from '@/components/Stagger';
 
 const STATS: Array<{ value: string; label: string }> = [
   { value: '15 Acres', label: 'Gated Eco-Community' },
-  { value: '15 Acres', label: 'Living Lake' },
-  { value: '1:1', label: 'Land-to-Water Ratio' },
+  { value: '60 Acres', label: 'Living Lake' },
+  { value: '1:4', label: 'Land-to-Water Ratio' },
 ];
 
 export default function Financial() {

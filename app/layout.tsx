@@ -28,7 +28,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: 'Udyana by Aranyavana · Lakefront Estate Plots, Karnataka',
   description:
-    'Premium lakefront estate plots in Kudlur, Solur — off the Bangalore–Mangalore Highway. A 15-acre living lake, 18 estate plots, by appointment only.',
+    'Premium lakefront estate plots in Kudlur, Solur — off the Bangalore–Mangalore Highway. A 60-acre living lake, 18 estate plots, by appointment only.',
   metadataBase: new URL('https://aranyavana.in'),
   openGraph: {
     title: 'Udyana by Aranyavana',

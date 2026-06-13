@@ -12,18 +12,20 @@ export default function Balance() {
           <p className="eyebrow mb-5">· The Architecture of Balance</p>
           <span className="rule mx-auto mb-10" />
           <h2 className="font-display italic font-light text-cream text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.05]">
-            <span className="block">A Flawless 1:1</span>
-            <span className="block">Architectural Balance.</span>
+            <span className="block">A Profound 1:4</span>
+            <span className="block">Ecological Advantage.</span>
           </h2>
           <p className="mt-8 font-display italic font-light text-mist/85 text-[clamp(1.05rem,1.8vw,1.4rem)] leading-snug">
-            <span className="block">15 Acres of Living Lake.</span>
+            <span className="block">60 Acres of Living Lake.</span>
             <span className="block">15 Acres of Forest Sanctuary.</span>
           </p>
           <p className="mt-10 font-body font-light text-sky/90 text-[1.02rem] leading-[1.95] max-w-[640px] mx-auto">
-            We do not build over the land; we balance against it. By pairing an
-            exclusive, low-density gated layout with an equally expansive,
-            protected water ecosystem, we ensure your legacy home is forever
-            anchored in pure, uninterrupted nature.
+            We do not build over the land; we yield to it. By pairing an
+            exclusive, low-density gated estate of fifteen acres with a vast,
+            sixty-acre perennial lake — a water body four times its size — we
+            ensure your legacy home is forever anchored by one of the most
+            ecologically dominant landscapes in the region. This is not
+            symmetry. This is supremacy of nature over concrete.
           </p>
         </SectionReveal>
 
@@ -33,7 +35,7 @@ export default function Balance() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/balance-lake.jpg"
-                alt="The 15-acre Living Lake — a thriving freshwater ecosystem fringed with lily pads and palms"
+                alt="The 60-acre Living Lake — a vast, thriving freshwater ecosystem fringed with lily pads and palms"
                 loading="lazy"
                 decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"

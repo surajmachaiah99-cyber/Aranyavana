@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import {
+  SE_STYLES,
+  SiteEcologyAccordion,
+  SiteEcologyTrigger,
+} from '@/components/SiteEcologyStudy';
 
 /**
  * Ritual steps data — promoted to module scope so the tab switcher
@@ -534,7 +539,14 @@ const SEEDBALL_STYLES = `
  */
 function RitualTabs() {
   const [activeId, setActiveId] = useState<(typeof RITUAL_STEPS)[number]['id']>('01');
+  const [isStudyOpen, setIsStudyOpen] = useState(false);
   const active = RITUAL_STEPS.find((s) => s.id === activeId) ?? RITUAL_STEPS[0];
+
+  // Reset the ecology study panel whenever the user moves off step 01
+  // — keeps the accordion's open-state coherent with the active tab.
+  useEffect(() => {
+    if (activeId !== '01') setIsStudyOpen(false);
+  }, [activeId]);
 
   return (
     <div className="sb-tabs">
@@ -577,10 +589,28 @@ function RitualTabs() {
           </div>
           <div>
             <p className="sb-tab-body">{active.body}</p>
-            <span className="sb-tab-tag">{active.tag}</span>
+            {active.id === '01' ? (
+              <SiteEcologyTrigger
+                isOpen={isStudyOpen}
+                onToggle={() => setIsStudyOpen((prev) => !prev)}
+              />
+            ) : (
+              <span className="sb-tab-tag">{active.tag}</span>
+            )}
           </div>
         </motion.div>
       </AnimatePresence>
+
+      {/* Site Ecology Study accordion — sibling to AnimatePresence so it
+          doesn't cross-fade with tab transitions. Only mounts while
+          step 01 is active; closes itself when the tab changes (see
+          useEffect on activeId above). */}
+      {activeId === '01' && (
+        <SiteEcologyAccordion
+          isOpen={isStudyOpen}
+          onClose={() => setIsStudyOpen(false)}
+        />
+      )}
     </div>
   );
 }
@@ -613,6 +643,7 @@ export default function SeedballSection() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: SEEDBALL_STYLES }} />
+      <style dangerouslySetInnerHTML={{ __html: SE_STYLES }} />
 
       <div className="ara-sb">
         {/* ── PHILOSOPHY ── */}

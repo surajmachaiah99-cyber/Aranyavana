@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   title: 'Udyana by Aranyavana · Lakefront Estate Plots, Karnataka',
   description:
     'Premium lakefront estate plots in Kudlur, Solur — off the Bangalore–Mangalore Highway. A 60-acre living lake, 18 estate plots, by appointment only.',
-  metadataBase: new URL('https://aranyavana.in'),
+  metadataBase: new URL('https://www.aranyavana.com'),
   openGraph: {
     title: 'Udyana by Aranyavana',
     description:

@@ -64,7 +64,7 @@ export default function Hero() {
             variants={item}
             className="font-body font-light text-[#E5D9C4]/85 text-[clamp(0.72rem,0.95vw,0.88rem)] tracking-[0.4em] uppercase"
           >
-            premium - Lake Front Estate plots · Solur, off NH-75
+            premium - Lake Front Estate plots · Solur, Nelamangala
           </motion.p>
 
           {/* Hairline divider */}

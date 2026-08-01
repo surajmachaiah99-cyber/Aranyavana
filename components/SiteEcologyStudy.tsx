@@ -781,7 +781,7 @@ export function SiteEcologyAccordion({
         {/* ── REPORT HEADER ── */}
         <div className="se-report-header se-fade">
           <span className="se-report-eyebrow">
-            · Independent Spatial Risk Report · Udyana · Kudlur, Solur · Karnataka
+            · Independent Spatial Risk Report · Udyana · Solur, Nelamangala · Karnataka
           </span>
           <h2 className="se-report-title">
             The land, <em>independently verified.</em>

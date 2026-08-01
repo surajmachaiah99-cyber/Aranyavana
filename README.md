@@ -1,6 +1,6 @@
 # Udyana by Aranyavana
 
-A premium, editorial Next.js 14 landing page for **Udyana** — a lakefront nature-estate investment community in Kudlur, Solur, Karnataka.
+A premium, editorial Next.js 14 landing page for **Udyana** — a lakefront nature-estate investment community in Solur, Nelamangala, Karnataka.
 
 This is a brand experience, not a conventional real estate site.
 

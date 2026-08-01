@@ -707,7 +707,7 @@ export default function SeedballSection() {
         {/* ── SPECIES STRIP ── */}
         <div className="sb-full-divider" />
         <div className="sb-species">
-          <div className="sb-section-label sb-reveal">· Native Species · Udyana · Kudlur</div>
+          <div className="sb-section-label sb-reveal">· Native Species · Udyana · Solur, Nelamangala</div>
           <h2 className="sb-species-heading sb-reveal sb-reveal-d1">
             Trees seeded at <em>Udyana.</em>
           </h2>

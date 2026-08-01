@@ -1,3 +1,5 @@
+import { SITE } from '@/lib/site';
+
 export default function Footer() {
   return (
     <footer className="bg-earth border-t border-sand/25">
@@ -13,16 +15,16 @@ export default function Footer() {
 
         <div className="md:text-center">
           <p className="font-body font-light text-mist/80 text-[0.9rem]">
-            Udyana · The Lake Retreat Solur, Nelamangala
+            {SITE.product} · The Lake Retreat · {SITE.location}
           </p>
           <p className="mt-2 font-body font-light text-mist/45 text-[0.78rem]">
-            hello@aranyavana.com
+            {SITE.email}
           </p>
         </div>
 
         <div className="md:text-right space-y-2">
           <p className="font-body font-light text-mist/60 text-[0.78rem]">
-            © 2025 Aranyavana Infra Developers LLP
+            © 2025 {SITE.legalName}
           </p>
           <p className="font-body font-light text-mist/45 text-[0.72rem]">
             All Rights Reserved

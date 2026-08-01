@@ -29,7 +29,7 @@ export default function Footer() {
 
         <div className="md:text-right space-y-2">
           <p className="font-body font-light text-mist/60 text-[0.78rem]">
-            © 2025 {SITE.legalName}
+            © {new Date().getFullYear()} {SITE.legalName}
           </p>
           <p className="font-body font-light text-mist/45 text-[0.72rem]">
             All Rights Reserved

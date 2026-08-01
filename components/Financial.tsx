@@ -66,6 +66,17 @@ export default function Financial() {
           </p>
         </SectionReveal>
 
+        {/* Scarcity counter — honest, no urgency theatre. Numbers and the
+            "Updated" label read from SITE.inventory; update them there when
+            a plot actually sells. See lib/site.ts. */}
+        <SectionReveal className="mt-5 text-center">
+          <p className="font-sc text-sand text-[0.72rem] tracking-widest2">
+            · {SITE.inventory.remainingPlots} of{' '}
+            {SITE.inventory.totalPlots} estate plots remain · Updated{' '}
+            {SITE.inventory.updatedLabel}
+          </p>
+        </SectionReveal>
+
         <SectionReveal className="mt-20 flex justify-center">
           <div className="w-full max-w-[440px] border border-sand/55 p-12 text-center bg-earth/30 backdrop-blur-sm">
             <p className="font-sc text-sand text-[0.72rem] tracking-widest2 mb-6">

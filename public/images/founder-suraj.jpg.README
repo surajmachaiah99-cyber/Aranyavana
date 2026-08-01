@@ -1,0 +1,10 @@
+Drop the founder portrait here as `founder-suraj.jpg`.
+
+Recommended:
+- 1200 x 1500 (4:5 portrait), sRGB, JPEG quality 78–82
+- Editorial, quiet — soft indirect light, natural pose
+- Neutral background (linen, natural wood, wall) — nothing branded
+- Face fills roughly the upper third; shoulders visible
+
+If this file is not present, components/FounderLetter.tsx falls
+back to a single-column, letter-only layout with no broken image.

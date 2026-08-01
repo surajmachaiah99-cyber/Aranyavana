@@ -9,6 +9,7 @@ import EnquiryForm from '@/components/EnquiryForm';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import LegalStanding from '@/components/LegalStanding';
+import FounderLetter from '@/components/FounderLetter';
 
 export default function Page() {
   return (
@@ -21,6 +22,7 @@ export default function Page() {
       <Financial />
       <Balance />
       <LegalStanding />
+      <FounderLetter />
       <EnquiryForm />
       <Footer />
       <FloatingWhatsApp />

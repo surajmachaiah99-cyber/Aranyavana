@@ -47,7 +47,7 @@ export default function FounderLetter() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/founder-suraj.jpg"
-                  alt="Suraj — Founder of Aranyavana"
+                  alt="Suraj Machaiah — Co-Founder of Aranyavana"
                   loading="lazy"
                   onError={() => setImageOk(false)}
                   className="w-full h-full object-cover founder-portrait"
@@ -63,7 +63,7 @@ export default function FounderLetter() {
                 : 'text-center'
             }
           >
-            <p className="eyebrow mb-5">· A Note From the Founder</p>
+            <p className="eyebrow mb-5">· A Note From the Co-Founder</p>
             <span
               className={imageOk ? 'rule block mb-10' : 'rule mx-auto mb-10'}
             />
@@ -117,15 +117,15 @@ export default function FounderLetter() {
               }`}
             >
               <p className="font-display italic font-light text-cream text-[1.5rem] leading-none">
-                Suraj
+                Suraj Machaiah
               </p>
               <p className="mt-3 font-sc text-sand/85 text-[0.72rem] tracking-widest2">
-                · Founder · {SITE.legalName}
+                · Co-Founder · {SITE.legalName}
               </p>
               <p className="mt-6 font-body font-light">
                 <a
                   href={`tel:${SITE.phoneRaw}`}
-                  aria-label={`Call Suraj at ${SITE.phone}`}
+                  aria-label={`Call Suraj Machaiah at ${SITE.phone}`}
                   className="text-mist/85 hover:text-mist text-[0.95rem] transition-colors"
                 >
                   {SITE.phone}

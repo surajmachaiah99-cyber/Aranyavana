@@ -20,6 +20,11 @@ export default function Footer() {
           <p className="mt-2 font-body font-light text-mist/45 text-[0.78rem]">
             {SITE.email}
           </p>
+          <p className="mt-1 font-body font-light text-mist/45 text-[0.78rem]">
+            <a href={`tel:${SITE.phoneRaw}`} className="hover:text-mist transition-colors">
+              {SITE.phone}
+            </a>
+          </p>
         </div>
 
         <div className="md:text-right space-y-2">

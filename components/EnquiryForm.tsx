@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'framer-motion';
 import { enquirySchema, interestOptions, type EnquiryInput } from '@/lib/schemas';
 import SectionReveal from '@/components/SectionReveal';
+import { SITE } from '@/lib/site';
 
 export default function EnquiryForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -215,6 +216,19 @@ export default function EnquiryForm() {
               )}
             </AnimatePresence>
           </div>
+
+          {/* Alternative path — for readers who prefer to call rather than
+              fill a form. Reads as an offer, not an escape hatch. */}
+          <p className="mt-8 text-center font-body font-light text-mist/55 text-[0.82rem]">
+            Prefer to speak directly?{' '}
+            <a
+              href={`tel:${SITE.phoneRaw}`}
+              aria-label={`Call ${SITE.phone}`}
+              className="text-sand hover:text-cream transition-colors"
+            >
+              {SITE.phone}
+            </a>
+          </p>
         </SectionReveal>
       </div>
     </section>

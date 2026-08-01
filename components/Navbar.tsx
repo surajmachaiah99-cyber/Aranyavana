@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { SITE } from '@/lib/site';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,7 +21,7 @@ export default function Navbar() {
           : 'bg-transparent border-b border-transparent'
       }`}
     >
-      <div className="container-edit flex items-center justify-center py-6 md:py-8">
+      <div className="container-edit relative flex items-center justify-center py-6 md:py-8">
         <a
           href="#top"
           className="group flex flex-col items-center gap-1 text-[#D1C2A5] hover:text-[#E5D9C4] transition-colors duration-500"
@@ -32,6 +33,16 @@ export default function Navbar() {
           <span className="font-display italic font-light text-[0.7rem] md:text-[0.85rem] text-[#D1C2A5]/65 group-hover:text-[#E5D9C4]/75 tracking-[0.05em] leading-none transition-colors duration-500">
             Curated Nature Living
           </span>
+        </a>
+
+        {/* Direct line — right-aligned, restrained. Hidden below sm to keep
+            mobile header clean; mobile users have the floating button + Footer. */}
+        <a
+          href={`tel:${SITE.phoneRaw}`}
+          aria-label={`Call ${SITE.phone}`}
+          className="absolute right-0 top-1/2 -translate-y-1/2 hidden sm:inline-block font-sc text-[#D1C2A5]/85 hover:text-[#E5D9C4] text-[0.7rem] md:text-[0.78rem] tracking-widest2 transition-colors duration-500"
+        >
+          {SITE.phone}
         </a>
       </div>
     </header>

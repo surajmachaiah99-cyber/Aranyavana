@@ -7,6 +7,7 @@ import Financial from '@/components/Financial';
 import Balance from '@/components/Balance';
 import EnquiryForm from '@/components/EnquiryForm';
 import Footer from '@/components/Footer';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 
 export default function Page() {
   return (
@@ -20,6 +21,7 @@ export default function Page() {
       <Balance />
       <EnquiryForm />
       <Footer />
+      <FloatingWhatsApp />
     </main>
   );
 }

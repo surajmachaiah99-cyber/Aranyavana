@@ -38,5 +38,15 @@ export async function POST(req: Request) {
     );
   }
 
-  return NextResponse.json({ ok: true });
+  // Set the dossier-access cookie on success. HttpOnly so it can't be
+  // fished from the client; middleware.ts reads it to gate /dossier.
+  const response = NextResponse.json({ ok: true });
+  response.cookies.set('udyana_verified', '1', {
+    httpOnly: true,
+    path: '/',
+    maxAge: 60 * 60 * 24 * 365, // one year
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+  });
+  return response;
 }

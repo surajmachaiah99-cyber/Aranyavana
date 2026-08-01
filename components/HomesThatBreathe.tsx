@@ -1,186 +1,36 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { LANDSCAPES, HOMES } from '@/lib/homes';
 
 /**
  * HomesThatBreathe — Section 03 · Aranyavana Earthscapes
  *
- * Self-contained drop-in port of the supplied spec.
+ * On-page presence is now a TEASER: two-card grid + photo gallery +
+ * package name/price lines, with a single CTA to request the private
+ * briefing. The full space programs, materials, features, upgrades,
+ * and investment tiers used to live inline as accordion rows; that
+ * detail now lives at /dossier and is gated by the enquiry cookie.
  *
- * Scoping strategy
- *   - All styles live under `.s3` (and prefixed `s3-*`, `pkg-*`, `dd-*`).
- *   - Spec's warmer palette is declared as scoped CSS variables inside
- *     `.s3 {…}`. The rest of the site stays on its existing palette.
- *   - Body font uses 'Montserrat' (the current sitewide body font) in
- *     place of the spec's 'Jost' so typography stays consistent. The
- *     display font, Cormorant Garamond, matches the spec.
+ * Scoping strategy (unchanged)
+ *   - All styles live under `.s3` (and prefixed `s3-*`, `pkg-*`).
+ *   - The `.pkg-*` accordion rules are retained but dormant in the
+ *     stylesheet -- no elements consume them any more, and the spec
+ *     allowed the dead rules to remain rather than be pruned.
+ *   - Body font 'Montserrat', display 'Cormorant Garamond'.
  *
  * Interactions
- *   - Each card holds an accordion. Clicking a row opens its panel and
- *     closes any other open row inside the same card. Clicking the open
- *     row again closes it. Cards are independent.
- *   - Reveal animation uses IntersectionObserver per spec
- *     (threshold 0.08, rootMargin '0px 0px -40px 0px') adding `.is-visible`
- *     to elements with `.fade-up`. Staggered delays d1..d5 = 0/0.1/0.2/0.3/0.4s.
+ *   - Static teasers -- no accordion, no click-to-expand.
+ *   - Reveal animation uses IntersectionObserver adding `.is-visible`
+ *     to elements with `.fade-up`. Delays d1..d5 = 0/0.1/0.2/0.3/0.4s.
  *   - CTA circle scales + ring expands on hover; the arrow nudges right.
  */
 
-// ────────────────────────────────────────────────────────────────────
-// Types + data
-// ────────────────────────────────────────────────────────────────────
+// Types + data now live in lib/homes.ts, imported at the top of this
+// file. Both this component and app/dossier/page.tsx read from that
+// single source so the price/name shown here and the detail shown in
+// the dossier can never drift apart.
 
-type Landscape = {
-  id: 'l1' | 'l2';
-  name: string;
-  trigger: string;
-  tagline: string;
-  includes: string[];
-  investment: string;
-};
-
-type HouseSection = {
-  heading: string;
-  rows: Array<[string, string]>;
-};
-
-type Home = {
-  id: 'h1' | 'h2';
-  name: string;
-  trigger: string;
-  area: string;
-  styleLabel: string;
-  styleDesc: string;
-  styleNote?: string;
-  spaceProgram: Array<[string, string]>;
-  materials: Array<[string, string]>;
-  featuresLabel: 'Signature Features' | 'Experience Features';
-  features: string[];
-  upgrades?: HouseSection;
-  investment: Array<[string, string]>;
-};
-
-const LANDSCAPES: Landscape[] = [
-  {
-    id: 'l1',
-    name: 'The Understory',
-    trigger: 'From ₹1.5 Lakhs',
-    tagline: 'Perfect for first-time buyers & nature enthusiasts',
-    includes: [
-      '10–15 native trees',
-      'Pathway stones',
-      'Flowering plants',
-      'Basic irrigation',
-      'Lawn preparation',
-      'Sit-out corner',
-    ],
-    investment: 'Rs. 1.5 – 3 Lakhs',
-  },
-  {
-    id: 'l2',
-    name: 'The Woodland',
-    trigger: 'From ₹4 Lakhs',
-    tagline: 'For eco-conscious buyers seeking a private woodland',
-    includes: [
-      'Dense native plantation',
-      'Meditation corner',
-      'Fruit-bearing trees',
-      'Stone seating',
-      'Bamboo clusters',
-      'Water feature + lighting',
-    ],
-    investment: 'Rs. 4 – 8 Lakhs',
-  },
-];
-
-const HOMES: Home[] = [
-  {
-    id: 'h1',
-    name: 'The Earth-Block Pavilion',
-    trigger: '1 BHK · From ₹22 Lakhs',
-    area: '800 sq.ft',
-    styleLabel: 'Architectural Style',
-    styleDesc: 'Modern Tropical Earth Home',
-    styleNote:
-      'High sloping roof · Exposed rafters · Deep verandah',
-    spaceProgram: [
-      ['Living Room', '14 × 12 ft'],
-      ['Kitchen', '10 × 8 ft'],
-      ['Bedroom', '12 × 12 ft'],
-      ['Toilet', '8 × 5 ft'],
-      ['Sit-out Deck', '12 × 8 ft'],
-      ['Utility', '6 × 4 ft'],
-    ],
-    materials: [
-      ['Structure', 'RCC Frame · M25 Concrete · Fe500 Steel'],
-      ['Walls', '9-inch CSEB Blocks, Exposed Earth Finish'],
-      ['Flooring', 'Kota Stone / Rustic Tiles'],
-      ['Roof', 'RCC Slab + Clay Tile Finish'],
-      ['Doors', 'Engineered Teak Finish'],
-      ['Windows', 'Aluminium Wood-Finish, Large Panoramic'],
-    ],
-    featuresLabel: 'Signature Features',
-    features: [
-      'Sit-out Deck',
-      'Outdoor Firepit Zone',
-      'Panoramic Windows',
-      'Rainwater Harvesting',
-      'Solar Provision',
-      'Natural Ventilation',
-    ],
-    investment: [
-      ['Standard Premium', 'Rs. 22 – 24 Lakhs'],
-      ['Luxury Retreat Finish', 'Rs. 28 – 32 Lakhs'],
-    ],
-  },
-  {
-    id: 'h2',
-    name: 'The Verandah House',
-    trigger: '2 BHK · From ₹34 Lakhs',
-    area: '1200 sq.ft',
-    styleLabel: 'Design Language',
-    styleDesc: '"Luxury Earth Retreat"',
-    spaceProgram: [
-      ['Living Room', '16 × 14 ft'],
-      ['Kitchen + Dining', '12 × 10 ft'],
-      ['Master Bedroom', '13 × 12 ft'],
-      ['Bedroom 2', '12 × 11 ft'],
-      ['Toilets', '8 × 5 ft each'],
-      ['Sit-out Deck', '16 × 8 ft'],
-      ['Courtyard', 'Optional'],
-    ],
-    materials: [
-      ['Structure', 'RCC Frame, Seismic Compliant'],
-      ['Walls', 'Exposed CSEB Masonry · Lime-plastered (cools interiors 3–4°C below concrete)'],
-      ['Flooring', 'Natural Stone / IPS / Rustic Tiles'],
-      ['Exterior', 'Stone Cladding Accents + Lime Texture'],
-      ['Roof', 'Sloped Tiled Roof with Insulation Layer'],
-      ['Windows', 'Floor-to-Ceiling Toughened Glass'],
-    ],
-    featuresLabel: 'Experience Features',
-    features: [
-      'Private Sit-out Deck',
-      'Courtyard Option',
-      'Outdoor Shower',
-      'Hammock Zone',
-      'Firepit Area',
-      'Pergola Seating',
-    ],
-    upgrades: {
-      heading: 'Optional Upgrades',
-      rows: [
-        ['Solar Package', 'Rs. 2.5 Lakhs'],
-        ['Jacuzzi Deck', 'Rs. 3.0 Lakhs'],
-        ['Infinity Reflection Pond', 'Rs. 2.0 Lakhs'],
-        ['Outdoor Kitchen', 'Rs. 1.5 Lakhs'],
-        ['Smart Automation', 'Rs. 1.2 Lakhs'],
-      ],
-    },
-    investment: [
-      ['Premium Nature Finish', 'Rs. 34 – 38 Lakhs'],
-      ['Ultra Luxury Retreat', 'Rs. 42 – 48 Lakhs'],
-    ],
-  },
-];
 
 // ────────────────────────────────────────────────────────────────────
 // SVG marks
@@ -638,6 +488,29 @@ const S3_STYLES = `
     margin: 0;
   }
 
+  /* ── Static teaser row (replaces the previous accordion pkg-row) ──
+     Detail moved to /dossier; the row here is name + price only. */
+  .pkg-teaser {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divide);
+  }
+  .pkg-teaser:last-child { border-bottom: none; }
+  .pkg-teaser-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+    flex-shrink: 0;
+  }
+  .s3-card.landscape .pkg-teaser-tag { color: var(--canopy); }
+  .s3-card.homes .pkg-teaser-tag { color: var(--harvest); }
+
   /* ── Bottom strip: note + CTA ── */
   .s3-bottom {
     display: grid;
@@ -730,8 +603,7 @@ const S3_STYLES = `
 // ────────────────────────────────────────────────────────────────────
 
 export default function HomesThatBreathe() {
-  const [openLandscape, setOpenLandscape] = useState<Landscape['id'] | null>(null);
-  const [openHome, setOpenHome] = useState<Home['id'] | null>(null);
+  // Static teasers -- no expand/collapse. Full detail moved to /dossier.
 
   // Reveal on scroll per the spec's IntersectionObserver settings.
   useEffect(() => {
@@ -912,52 +784,13 @@ export default function HomesThatBreathe() {
                 grove of trees to a private woodland sanctuary.
               </p>
 
-              <div className="card-packages" role="list">
-                {LANDSCAPES.map((p) => {
-                  const open = openLandscape === p.id;
-                  return (
-                    <div
-                      key={p.id}
-                      role="listitem"
-                      className={`pkg-row${open ? ' is-open' : ''}`}
-                    >
-                      <button
-                        type="button"
-                        className="pkg-line"
-                        aria-expanded={open}
-                        aria-controls={`dd-${p.id}`}
-                        onClick={() =>
-                          setOpenLandscape((cur) => (cur === p.id ? null : p.id))
-                        }
-                      >
-                        <span className="pkg-name">{p.name}</span>
-                        <span className="pkg-tag">
-                          {p.trigger}
-                          <span className="pkg-chev" aria-hidden="true" />
-                        </span>
-                      </button>
-
-                      <div
-                        id={`dd-${p.id}`}
-                        className="pkg-panel"
-                        role="region"
-                        aria-hidden={!open}
-                      >
-                        <div className="pkg-panel-inner">
-                          <p className="pkg-tagline">{p.tagline}</p>
-                          <span className="pkg-sec-label">Includes</span>
-                          <ul className="pkg-includes">
-                            {p.includes.map((it) => (
-                              <li key={it}>{it}</li>
-                            ))}
-                          </ul>
-                          <span className="pkg-sec-label">Investment</span>
-                          <p className="pkg-invest-line">{p.investment}</p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="card-packages">
+                {LANDSCAPES.map((p) => (
+                  <div key={p.id} className="pkg-teaser">
+                    <span className="pkg-name">{p.name}</span>
+                    <span className="pkg-teaser-tag">{p.investment}</span>
+                  </div>
+                ))}
               </div>
             </article>
 
@@ -975,113 +808,15 @@ export default function HomesThatBreathe() {
                 grows more beautiful as the land around it matures.
               </p>
 
-              <div className="card-packages" role="list">
-                {HOMES.map((h) => {
-                  const open = openHome === h.id;
-                  return (
-                    <div
-                      key={h.id}
-                      role="listitem"
-                      className={`pkg-row${open ? ' is-open' : ''}`}
-                    >
-                      <button
-                        type="button"
-                        className="pkg-line"
-                        aria-expanded={open}
-                        aria-controls={`dd-${h.id}`}
-                        onClick={() =>
-                          setOpenHome((cur) => (cur === h.id ? null : h.id))
-                        }
-                      >
-                        <span className="pkg-name">{h.name}</span>
-                        <span className="pkg-tag">
-                          {h.trigger}
-                          <span className="pkg-chev" aria-hidden="true" />
-                        </span>
-                      </button>
-
-                      <div
-                        id={`dd-${h.id}`}
-                        className="pkg-panel"
-                        role="region"
-                        aria-hidden={!open}
-                      >
-                        <div className="pkg-panel-inner">
-                          <p className="pkg-meta">
-                            <span><strong>Built-Up Area:</strong> {h.area}</span>
-                          </p>
-                          <p className="pkg-meta">
-                            <span>
-                              <strong>{h.styleLabel}:</strong> {h.styleDesc}
-                            </span>
-                          </p>
-                          {h.styleNote && (
-                            <p className="pkg-meta-note">{h.styleNote}</p>
-                          )}
-
-                          <span className="pkg-sec-label">Space Program</span>
-                          <table className="pkg-table">
-                            <tbody>
-                              {h.spaceProgram.map(([room, dims]) => (
-                                <tr key={room}>
-                                  <th scope="row">{room}</th>
-                                  <td>{dims}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-
-                          <span className="pkg-sec-label">Material Specifications</span>
-                          <table className="pkg-table">
-                            <tbody>
-                              {h.materials.map(([el, spec]) => (
-                                <tr key={el}>
-                                  <th scope="row">{el}</th>
-                                  <td>{spec}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-
-                          <span className="pkg-sec-label">{h.featuresLabel}</span>
-                          <ul className="pkg-features">
-                            {h.features.map((f) => (
-                              <li key={f}>{f}</li>
-                            ))}
-                          </ul>
-
-                          {h.upgrades && (
-                            <>
-                              <span className="pkg-sec-label">{h.upgrades.heading}</span>
-                              <table className="pkg-table">
-                                <tbody>
-                                  {h.upgrades.rows.map(([k, v]) => (
-                                    <tr key={k}>
-                                      <th scope="row">{k}</th>
-                                      <td>{v}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </>
-                          )}
-
-                          <span className="pkg-sec-label">Investment</span>
-                          <table className="pkg-table">
-                            <tbody>
-                              {h.investment.map(([tier, range]) => (
-                                <tr key={tier}>
-                                  <th scope="row">{tier}</th>
-                                  <td className="pkg-invest-line">{range}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="card-packages">
+                {HOMES.map((h) => (
+                  <div key={h.id} className="pkg-teaser">
+                    <span className="pkg-name">{h.name}</span>
+                    <span className="pkg-teaser-tag">
+                      {h.trigger} · {h.area}
+                    </span>
+                  </div>
+                ))}
               </div>
             </article>
           </div>
@@ -1240,18 +975,20 @@ export default function HomesThatBreathe() {
             </div>
           </div>
 
-          {/* Bottom strip */}
+          {/* Bottom strip — teaser closes with the dossier hand-off. Full
+              space programs, materials, and finish schedules live at
+              /dossier and are unlocked by submitting the enquiry form. */}
           <div className="s3-bottom fade-up d5">
             <p className="s3-note">
-              Every detail is{' '}
-              <strong>curated by Aranyavana</strong>
-              {' '}— so your land becomes exactly what you imagined it could be.
+              Full space programs, material specifications, and finish
+              schedules are shared at the{' '}
+              <strong>private briefing.</strong>
             </p>
-            <a href="#enquiry" className="s3-cta" aria-label="Enquire Now">
+            <a href="#enquiry" className="s3-cta" aria-label="Request a private briefing">
               <span className="cta-circle">
                 <span className="cta-arrow" aria-hidden="true">→</span>
               </span>
-              <span className="cta-label">Enquire Now</span>
+              <span className="cta-label">Request a Private Briefing</span>
             </a>
           </div>
         </div>

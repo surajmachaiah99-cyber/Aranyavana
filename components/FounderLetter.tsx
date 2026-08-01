@@ -85,7 +85,7 @@ export default function FounderLetter() {
                 layouts named after the trees that were removed to build them.
                 Every project promised nature. Almost none of them kept it.
               </p>
-              <p>Aranyavana began as a correction.</p>
+              <p>Aranyavana began, for us, as a correction.</p>
               <p>
                 At Udyana, we scattered thousands of native seedballs across
                 this land before a single boundary was marked. Not as a
@@ -93,21 +93,21 @@ export default function FounderLetter() {
                 else follows its lead.
               </p>
               <p>
-                I chose this land because of the lake. Sixty acres of perennial
-                water, four times the size of the community beside it, legally
-                protected and independently verified. In the decades ahead,
-                land with secure natural water will not be a lifestyle
-                preference. It will be the scarce asset.
+                We chose this land because of the lake. Sixty acres of
+                perennial water, four times the size of the community beside
+                it, legally protected and independently verified. In the
+                decades ahead, land with secure natural water will not be a
+                lifestyle preference. It will be the scarce asset.
               </p>
               <p>
                 We are keeping this small. Sixty-nine plots across fifteen
-                acres, and no more. I would rather build one community that is
-                still standing in a hundred years than ten that are forgotten
-                in twenty.
+                acres, and no more. We would rather build one community that
+                is still standing in a hundred years than ten that are
+                forgotten in twenty.
               </p>
               <p>
-                If that is the kind of thing you have been looking for, I would
-                like to walk the land with you myself.
+                If that is the kind of thing you have been looking for, I
+                would like to walk the land with you myself.
               </p>
             </div>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * SiteEcologyStudy — Independent Spatial Risk Report panel for Udyana.
@@ -558,6 +558,73 @@ export const SE_STYLES = `
     outline: none;
   }
 
+  /* ── EMAIL GATE (replaces sections 02, 04, 05 until an email is captured) ── */
+  .se-gate {
+    border: 1px solid rgba(196, 170, 138, 0.15);
+    background: rgba(20, 35, 18, 0.4);
+    padding: 40px 44px;
+    margin-bottom: 64px;
+  }
+  .se-gate-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .se-gate-input {
+    flex: 1;
+    min-width: 240px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(196, 170, 138, 0.3);
+    padding: 12px 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #F0E8D8;
+    transition: border-color 0.3s ease;
+  }
+  .se-gate-input:focus {
+    outline: none;
+    border-bottom-color: #F2C96A;
+  }
+  .se-gate-input::placeholder { color: rgba(196, 170, 138, 0.45); }
+  .se-gate-submit {
+    background: #F2C96A;
+    color: #1a2318;
+    border: none;
+    padding: 14px 28px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .se-gate-submit:hover:not(:disabled) { background: #C4AA8A; }
+  .se-gate-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .se-gate-microcopy {
+    margin-top: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: rgba(196, 170, 138, 0.5);
+  }
+  .se-gate-error {
+    margin-top: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: #F2C96A;
+  }
+  @media (max-width: 540px) {
+    .se-gate { padding: 32px 24px; }
+    .se-gate-form { flex-direction: column; }
+    .se-gate-submit { width: 100%; }
+  }
+
   /* ── Stagger fade-in ── */
   .se-fade {
     opacity: 0;
@@ -628,6 +695,75 @@ export function SiteEcologyTrigger({
 }
 
 // ─────────────────────────────────────────────────────────────────────
+// EMAIL GATE — replaces sections 02, 04, 05 until an email is captured.
+// ─────────────────────────────────────────────────────────────────────
+function EcologyReportGate({ onUnlock }: { onUnlock: () => void }) {
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/ecology-report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      if (!res.ok) {
+        const body = (await res.json().catch(() => ({}))) as { error?: string };
+        setError(body.error ?? 'Something went wrong. Please try again.');
+        setSubmitting(false);
+        return;
+      }
+      onUnlock();
+    } catch {
+      setError('Network error. Please try again.');
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="se-fade se-d3 se-gate">
+      <span className="se-report-eyebrow">· Independent Verification</span>
+      <h3 className="se-report-title" style={{ fontSize: 'clamp(24px, 3vw, 34px)' }}>
+        The full report.
+      </h3>
+      <p className="se-report-sub">
+        Satellite analysis cross-referenced with STRRPA, BMRDA, TGR and village
+        land records. Prepared independently by Agentaly Property Research.
+      </p>
+      <form onSubmit={submit} noValidate className="se-gate-form">
+        <input
+          type="email"
+          required
+          autoComplete="email"
+          placeholder="Email address"
+          className="se-gate-input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={submitting}
+          aria-label="Email address"
+        />
+        <button type="submit" className="se-gate-submit" disabled={submitting}>
+          {submitting ? 'Sending' : 'Receive the report'}
+        </button>
+      </form>
+      {error && (
+        <p role="alert" className="se-gate-error">
+          {error}
+        </p>
+      )}
+      <p className="se-gate-microcopy">
+        Sent immediately. No follow-up unless you ask for it.
+      </p>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
 // ACCORDION — full spatial-risk-report panel.
 // ─────────────────────────────────────────────────────────────────────
 export function SiteEcologyAccordion({
@@ -640,6 +776,8 @@ export function SiteEcologyAccordion({
   const panelRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const prevOpenRef = useRef(false);
+  const [reportUnlocked, setReportUnlocked] = useState(false);
+  const skipUnlockEffect = useRef(true);
 
   // Open / close height animation + stagger fades + scroll-into-view
   useEffect(() => {
@@ -712,6 +850,27 @@ export function SiteEcologyAccordion({
     document.addEventListener('keydown', onKeydown);
     return () => document.removeEventListener('keydown', onKeydown);
   }, [isOpen, onClose]);
+
+  // Unlock reveal: when the reader submits their email, sections 02/04/05
+  // mount below the gate. The panel is at height:auto by this point, so
+  // browsers handle the height growth naturally. We only need to stagger
+  // fades on the newly-mounted .se-fade elements so they animate in like
+  // the rest of the report.
+  useEffect(() => {
+    if (skipUnlockEffect.current) {
+      skipUnlockEffect.current = false;
+      return;
+    }
+    if (!isOpen || !panelRef.current) return;
+    const fades = panelRef.current.querySelectorAll<HTMLElement>(
+      '.se-fade:not(.se-visible)',
+    );
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    fades.forEach((el, i) => {
+      timers.push(setTimeout(() => el.classList.add('se-visible'), 40 + i * 32));
+    });
+    return () => timers.forEach(clearTimeout);
+  }, [reportUnlocked, isOpen]);
 
   // Swipe-up to close + resize recalculation
   useEffect(() => {
@@ -851,7 +1010,8 @@ export function SiteEcologyAccordion({
           </div>
         </div>
 
-        {/* ── 02: SITE DATA ── */}
+        {/* ── 02: SITE DATA (gated behind email capture) ── */}
+        {reportUnlocked ? (
         <div className="se-fade se-d3" style={{ marginBottom: 64 }}>
           <div className="se-section-label">02 · Site Data</div>
           <div className="se-data-grid">
@@ -923,6 +1083,9 @@ export function SiteEcologyAccordion({
             </div>
           </div>
         </div>
+        ) : (
+          <EcologyReportGate onUnlock={() => setReportUnlocked(true)} />
+        )}
 
         {/* ── 03: SPATIAL METRICS ── */}
         <div className="se-fade se-d3" style={{ marginBottom: 64 }}>
@@ -965,6 +1128,8 @@ export function SiteEcologyAccordion({
           </div>
         </div>
 
+        {reportUnlocked && (
+          <>
         {/* ── 04: SITE ECOLOGY & WILDLIFE ──
             Restructured into two sub-sections to keep verifiable claims
             (Kingfisher + Peafowl, confirmed sightings) cleanly separated
@@ -1078,6 +1243,8 @@ export function SiteEcologyAccordion({
             </span>
           </div>
         </div>
+          </>
+        )}
 
         {/* ── SOURCE ── */}
         <div className="se-source se-fade se-d6">

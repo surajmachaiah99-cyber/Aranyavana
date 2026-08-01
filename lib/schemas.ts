@@ -27,3 +27,14 @@ export const enquirySchema = z.object({
 });
 
 export type EnquiryInput = z.infer<typeof enquirySchema>;
+
+/**
+ * Ecology-report gate. Just an email — this is a low-friction lead
+ * capture, not a fully-qualified private-briefing enquiry. Written
+ * as its own schema so the two lead qualities never get muddled.
+ */
+export const ecologyReportSchema = z.object({
+  email: z.string().trim().email('Please enter a valid email address.'),
+});
+
+export type EcologyReportInput = z.infer<typeof ecologyReportSchema>;

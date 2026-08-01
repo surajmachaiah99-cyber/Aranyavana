@@ -1,10 +1,11 @@
 import SectionReveal from '@/components/SectionReveal';
 import { StaggerGroup, StaggerItem } from '@/components/Stagger';
+import { SITE } from '@/lib/site';
 
 const STATS: Array<{ value: string; label: string }> = [
-  { value: '15 Acres', label: 'Gated Eco-Community' },
-  { value: '60 Acres', label: 'Living Lake' },
-  { value: '1:4', label: 'Land-to-Water Ratio' },
+  { value: `${SITE.inventory.estateAcres} Acres`, label: 'Gated Eco-Community' },
+  { value: `${SITE.inventory.lakeAcres} Acres`, label: 'Living Lake' },
+  { value: SITE.inventory.ratio, label: 'Land-to-Water Ratio' },
 ];
 
 export default function Financial() {
@@ -28,10 +29,12 @@ export default function Financial() {
 
           <p className="mt-12 font-body font-light text-sky/90 text-[1.02rem] leading-[1.95] max-w-[640px] mx-auto">
             In the coming decades, land with secure, clean, natural water will
-            be the ultimate luxury asset. With only 18 exclusive estate plots
-            available, Udyana is a finite opportunity to secure a nature-based
-            wealth asset that will appreciate as the surrounding ecosystem
-            matures.
+            be the ultimate luxury asset. Udyana comprises{' '}
+            {SITE.inventory.totalPlots} estate plots across{' '}
+            {SITE.inventory.estateAcres} acres.{' '}
+            {SITE.inventory.remainingPlots} remain available — a finite window
+            to secure a nature-based wealth asset that will appreciate as the
+            surrounding ecosystem matures.
           </p>
         </SectionReveal>
 
@@ -51,7 +54,19 @@ export default function Financial() {
           ))}
         </StaggerGroup>
 
-        <SectionReveal className="mt-24 flex justify-center">
+        {/* Acreage breakdown — makes the plot/lot arithmetic transparent so
+            a sharp reader doesn't have to reconcile 15 acres against 69
+            plots on their own. */}
+        <SectionReveal className="mt-12 text-center">
+          <p className="font-sc text-sand/70 text-[0.72rem] tracking-widest2 max-w-2xl mx-auto leading-relaxed">
+            {SITE.inventory.totalPlots} plots · approx.{' '}
+            {SITE.inventory.plotSizeDisplay} each · the balance of the{' '}
+            {SITE.inventory.estateAcres} acres held as roads, commons, and
+            permanent green buffer
+          </p>
+        </SectionReveal>
+
+        <SectionReveal className="mt-20 flex justify-center">
           <div className="w-full max-w-[440px] border border-sand/55 p-12 text-center bg-earth/30 backdrop-blur-sm">
             <p className="font-sc text-sand text-[0.72rem] tracking-widest2 mb-6">
               · Starting Investment
@@ -60,7 +75,7 @@ export default function Financial() {
               ₹75 Lakhs
             </p>
             <p className="mt-5 font-body font-light text-sky text-[0.88rem] leading-relaxed">
-              For a 6,000 Sq.Ft. Lakefront Estate Plot
+              For a {SITE.inventory.plotSizeDisplay} Lakefront Estate Plot
             </p>
             <p className="mt-6 font-body font-light text-mist/45 text-[0.72rem] tracking-wide">
               Price subject to escalation. Limited plots remaining.

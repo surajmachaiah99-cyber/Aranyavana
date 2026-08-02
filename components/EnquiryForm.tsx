@@ -209,7 +209,14 @@ export default function EnquiryForm() {
                     </button>
                     <p className="mt-5 font-body font-light text-mist/45 text-[0.72rem] tracking-wide">
                       We respond within 24 hours. By submitting, you consent to
-                      be contacted about Udyana.
+                      be contacted about Udyana and agree to our{' '}
+                      <a
+                        href="/privacy"
+                        className="underline underline-offset-2 decoration-mist/30 hover:text-mist transition-colors"
+                      >
+                        Privacy Policy
+                      </a>
+                      .
                     </p>
                   </div>
                 </motion.form>

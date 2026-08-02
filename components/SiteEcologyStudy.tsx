@@ -757,7 +757,19 @@ function EcologyReportGate({ onUnlock }: { onUnlock: () => void }) {
         </p>
       )}
       <p className="se-gate-microcopy">
-        Sent immediately. No follow-up unless you ask for it.
+        Sent immediately. No follow-up unless you ask for it. By submitting,
+        you agree to our{' '}
+        <a
+          href="/privacy"
+          style={{
+            color: 'inherit',
+            textDecoration: 'underline',
+            textUnderlineOffset: '2px',
+          }}
+        >
+          Privacy Policy
+        </a>
+        .
       </p>
     </div>
   );

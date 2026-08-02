@@ -512,34 +512,58 @@ export const SE_STYLES = `
     font-size: 10px;
   }
 
-  /* ── Source note ── */
-  .se-source {
-    padding: 24px 0;
-    border-top: 1px solid rgba(196, 170, 138, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
+  /* ── Source attribution ──
+     Bordered block that promotes the independent-firm citation from
+     fine print to a proper attribution card. The old .se-source /
+     .se-source-text / .se-source-badge rules above have been
+     removed since the source is no longer rendered as fine print. */
+  .se-source-block {
+    border: 1px solid rgba(196, 170, 138, 0.15);
+    border-left: 3px solid rgba(196, 170, 138, 0.5);
+    padding: 32px 40px;
+    margin-top: 24px;
+    margin-bottom: 48px;
+    background: rgba(20, 35, 18, 0.4);
   }
-  .se-source-text {
+  .se-source-eyebrow {
     font-family: 'Montserrat', sans-serif;
     font-size: 10px;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    color: rgba(196, 170, 138, 0.32);
-  }
-  .se-source-badge {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 8px;
     font-weight: 400;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(196, 170, 138, 0.28);
-    border: 1px solid rgba(196, 170, 138, 0.10);
-    padding: 5px 12px;
-    border-radius: 1px;
+    color: #C4AA8A;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .se-source-firm {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 300;
+    color: #F0E8D8;
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+  .se-source-firm-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(196, 170, 138, 0.35);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.3s ease;
+  }
+  .se-source-firm-link:hover {
+    text-decoration-color: rgba(240, 232, 216, 0.85);
+  }
+  .se-source-body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(196, 170, 138, 0.72);
+    max-width: 620px;
+    margin: 0;
+  }
+  @media (max-width: 540px) {
+    .se-source-block { padding: 24px 24px; }
   }
 
   /* ── Close button ── */
@@ -1289,14 +1313,29 @@ export function SiteEcologyAccordion({
           </>
         )}
 
-        {/* ── SOURCE ── */}
-        <div className="se-source se-fade se-d6">
-          <span className="se-source-text">
-            · Source: Independent Spatial Risk Analysis · Agentaly Property
-            Research · Satellite data cross-referenced with STRRPA, BMRDA,
-            TGR, and village records
-          </span>
-          <span className="se-source-badge">· Verified Report</span>
+        {/* ── SOURCE ATTRIBUTION ──
+            Upgraded from the previous fine-print source line to a
+            proper bordered attribution block. Making the independence
+            visible is the whole point of citing a third-party research
+            firm; underplaying it as fine print was leaving credibility
+            on the table.
+
+            NOTE: Agentaly Property Research URL is unconfirmed. The
+            firm name renders as styled text; wrap it in <a href="..."
+            className="se-source-firm-link"> once the URL lands. */}
+        <div className="se-source-block se-fade se-d6">
+          <span className="se-source-eyebrow">· Independent Analysis</span>
+          <h3 className="se-source-firm">Agentaly Property Research</h3>
+          <p className="se-source-body">
+            Satellite data cross-referenced with STRRPA,{' '}
+            <abbr title="Bangalore Metropolitan Region Development Authority">
+              BMRDA
+            </abbr>{' '}
+            and TGR records, and against local village land records.
+            Commissioned by Aranyavana; conducted independently. Full
+            methodology and source records available for review at the private
+            briefing.
+          </p>
         </div>
 
         {/* ── CLOSE ── */}

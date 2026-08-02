@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { SITE } from '@/lib/site';
 
 export default function Footer() {
@@ -15,7 +16,7 @@ export default function Footer() {
 
         <div className="md:text-center">
           <p className="font-body font-light text-mist/80 text-[0.9rem]">
-            {SITE.product} · The Lake Retreat · {SITE.location}
+            {SITE.product} by {SITE.brand} · {SITE.location}
           </p>
           <p className="mt-2 font-body font-light text-mist/45 text-[0.78rem]">
             {SITE.email}
@@ -33,6 +34,15 @@ export default function Footer() {
           </p>
           <p className="font-body font-light text-mist/45 text-[0.72rem]">
             All Rights Reserved
+          </p>
+          <p className="mt-3 font-sc text-mist/45 text-[0.68rem] tracking-widest2">
+            <Link href="/privacy" className="hover:text-mist transition-colors">
+              Privacy
+            </Link>
+            <span className="mx-2 text-mist/25">·</span>
+            <Link href="/legal" className="hover:text-mist transition-colors">
+              Legal
+            </Link>
           </p>
         </div>
       </div>

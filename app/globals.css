@@ -172,6 +172,91 @@
     text-transform: uppercase;
     margin-bottom: 0.25rem;
   }
+
+  /* Prose styling for /privacy and /legal. Applied to the wrapper of
+     the page content so H2/H3/P/UL inherit the site's editorial voice
+     without every element needing individual Tailwind classes. */
+  .legal-prose h2 {
+    font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--color-cream);
+    line-height: 1.15;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+  .legal-prose h3 {
+    font-family: var(--font-cormorant-sc), 'Cormorant SC', serif;
+    font-weight: 400;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-sand);
+    opacity: 0.85;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .legal-prose p {
+    font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: rgba(232, 224, 212, 0.75);
+    font-size: 1rem;
+    line-height: 1.9;
+    margin-top: 1rem;
+  }
+  .legal-prose p + p { margin-top: 1.25rem; }
+  .legal-prose ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  .legal-prose ul li {
+    font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: rgba(232, 224, 212, 0.7);
+    font-size: 1rem;
+    line-height: 1.9;
+    padding-left: 1.25rem;
+    position: relative;
+    margin-top: 0.5rem;
+  }
+  .legal-prose ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0.35rem;
+    color: var(--color-sand);
+  }
+  .legal-prose a {
+    color: var(--color-sand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(196, 168, 130, 0.5);
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+  }
+  .legal-prose a:hover {
+    color: var(--color-cream);
+    text-decoration-color: var(--color-cream);
+  }
+  .legal-prose strong {
+    color: var(--color-mist);
+    font-weight: 500;
+  }
+  .legal-prose em {
+    color: var(--color-sand);
+    font-style: italic;
+  }
+  .legal-prose .placeholder-block {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px dashed rgba(196, 168, 130, 0.5);
+    background: rgba(46, 43, 39, 0.4);
+    font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    color: var(--color-sand);
+  }
 }
 
 /* Grain overlay — applied via the <Grain /> component */

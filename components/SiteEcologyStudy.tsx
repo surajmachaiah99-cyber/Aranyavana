@@ -639,6 +639,18 @@ export const SE_STYLES = `
     .se-gate-submit { width: 100%; }
   }
 
+  /* ── abbr styling ──
+     Confirmed acronym expansions render with a subtle dotted
+     underline to signal 'hover to see the full name' without shouting.
+     Applied only within .se-panel so it doesn't leak to any legal-
+     copy pages that may also use <abbr>. */
+  .se-panel abbr[title] {
+    text-decoration: underline dotted;
+    text-decoration-color: rgba(196, 170, 138, 0.5);
+    text-underline-offset: 3px;
+    cursor: help;
+  }
+
   /* ── Stagger fade-in ── */
   .se-fade {
     opacity: 0;
@@ -974,8 +986,12 @@ export function SiteEcologyAccordion({
           <p className="se-report-sub">
             Before the first seedball was placed, Udyana underwent a
             comprehensive independent spatial risk analysis — checking
-            government land records, village maps, master plan data, and water
-            body boundaries. What follows is what the data confirmed.
+            government land records, village maps, STRRPA master plan data,{' '}
+            <abbr title="Bangalore Metropolitan Region Development Authority">
+              BMRDA
+            </abbr>{' '}
+            zoning data, and water body boundaries. What follows is what the
+            data confirmed.
           </p>
         </div>
 
@@ -1174,14 +1190,14 @@ export function SiteEcologyAccordion({
           </p>
           <div className="se-bio-scroll-2">
             <div className="se-bio-card">
-              <span className="se-bio-emoji" aria-hidden="true">🐦</span>
+              <span className="se-bio-emoji" aria-hidden="true">◉</span>
               <span className="se-bio-category">· Avifauna · Confirmed</span>
               <span className="se-bio-name">Common Kingfisher</span>
               <span className="se-bio-sci">Alcedo atthis</span>
               <span className="se-bio-status">· Photographed on site</span>
             </div>
             <div className="se-bio-card">
-              <span className="se-bio-emoji" aria-hidden="true">🦚</span>
+              <span className="se-bio-emoji" aria-hidden="true">◉</span>
               <span className="se-bio-category">· Avifauna · Confirmed</span>
               <span className="se-bio-name">Indian Peafowl</span>
               <span className="se-bio-sci">Pavo cristatus</span>
@@ -1196,7 +1212,7 @@ export function SiteEcologyAccordion({
           </p>
           <div className="se-bio-scroll-4">
             <div className="se-bio-card se-bio-card-muted">
-              <span className="se-bio-emoji" aria-hidden="true">🌳</span>
+              <span className="se-bio-emoji" aria-hidden="true">◈</span>
               <span className="se-bio-category">· Flora · Regional</span>
               <span className="se-bio-name">Acacia</span>
               <span className="se-bio-sci">Acacia spp.</span>
@@ -1205,7 +1221,7 @@ export function SiteEcologyAccordion({
               </span>
             </div>
             <div className="se-bio-card se-bio-card-muted">
-              <span className="se-bio-emoji" aria-hidden="true">🌿</span>
+              <span className="se-bio-emoji" aria-hidden="true">◈</span>
               <span className="se-bio-category">· Flora · Regional</span>
               <span className="se-bio-name">Neem</span>
               <span className="se-bio-sci">Azadirachta indica</span>
@@ -1214,7 +1230,7 @@ export function SiteEcologyAccordion({
               </span>
             </div>
             <div className="se-bio-card se-bio-card-muted">
-              <span className="se-bio-emoji" aria-hidden="true">🌳</span>
+              <span className="se-bio-emoji" aria-hidden="true">◈</span>
               <span className="se-bio-category">· Flora · Regional</span>
               <span className="se-bio-name">Tamarind</span>
               <span className="se-bio-sci">Tamarindus indica</span>
@@ -1223,7 +1239,7 @@ export function SiteEcologyAccordion({
               </span>
             </div>
             <div className="se-bio-card se-bio-card-muted">
-              <span className="se-bio-emoji" aria-hidden="true">🌱</span>
+              <span className="se-bio-emoji" aria-hidden="true">◈</span>
               <span className="se-bio-category">· Flora · Regional</span>
               <span className="se-bio-name">Cluster Fig</span>
               <span className="se-bio-sci">Ficus racemosa</span>
@@ -1237,7 +1253,8 @@ export function SiteEcologyAccordion({
         {/* ── 05: ECO-COMPLIANCE ── */}
         <div className="se-compliance se-fade se-d5">
           <span className="se-compliance-label">
-            · Ecological Compliance · TGR Catchment Zone 1 · BMRDA ACZ Zone 2
+            · Ecological Compliance · TGR Catchment Zone 1 · BMRDA{' '}
+            <abbr title="Agricultural Conservation Zone">ACZ</abbr> Zone 2
           </span>
           <h3 className="se-compliance-title">
             Protected by law.<br />

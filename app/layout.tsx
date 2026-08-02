@@ -26,15 +26,37 @@ const montserrat = Montserrat({
   display: 'swap',
 });
 
+const OG_IMAGE_URL = `${SITE.url}/og-image.jpg`;
+
 export const metadata: Metadata = {
   title: 'Udyana by Aranyavana · Lakefront Estate Plots, Karnataka',
-  description: `Premium lakefront estate plots in ${SITE.location} — off the Bangalore–Mangalore Highway. A 60-acre living lake, ${SITE.inventory.totalPlots} estate plots · ${SITE.inventory.remainingPlots} available, by appointment only.`,
+  description: `Lakefront estate plots in ${SITE.location} — off the Bangalore–Mangalore Highway. A ${SITE.inventory.lakeAcres}-acre living lake, ${SITE.inventory.totalPlots} estate plots, ${SITE.inventory.remainingPlots} available. By appointment only.`,
   metadataBase: new URL(SITE.url),
+  alternates: {
+    canonical: SITE.url,
+  },
   openGraph: {
     title: 'Udyana by Aranyavana',
-    description:
-      'Some investments grow. Some breathe. Premium lakefront estate plots off the Bangalore–Mangalore Highway.',
+    description: `Some investments grow. Some breathe. Lakefront estate plots in ${SITE.location}, off the Bangalore–Mangalore Highway.`,
+    url: SITE.url,
+    siteName: SITE.brand,
+    locale: 'en_IN',
     type: 'website',
+    images: [
+      {
+        url: OG_IMAGE_URL,
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
+        alt: `${SITE.product} by ${SITE.brand} — a ${SITE.inventory.lakeAcres}-acre living lake at ${SITE.location}`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Udyana by Aranyavana',
+    description: `Some investments grow. Some breathe. Lakefront estate plots in ${SITE.location}, off the Bangalore–Mangalore Highway.`,
+    images: [OG_IMAGE_URL],
   },
 };
 

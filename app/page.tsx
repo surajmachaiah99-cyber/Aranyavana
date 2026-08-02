@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import SeedballSection from '@/components/SeedballSection';
+import SiteEcologySection from '@/components/SiteEcologySection';
 import CoreAssets from '@/components/CoreAssets';
 import HomesThatBreathe from '@/components/HomesThatBreathe';
 import Financial from '@/components/Financial';
@@ -17,6 +18,7 @@ export default function Page() {
       <Navbar />
       <Hero />
       <SeedballSection />
+      <SiteEcologySection />
       <CoreAssets />
       <HomesThatBreathe />
       <Financial />

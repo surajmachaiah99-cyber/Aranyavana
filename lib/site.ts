@@ -56,3 +56,34 @@ export const SITE = {
 } as const;
 
 export type SiteConfig = typeof SITE;
+
+/**
+ * The homepage's numbered top-level sections, in scroll order.
+ *
+ * Renumbering rules:
+ *   - Sections declared here render numeric badges (01, 02, 03...).
+ *   - Balance and LegalStanding are intentionally NOT listed --
+ *     they're unnumbered interludes between numbered blocks.
+ *   - Insert or remove an entry here and every component picks up
+ *     the new number automatically via `sectionNum(slug)`. Do NOT
+ *     hardcode section numbers anywhere else.
+ */
+export const SECTIONS = [
+  { slug: 'philosophy', name: 'The Aranyavana Philosophy' },
+  { slug: 'verification', name: 'Independent Verification' },
+  { slug: 'offering', name: 'The Offering' },
+  { slug: 'material-study', name: 'Material Study' },
+  { slug: 'investment-thesis', name: 'The Investment Thesis' },
+  { slug: 'founder-letter', name: 'A Note From the Co-Founder' },
+] as const;
+
+export type SectionSlug = (typeof SECTIONS)[number]['slug'];
+
+/**
+ * Given a section slug, returns its zero-padded ordinal ('01', '02'...).
+ * Empty string if the slug is not registered.
+ */
+export function sectionNum(slug: SectionSlug): string {
+  const idx = SECTIONS.findIndex((s) => s.slug === slug);
+  return idx === -1 ? '' : String(idx + 1).padStart(2, '0');
+}

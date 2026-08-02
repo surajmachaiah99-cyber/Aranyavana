@@ -33,7 +33,21 @@ import { useEffect, useRef, useState } from 'react';
  */
 
 export const SE_STYLES = `
-  /* ── TRIGGER (paired with .sb-tab-tag for inherited typography) ── */
+  /* ── TRIGGER ──
+     Was originally paired with .sb-tab-tag inside SeedballSection's
+     ritual tab 01. Now that the report has been promoted to a
+     standalone section (02), the trigger renders outside .ara-sb
+     scope -- so .se-trigger-btn provides the typography that
+     sb-tab-tag used to inherit, and .se-trigger keeps the button
+     reset + rotating chevron behaviour. */
+  .se-trigger-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #C4AA8A;
+  }
   .se-trigger {
     background: none;
     border: none;
@@ -681,12 +695,12 @@ export function SiteEcologyTrigger({
     <button
       type="button"
       id="seToggle"
-      className="sb-tab-tag se-trigger"
+      className="se-trigger-btn se-trigger"
       aria-expanded={isOpen}
       aria-controls="sePanel"
       onClick={onToggle}
     >
-      · Site Ecology Study
+      · {isOpen ? 'Close the report' : 'Open the full report'}
       <span className="se-trigger-arrow" aria-hidden="true">
         ›
       </span>

@@ -1,5 +1,6 @@
 import SectionReveal from '@/components/SectionReveal';
 import { StaggerGroup, StaggerItem } from '@/components/Stagger';
+import { sectionNum } from '@/lib/site';
 import { GroveIcon, HorizonIcon, WaveIcon } from '@/components/icons';
 import type { ReactNode } from 'react';
 
@@ -40,11 +41,19 @@ const CARDS: Card[] = [
 ];
 
 export default function CoreAssets() {
+  const num = sectionNum('offering');
   return (
-    <section id="assets" className="bg-stone py-32 md:py-40 relative">
-      <div className="container-edit">
+    <section id="offering" className="bg-stone py-32 md:py-40 relative overflow-hidden">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 -top-12 md:top-0 text-center font-display font-light text-cream/[0.05] text-[28vw] leading-none select-none"
+      >
+        {num}
+      </span>
+
+      <div className="container-edit relative">
         <SectionReveal className="max-w-3xl">
-          <p className="eyebrow mb-5">· The Offering</p>
+          <p className="eyebrow mb-5">· {num} · The Offering</p>
           <span className="rule mb-10" />
           <h2 className="font-display font-light text-cream text-[clamp(2rem,4vw,3.25rem)] leading-[1.05]">
             Three Reasons This Land Is Finite

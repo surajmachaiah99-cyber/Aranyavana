@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { SITE } from '@/lib/site';
+import { SITE, sectionNum } from '@/lib/site';
 
 /**
  * FounderLetter — a single, quiet section that puts a name and a
@@ -63,7 +63,9 @@ export default function FounderLetter() {
                 : 'text-center'
             }
           >
-            <p className="eyebrow mb-5">· A Note From the Co-Founder</p>
+            <p className="eyebrow mb-5">
+              · {sectionNum('founder-letter')} · A Note From the Co-Founder
+            </p>
             <span
               className={imageOk ? 'rule block mb-10' : 'rule mx-auto mb-10'}
             />

@@ -1,6 +1,6 @@
 import SectionReveal from '@/components/SectionReveal';
 import { StaggerGroup, StaggerItem } from '@/components/Stagger';
-import { SITE } from '@/lib/site';
+import { SITE, sectionNum } from '@/lib/site';
 
 const STATS: Array<{ value: string; label: string }> = [
   { value: `${SITE.inventory.estateAcres} Acres`, label: 'Gated Eco-Community' },
@@ -9,18 +9,19 @@ const STATS: Array<{ value: string; label: string }> = [
 ];
 
 export default function Financial() {
+  const num = sectionNum('investment-thesis');
   return (
     <section id="investment" className="relative bg-stone py-32 md:py-44 overflow-hidden">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 -top-12 md:top-0 text-center font-display font-light text-cream/[0.05] text-[28vw] leading-none select-none"
       >
-        04
+        {num}
       </span>
 
       <div className="container-edit relative">
         <SectionReveal className="text-center max-w-3xl mx-auto">
-          <p className="eyebrow mb-5">· The Investment Thesis</p>
+          <p className="eyebrow mb-5">· {num} · The Investment Thesis</p>
           <span className="rule mx-auto mb-10" />
           <h2 className="font-display italic font-light text-cream text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.05]">
             <span className="block">Wealth Preservation through</span>

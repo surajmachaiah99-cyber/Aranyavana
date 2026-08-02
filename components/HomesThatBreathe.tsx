@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { LANDSCAPES, HOMES } from '@/lib/homes';
+import { sectionNum } from '@/lib/site';
 
 /**
  * HomesThatBreathe — Section 03 · Aranyavana Earthscapes
@@ -747,7 +748,7 @@ export default function HomesThatBreathe() {
         <div className="s3-inner">
           {/* Badge */}
           <div className="s3-badge fade-up d1">
-            <span className="s3-badge-num">03</span>
+            <span className="s3-badge-num">{sectionNum('material-study')}</span>
             <span className="s3-badge-rule" />
             <span>· Material Study · Tropical Modern Architecture · Udyana</span>
           </div>
@@ -772,7 +773,7 @@ export default function HomesThatBreathe() {
           <div className="s3-grid">
             {/* ── LANDSCAPE ── */}
             <article className="s3-card landscape fade-up d3">
-              <span className="card-num">01</span>
+              <span className="card-num">{`${sectionNum('material-study')}.1`}</span>
               <div className="card-mark"><LeafMark /></div>
               <span className="card-type">Landscape Design</span>
               <h3 className="card-headline">
@@ -796,7 +797,7 @@ export default function HomesThatBreathe() {
 
             {/* ── HOMES ── */}
             <article className="s3-card homes fade-up d4">
-              <span className="card-num">02</span>
+              <span className="card-num">{`${sectionNum('material-study')}.2`}</span>
               <div className="card-mark"><HouseMark /></div>
               <span className="card-type">Construction Packages</span>
               <h3 className="card-headline">

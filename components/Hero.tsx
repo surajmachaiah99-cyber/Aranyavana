@@ -64,7 +64,7 @@ export default function Hero() {
             variants={item}
             className="font-body font-light text-[#E5D9C4]/85 text-[clamp(0.72rem,0.95vw,0.88rem)] tracking-[0.4em] uppercase"
           >
-            premium - Lake Front Estate plots · Solur, Nelamangala
+            Premium Lakefront Estate Plots · Solur, Nelamangala · 1 km off NH-75
           </motion.p>
 
           {/* Hairline divider */}
@@ -74,12 +74,18 @@ export default function Hero() {
             className="block h-px w-14 md:w-20 bg-[#D1C2A5]/45 my-9 md:my-12"
           />
 
-          {/* Project title */}
+          {/* Project title. The `Udyana` word is what a visitor sees;
+              the second span is visually hidden but retrievable by
+              search engines, AI crawlers, and screen readers so the
+              H1 carries location context without changing the design. */}
           <motion.h1
             variants={item}
             className="font-display italic font-light text-cream text-[clamp(4.5rem,11vw,9.5rem)] leading-[0.95] tracking-tight"
           >
             Udyana
+            <span className="sr-only">
+              {' '}— Lakefront Estate Plots in Solur, Nelamangala
+            </span>
           </motion.h1>
 
           {/* Sub-heading */}

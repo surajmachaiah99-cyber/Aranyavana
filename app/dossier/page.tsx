@@ -1,21 +1,28 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
+import DossierGate from '@/components/DossierGate';
 import { LANDSCAPES, HOMES } from '@/lib/homes';
 import { SITE } from '@/lib/site';
 
 /**
  * The Estate Dossier.
  *
- * Second-touch content: the full space programs, material specifications,
- * feature lists, optional upgrades, and investment tiers that used to
- * live inline in the Homes That Breathe section. Now gated by
- * middleware.ts, which requires the `udyana_verified` cookie set on a
- * successful /api/enquiry submit.
+ * Second-touch content: the full space programs, material
+ * specifications, feature lists, optional upgrades, and investment
+ * tiers that used to live inline in the Homes That Breathe section.
  *
- * The page uses the site's existing palette + typography stack; no new
- * scoped CSS, no new fonts. Layout is a formal document layout --
- * eyebrow, heading, table blocks -- so it reads like a proposal rather
- * than a marketing page.
+ * Access is soft-gated by the `udyana_verified` cookie set on a
+ * successful /api/enquiry submit. Direct visits without the cookie
+ * render an inline gate (brief explanation + inline enquiry form)
+ * rather than redirecting away. Once the form is submitted, the
+ * client wrapper (DossierGate) calls router.refresh() and this same
+ * page re-executes on the server, this time reading the cookie and
+ * rendering the full dossier below.
+ *
+ * The page uses the site's existing palette + typography stack; no
+ * new scoped CSS, no new fonts. `noindex` is set so the URL never
+ * appears in search results.
  */
 
 export const metadata: Metadata = {
@@ -25,10 +32,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function DossierPage() {
+export default async function DossierPage() {
+  const cookieStore = await cookies();
+  const isVerified = cookieStore.get('udyana_verified')?.value === '1';
+
   return (
     <main className="bg-earth min-h-screen">
-      {/* Header ── quiet nav back to the homepage */}
+      {/* Shared header ── quiet nav back to the homepage */}
       <header className="border-b border-bark/50">
         <div className="container-edit flex items-center justify-between py-6 md:py-8">
           <Link
@@ -43,6 +53,49 @@ export default function DossierPage() {
         </div>
       </header>
 
+      {isVerified ? <VerifiedDossier /> : <Gate />}
+    </main>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Gate — shown when no udyana_verified cookie is present.
+// Brief explanation + inline enquiry form. On successful submit the
+// cookie is set and the client wrapper refreshes the route so
+// VerifiedDossier renders instead.
+// ─────────────────────────────────────────────────────────────────────
+function Gate() {
+  return (
+    <section className="py-24 md:py-32">
+      <div className="container-edit max-w-3xl mx-auto">
+        <div className="text-center">
+          <p className="eyebrow mb-5">· Technical Dossier · {SITE.product}</p>
+          <span className="rule mx-auto mb-10" />
+          <h1 className="font-display italic font-light text-cream text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.05]">
+            The full specifications.
+          </h1>
+          <p className="mt-10 font-body font-light text-sky/85 text-[1.02rem] leading-[1.95]">
+            Complete space programs, material schedules, finish
+            specifications, and investment tiers for both estate home designs
+            and both landscape packages. Shared with prospective owners.
+          </p>
+        </div>
+
+        <div className="mt-16">
+          <DossierGate />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// VerifiedDossier — the full technical dossier. Only rendered when
+// the udyana_verified cookie is present.
+// ─────────────────────────────────────────────────────────────────────
+function VerifiedDossier() {
+  return (
+    <>
       {/* Intro */}
       <section className="py-24 md:py-32">
         <div className="container-edit max-w-3xl text-center">
@@ -55,8 +108,8 @@ export default function DossierPage() {
             The space programs, material specifications, feature schedules,
             and investment tiers that shape every estate at Udyana. This is
             the working document that walks you through what your home is,
-            in what it is made of, and at what price. Nothing hidden;
-            nothing rounded.
+            what it is made of, and at what price. Nothing hidden; nothing
+            rounded.
           </p>
         </div>
       </section>
@@ -292,6 +345,6 @@ export default function DossierPage() {
           </div>
         </div>
       </footer>
-    </main>
+    </>
   );
 }

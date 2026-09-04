@@ -26,6 +26,17 @@ export default function Footer() {
               {SITE.phone}
             </a>
           </p>
+          <p className="mt-1 font-body font-light text-mist/45 text-[0.78rem]">
+            <a
+              href={SITE.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Aranyavana on Instagram — ${SITE.instagramHandle}`}
+              className="hover:text-mist transition-colors"
+            >
+              {SITE.instagramHandle}
+            </a>
+          </p>
         </div>
 
         <div className="md:text-right space-y-2">

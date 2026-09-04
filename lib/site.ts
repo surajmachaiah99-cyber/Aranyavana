@@ -22,6 +22,11 @@ export const SITE = {
   whatsappUrl:
     'https://wa.me/919422799976?text=I%27d%20like%20to%20know%20more%20about%20Udyana',
 
+  // Social. Handle string is what shows in the footer; URL is what opens.
+  // Kept as a single source so the two never drift apart.
+  instagramUrl: 'https://www.instagram.com/aranyavana.life/',
+  instagramHandle: '@aranyavana.life',
+
   // Canonical location. Do not use "Kudlur", "Magadi", or "NH-75" anywhere.
   location: 'Solur, Nelamangala',
   locationLong: 'Solur, Nelamangala · Bangalore Rural',
